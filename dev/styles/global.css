@@ -107,3 +107,10 @@ input.correct-input {
 input.false-input {
     border-color: var(--rusty-red) !important;
 }
+
+select.correct-input {
+    border-color: var(--mint-green) !important;
+}
+select.false-input {
+    border-color: var(--rusty-red) !important;
+}
