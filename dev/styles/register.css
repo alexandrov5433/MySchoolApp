@@ -1,5 +1,5 @@
 .register {
-    height: inherit;
+    height: fit-content;
     width: 100%;
 }
 
@@ -24,17 +24,6 @@
 
     h2 {
         font-size: var(--size-title);
-    }
-}
-
-.register .radio-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    label {
-        margin-right: 15px;
-        font-size: var(--size-option);
     }
 }
 
@@ -89,10 +78,7 @@
 }
 
 /* class to add by false validation */
-.register input.false-input {
+/* .register input.false-input {
     border-bottom: 4px solid var(--rusty-red);
-}
+} */
 
-.register select.false-input {
-    border-bottom: 4px solid var(--rusty-red);
-}
