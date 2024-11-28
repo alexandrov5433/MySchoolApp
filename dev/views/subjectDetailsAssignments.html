@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySchool - Home</title>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/core.css">
+    <link rel="stylesheet" href="../styles/subjectDetailsMain.css">
+    <link rel="stylesheet" href="../styles/subjectDetailsAssignments.css">
+    <link rel="stylesheet" href="../styles/customFileUpload.css">
+    <link rel="stylesheet" href="../styles/questionWindow.css">
+</head>
+
+<body>
+    <div class="flex-container">
+        <header class="header-container">
+            <div class="logo">
+                <p>St. Peter Middle School</p>
+            </div>
+
+            <div class="navigation nav-all">
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Forms & Documents</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="navigation nav-specific">
+                <nav>
+                    <ul>
+                        <li><a href="#">Register</a></li>
+                        <li><a href="#">Log In</a></li>
+                        <li class="apply"><a href="#">Apply Now</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <!-- <div class="question-window-container">
+                <div class="window">
+                    <div class="info">
+                        <div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, ullam!</p>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button class="green-btn">Confirm</button>
+                        <button class="red-btn">Cancel</button>
+                    </div>
+                </div>
+            </div> -->
+            <div class="subject-details-view">
+                <div class="location">
+                    <span>My Subjects - History</span>
+                </div>
+                <div class="container">
+
+                    <div class="image-container">
+                        <img src="../../public/green-peach-red.jpg" alt="fire-light-water">
+                        <div>History</div>
+                    </div>
+
+                    <div class="upper-content">
+                        <div class="teacher-pic-container">
+                            <img src="../../public/test-teacher-profile-picture.jpg" alt="teacher-profile-picture">
+                        </div>
+                        <div class="infos-and-mininav">
+                            <div class="infos">
+                                <div class="name">Michaela Ivanova</div>
+                                <div class="subject-id">#2332ht</div>
+                            </div>
+                            <div class="mininav">
+                                <button>Participating Students</button>
+                                <button>Announcements</button>
+                                <button class="colorize">Assignments</button>
+                                <button>Download Material</button>
+                            </div>
+                        </div>
+                        <div class="controls-container">
+                            <button class="green-btn">Join</button>
+                            <button class="red-btn">Leave</button>
+                        </div>
+                    </div>
+
+                    <div class="lower-content">
+
+
+
+                        <div class="assignments-container">
+
+                            <div class="assignment-creator">
+                                <form class="custom-file-upload-form">
+                                    <div class="group">
+                                        <div class="label-container">
+                                            <label for="title">Title</label>
+                                        </div>
+                                        <input type="text" id="title">
+                                    </div>
+                                    <div class="group">
+                                        <div class="label-container">
+                                            <label for="description">Description</label>
+                                        </div>
+                                        <textarea name="description" id="description"></textarea>
+                                    </div>
+                                    <div class="group add-margin-top">
+                                        <div class="label-container">
+                                            <label for="file">File to upload</label>
+                                        </div>
+                                        <label for="fileUpload" class="custom-file-upload-btn">Select File
+                                            <input type="file" id="fileUpload"></input>
+                                        </label>
+                                        <div class="selected-file-name-container add-margin-top">
+                                            <span>Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.</span>
+                                        </div>
+                                    </div>
+                                    <button class="add-margin-top green-btn">Create Assignment</button>
+                                    <button class="add-margin-top green-btn">Save Changes</button>
+                                    <button class="add-margin-top red-btn">Discard</button>
+                                </form>
+                            </div>
+
+                            <div class="assignment">
+                                <div class="title-deadline-container">
+                                    <div class="title">
+                                        <p>Title of assignment</p>
+                                    </div>
+                                    <div class="deadline">
+                                        <p>Deadline: 12.11.2024 24:00h</p>
+                                    </div>
+                                </div>
+                                <div class="first">
+                                    <div class="info">
+                                        <div class="description-container">
+                                            <p>Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.Assignment description here.</p>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="assignment-controls">
+                                    <button class="green-btn">Download Resources</button>
+                                    <button class="green-btn">Edit Assignment</button>
+                                    <button class="red-btn">Delete Assignment</button>
+                                </div>
+
+                                <div class="uploaded-solution-container">
+                                    <div class="label-container ">
+                                        <label class="title">Current uploaded solution</label>
+                                    </div>
+                                    <div class="solution-container">
+                                        <span><a href="#">File name of last uploaded solution as anchor to download.File name of last uploaded solution as anchor to download.File name of last uploaded solution as anchor to download.</a></span>
+                                    </div>
+                                </div>
+                                <div class="assigment-file-upload-container">
+                                    <form class="custom-file-upload-form">
+                                        <div class="group">
+                                            <div class="label-container ">
+                                                <label class="container-title">Upload solution</label>
+                                            </div>
+                                        </div>
+                                        <div class="group">
+                                            <div>
+                                                <label class="upload-description">Solutions may be uploaded until the deadline. Only the last solution uploaded is saved.</label>
+                                            </div>
+                                        </div>
+                                        <div class="group add-margin-top">
+                                            <div class="label-container">
+                                                <label for="file">File to upload</label>
+                                            </div>
+                                            <label for="fileUpload" class="custom-file-upload-btn">Select File
+                                                <input type="file" id="fileUpload"></input>
+                                            </label>
+                                            <div class="selected-file-name-container add-margin-top">
+                                                <span>Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.Name of selected file.</span>
+                                            </div>
+                                        </div>
+                                        <button class="add-margin-top green-btn">Submit</button>
+                                    </form>
+                                </div>
+                                <div class="all-uploaded-solutions-from-students-container">
+                                    <div class="label-container ">
+                                        <label class="title">All students solution uploads</label>
+                                    </div>
+                                    <div class="solution-container">
+                                        <div class="student-name">
+                                            <p>Ivan Petrov</p>
+                                        </div>
+                                        <div class="student-id">
+                                            <p>ID 234dfs</p>
+                                        </div>
+                                        <div class="solution">
+                                            <button class="green-btn">Download Solution</button>
+                                        </div>
+                                        <div class="control">
+                                            <button class="yellow-btn">View Profile</button>
+                                        </div>
+                                    </div>
+                                    <div class="solution-container">
+                                        <div class="student-name">
+                                            <p>Ivan Petrov</p>
+                                        </div>
+                                        <div class="student-id">
+                                            <p>ID 234dfs</p>
+                                        </div>
+                                        <div class="solution">
+                                            <button class="green-btn">Download Solution</button>
+                                        </div>
+                                        <div class="control">
+                                            <button class="yellow-btn">View Profile</button>
+                                        </div>
+                                    </div>
+                                    <div class="solution-container">
+                                        <div class="student-name">
+                                            <p>Ivan Petrov</p>
+                                        </div>
+                                        <div class="student-id">
+                                            <p>ID 234dfs</p>
+                                        </div>
+                                        <div class="solution">
+                                            <button class="green-btn">Download Solution</button>
+                                        </div>
+                                        <div class="control">
+                                            <button class="yellow-btn">View Profile</button>
+                                        </div>
+                                    </div>
+                                    <div class="solution-container">
+                                        <div class="student-name">
+                                            <p>Ivan Petrov</p>
+                                        </div>
+                                        <div class="student-id">
+                                            <p>ID 234dfs</p>
+                                        </div>
+                                        <div class="solution">
+                                            <button class="green-btn">Download Solution</button>
+                                        </div>
+                                        <div class="control">
+                                            <button class="yellow-btn">View Profile</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                  
+
+                        </div>
+
+
+                        
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+</body>
+
+</html>

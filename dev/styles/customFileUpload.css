@@ -1,0 +1,23 @@
+.custom-file-upload-btn{
+    border-radius: var(--border-radius);
+    padding: 5px 10px;
+    background-color: var(--dim-gray);
+    color: var(--white);
+    input[type="file"] {
+        display: none;
+    }
+}
+.custom-file-upload-btn:active{
+    background-color: var(--gray);
+}
+
+.selected-file-name-container {
+    font-size: var(--size-description);
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    span {
+        color: var(--dark-cold-gray);
+    }
+}

@@ -1,0 +1,131 @@
+.apply-now {
+    height: inherit;
+    width: 100%;
+}
+
+.apply-now form {
+    width: 1500px;
+    height: fit-content;
+    margin: 0 auto;
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 4px;
+    color: var(--dim-gray);
+    box-shadow: var(--component-box-shadow);
+}
+
+.apply-now .apply-now-elements-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+    color: var(--black);
+
+    h2 {
+        font-size: var(--size-title);
+    }
+}
+
+.apply-now .main-elements {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.apply-now .input-elements {
+    width: 480px;
+    display: flex;
+
+    flex-direction: column;
+    gap: 30px;
+}
+.apply-now .description-elements {
+    width: 380px;
+    padding: 10px;
+    background-color: var(--light-cold-gray);
+    border-radius: var(--border-radius);
+    
+    span {
+        color: var(--dim-gray);
+        text-align: left;
+        display: block;
+        font-size: var(--size-description);
+        margin-bottom: 15px;
+    }
+
+    a {
+        text-decoration: none;
+        text-transform: uppercase;
+        color: var(--rusty-red);
+    }
+}
+
+.apply-now .form-group.special-input {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    span {
+        max-width: fit-content;
+        font-size: var(--size-description);
+    }
+}
+
+.apply-now .radio-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    label {
+        margin-right: 15px;
+        font-size: var(--size-option);
+    }
+}
+
+.apply-now form .form-control {
+    background: var(--light-cold-gray);
+    border: none;
+    border-bottom: 4px solid var(--gray);
+    border-radius: var(--border-radius);
+    box-shadow: none;
+    outline: none;
+    color: var(--dim-gray);
+    text-indent: 8px;
+    height: 42px;
+}
+
+.apply-now form .form-control.credentials {
+    width: 300px;
+}
+
+.apply-now form .btn {
+    padding: 15px 70px;
+}
+
+.apply-now .no-acc-msg {
+    color: var(--dim-gray);
+    font-size: var(--size-small-msg);
+
+    a {
+        text-decoration: none;
+        text-transform: uppercase;
+        color: var(--rusty-red);
+    }
+}
+
+.apply-now .error-msg-group {
+    max-height: 100px;
+}
+
+/* error communacation */
+/* show span and edit textContent when error */
+.apply-now span.error {
+    max-width: 100%;
+    display: block;
+    color: var(--rusty-red);
+    font-size: var(--size-error-msg);
+}
+
+/* class to add by false validation */
+.apply-now input.false-input {
+    border-bottom: 4px solid var(--rusty-red);
+}

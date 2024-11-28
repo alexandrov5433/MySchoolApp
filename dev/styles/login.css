@@ -1,0 +1,79 @@
+.login {
+    height: inherit;
+    width: 100%;
+}
+
+.login form {
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    color: var(--dark-cold-gray);
+    box-shadow: var(--component-box-shadow);
+}
+
+.login .login-elements-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+    color: var(--black);
+
+    h2 {
+        font-size: var(--size-title);
+    }
+}
+
+.login form .form-control {
+    background: var(--light-cold-gray);
+    border: none;
+    border-bottom: 4px solid var(--gray);
+    border-radius: var(--border-radius);
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 8px;
+    height: 42px;
+}
+
+.login form .form-control.credentials {
+    width: 300px;
+}
+
+.login form .btn {
+    padding: 15px 70px;
+}
+
+.login .no-acc-msg {
+    color: var(--dim-gray);
+    font-size: var(--size-small-msg);
+
+    a {
+        text-decoration: none;
+        text-transform: uppercase;
+        color: var(--rusty-red);
+    }
+}
+
+/* error communacation */
+/* show span and edit textContent when error */
+.login .error-msg-group {
+    max-height: 100px;
+
+    span.error {
+        display: block;
+        color: var(--rusty-red);
+        font-size: var(--size-error-msg);
+    }
+}
+
+/* class to add by false validation */
+.login input.false-input {
+    border-bottom: 4px solid var(--rusty-red);
+}
+
+.login select.false-input {
+    border-bottom: 4px solid var(--rusty-red);
+}

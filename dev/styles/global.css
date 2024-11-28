@@ -1,0 +1,102 @@
+:root {
+    --black: #000000;
+    --light-cold-gray: #f7f9fc;
+    --background-gray: #f5f5f5;
+    --dim-gray-transparent: rgba(105, 105, 105, 0.01);
+    --gray: #838383;
+    --dim-gray: rgb(105, 105, 105);
+    --dark-cold-gray: #505e6c;
+    --white: #ffffffff;
+    --cosmic-latte: #fff8e8ff;
+    --active-jasmine: rgb(255, 229, 171);
+    --jasmine: #fcd581ff;
+    --active-mint-green: #c2efc2;
+    --mint-green: #9ae59a;
+    --active-red: #f25577;
+    --rusty-red: #d52941ff;
+    --claret: #990d35ff;
+    /* size */
+    --size-big-title: 80px;
+    --size-title: 60px;
+    --size-mid-title: 40px;
+    --size-option: 25px;
+    --size-text: 28px;
+    --size-description: 20px;
+    --size-small-msg: 18px;
+    --size-error-msg: 22px;
+    /* component box shadow */
+    --component-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    --component-box-shadow-strong: 2px 2px 6px rgba(0, 0, 0, 1);
+    /* animation */
+    --translate-y-btn: translateY(3px);
+    /* component border radius */
+    --border-radius: 4px;
+    /* font */
+    --font-family: "Clarkson", Helvetica, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 1.5vw;
+    font-family: "Clarkson", Helvetica, sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+button.green-btn {
+    background-color: var(--mint-green);
+}
+button.green-btn:hover {
+    background-color: var(--active-mint-green);
+}
+button.green-btn:active {
+    background-color: var(--active-mint-green);
+}
+button.red-btn {
+    background-color: var(--rusty-red);
+}
+button.red-btn:active {
+    background-color: var(--active-red);
+}
+button.red-btn:hover {
+    background-color: var(--active-red);
+}
+button.yellow-btn {
+    background-color: var(--jasmine);
+}
+button.yellow-btn:hover {
+    background-color: var(--active-jasmine);
+}
+button.yellow-btn:active {
+    background-color: var(--active-jasmine);
+}
+button:active {
+    transform: var(--translate-y-btn);
+}
+button {
+    height: fit-content;
+    width: fit-content;
+    padding: 5px 10px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: var(--size-option);
+    font-weight: bold;
+    box-shadow: none;
+    text-shadow: none;
+    outline: none;
+}
+
+button:disabled {
+    background-color: var(--gray) !important;
+    color: var(--black);
+}
+button:disabled:active {
+    transform: translateY(0) !important;
+}

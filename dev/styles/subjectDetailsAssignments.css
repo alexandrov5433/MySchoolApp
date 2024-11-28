@@ -1,0 +1,180 @@
+.assignments-container {
+    padding: 1vh 1vw;
+}
+
+.assignments-container .assignment {
+    border: 1px solid var(--black);
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--background-gray);
+    display: flex;
+    flex-direction: column;
+}
+
+.assignments-container .assignment:hover {
+    box-shadow: var(--component-box-shadow);
+}
+
+.assignments-container .file-icon-container {
+    display: flex;
+    width: 350px;
+    /* height: 250px; */
+    align-items: center;
+    justify-content: center;
+    img {
+        /* 3w:4h */
+        width: 50px;
+        height: calc((50px / 3) * 4);
+    }
+}
+
+.assignments-container .assignment .title-deadline-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    .title {
+        font-size: var(--size-mid-title);
+        font-weight: bold;
+    }
+    .deadline {
+        font-size: var(--size-text);
+        font-weight: bold;
+        color: var(--rusty-red);
+    }
+}
+
+.assignments-container .assignment .first {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--white);
+    padding: 10px;
+    .description-container {
+        /* min-width: 650px; */
+        /* width: 45vw; */
+        font-size: var(--size-text);
+    }
+}
+
+.assignments-container .assignment-creator {
+    border: 1px solid var(--black);
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--background-gray);
+    .group {
+        label {
+            font-size: var(--size-description);
+            font-weight: bold;
+        }
+        input {
+            /* border: transparent; */
+            width: 600px;
+            font-size: var(--size-description);
+            padding: 5px 5px;
+            font-family: var(--font-family);
+        }
+        textarea {
+            /* border: transparent; */
+            padding: 5px 5px;
+            width: 900px;
+            height: 250px;
+            font-size: var(--size-description);
+            font-family: var(--font-family);
+        }
+    }
+    .add-margin-top{
+        margin-top: 2vh;
+    }
+    button {
+        margin-right: 2vw;
+    }
+}
+.assignments-container .uploaded-solution-container {
+    border-top: 1px solid var(--black);
+    margin-top: 15px;
+    padding: 10px 0;
+
+    .label-container .title {
+        font-size: var(--size-option);
+        font-weight: bold;
+    }
+
+    .solution-container {
+        max-width: 80%;
+        font-size: var(--size-description);
+    }
+}
+
+.assignments-container .assigment-file-upload-container {
+    border-top: 1px solid var(--black);
+    margin-top: 15px;
+    padding: 10px 0;
+    .group {
+        label {
+            font-size: var(--size-description);
+            font-weight: bold;
+        }
+
+    }
+    .group .container-title {
+        font-size: var(--size-option);
+    }
+    .group .upload-description {
+        font-size: var(--size-description);
+        font-weight: 100;
+    }
+    .add-margin-top{
+        margin-top: 2vh;
+    }
+}
+
+.assignments-container .assignment-controls {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60vw;
+    padding-top: 10px;
+    button {
+        margin-right: 2vw;
+    }
+
+}
+
+.assignments-container .all-uploaded-solutions-from-students-container {
+    border-top: 1px solid var(--black);
+    margin-top: 15px;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    .label-container .title {
+        font-size: var(--size-option);
+        font-weight: bold;
+    }
+    .solution-container {
+        height: 60px;
+        background-color: var(--white);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .solution-container:hover {
+        box-shadow: var(--component-box-shadow);
+    }
+    .solution-container .student-name {
+        font-size: var(--size-option);
+        font-weight: bold;
+    }
+    .solution-container .student-id {
+        font-size: var(--size-description);
+        font-weight: bold;
+        color: var(--gray);
+    }
+
+}
+
+/* add class to hide elemnts */
+.assignments-container .hide {
+    display: none !important;
+}

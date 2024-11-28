@@ -1,0 +1,129 @@
+.announcements-container {
+    padding: 1vh 1vw;
+    button:active {
+        transform: var(--translate-y-btn);
+    }
+}
+
+.announcements-container .announcement {
+    border: 1px solid var(--black);
+    margin-top: 15px;
+    padding: 2px;
+    background-color: var(--background-gray);
+}
+
+.announcements-container .announcement:hover {
+    box-shadow: var(--component-box-shadow);
+}
+
+.announcements-container .announcement .upper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--cosmic-latte);
+    padding: 10px;
+    .title-container {
+        font-size: var(--size-mid-title);
+        font-weight: bold;
+    }
+    .datetime-container {
+        font-size: var(--size-description);
+        color: var(--dim-gray);
+    }
+}
+
+.announcements-container .announcement .lower {
+    padding: 10px;
+    font-size: var(--size-text);
+}
+
+.announcements-container .teacher-announcement-creator {
+    border: 1px solid var(--black);
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--background-gray);
+    .group {
+        label {
+            font-size: var(--size-description);
+            font-weight: bold;
+        }
+        input {
+            /* border: transparent; */
+            width: 600px;
+            font-size: var(--size-description);
+            padding: 5px 5px;
+            font-family: var(--font-family);
+        }
+        textarea {
+            /* border: transparent; */
+            padding: 5px 5px;
+            width: 900px;
+            height: 250px;
+            font-size: var(--size-description);
+            font-family: var(--font-family);
+        }
+    }
+    .add-margin-top{
+        margin-top: 2vh;
+    }
+    button {
+        height: fit-content;
+        width: fit-content;
+        padding: 5px 10px;
+        border: none;
+        border-radius: var(--border-radius);
+        font-size: var(--size-option);
+        font-weight: bold;
+        box-shadow: none;
+        text-shadow: none;
+        outline: none !important;
+        background-color: var(--mint-green);
+    }
+    button:active {
+        background: var(--active-mint-green);
+    }
+    button.discard {
+        background-color: var(--rusty-red);
+    }
+    button.discard:active {
+        background-color: var(--active-red);
+    }
+}
+
+.announcements-container .teacher-announcement-controls {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 15vw;
+    button {
+        height: fit-content;
+        width: fit-content;
+        padding: 5px 10px;
+        border: none;
+        border-radius: var(--border-radius);
+        font-size: var(--size-option);
+        font-weight: bold;
+        box-shadow: none;
+        text-shadow: none;
+        outline: none !important;
+    }
+
+    button.edit {
+        background-color: var(--mint-green);
+    }
+    button.edit:active {
+        background-color: var(--active-mint-green);
+    }
+
+    button.delete {
+        background-color: var(--rusty-red);
+    }
+    button.delete:active {
+        background-color: var(--active-red);
+    }
+}
+
+/* add class to hide teacher-announcement elemnts */
+.announcements-container .hide {
+    display: none !important;
+}

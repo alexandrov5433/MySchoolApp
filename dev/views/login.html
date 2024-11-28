@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySchool - Home</title>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/core.css">
+    <link rel="stylesheet" href="../styles/navDropdown.css">
+    <link rel="stylesheet" href="../styles/login.css">
+</head>
+
+<body>
+    <div class="flex-container">
+        <header class="header-container">
+            <div class="logo">
+                <p>St. Peter Middle School</p>
+            </div>
+
+            <div class="navigation nav-all">
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Forms & Documents</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="navigation nav-specific">
+                <nav>
+                    <ul>
+                        <li><a href="#">Student Grades</a></li>
+                        <li><a href="#">My Profile</a></li>
+                        <li class="logout-active"><a href="#">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <div class="login">
+                <form>
+                    <div class="login-elements-container">
+                        <h2>Login</h2>
+
+                        <!-- <div class="form-group">
+                            <div class="radio-container">
+                                <label for="student-radio">Student</label><input id="student-radio" class="form-control" type="radio" name="loginAs" value="student">
+                            </div>
+                            <div class="radio-container">
+                                <label for="parent-radio">Parent</label><input id="parent-radio" class="form-control" type="radio" name="loginAs" value="parent">
+                            </div>
+                            <div class="radio-container">
+                                <label for="teacher-radio">Teacher</label><input id="teacher-radio" class="form-control" type="radio" name="loginAs" value="teacher">
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <select class="form-control credentials" name="registerAs" id="registerAs">
+                                <option value="">Parent, Teacher or Student?</option>
+                                <option value="parent">Parent</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="teacher">Student</option>
+                            </select>
+                        </div>
+                        <!-- <div class="error-msg-group">
+                            <span class="error">Error message here!Error message here!</span>
+                        </div> -->
+                        <div class="form-group">
+                            <input class="form-control credentials false-input" type="email" name="email" placeholder="Email">
+                        </div>
+                        <div class="error-msg-group">
+                            <span class="error">Error message here!Error message here!</span>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control credentials" type="password" name="password"
+                                placeholder="Password">
+                        </div>
+
+                        <!-- <div class="error-msg-group">
+                            <span class="error">Error message here!Error message here!</span>
+                        </div> -->
+
+                        <div class="form-btn">
+                            <button class="red-btn btn" type="submit">Log In</button>
+                        </div>
+
+                        <span class="no-acc-msg">No account? <a href="#">Register</a> or <a href="#">apply</a> to become
+                            a student.</span>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
