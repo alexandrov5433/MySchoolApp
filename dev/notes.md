@@ -58,7 +58,7 @@ A quick JOIN btn is present in each component. If student already participates i
 
 ## Students (Teacher only)
 - Pending Applications (overview) -> application details (id)
-- All Students (overview) -> student profile (id) -> Student grades (id) CRUD
+- All Students (overview) -> student profile (id) -> Student grades / docs / details (id) CRUD
 
 ## Grades
 Teacher - CRUD - see "Students" part
