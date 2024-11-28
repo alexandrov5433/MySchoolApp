@@ -17,6 +17,13 @@
     align-items: start;
     gap: 20px;
 
+    .upper-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
     .title {
         font-size: var(--size-mid-title);
         font-weight: bold;
