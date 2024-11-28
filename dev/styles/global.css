@@ -100,3 +100,10 @@ button:disabled {
 button:disabled:active {
     transform: translateY(0) !important;
 }
+
+input.correct-input {
+    border-color: var(--mint-green) !important;
+}
+input.false-input {
+    border-color: var(--rusty-red) !important;
+}
