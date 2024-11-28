@@ -71,7 +71,11 @@ Data:
 - date of birth
 - profile picture
 - email
-- telephone
+- mobile number
+- home number
 - id in system
+- street
+- house number
+- city
 Owner: CRUD
 Non-owner: view only
