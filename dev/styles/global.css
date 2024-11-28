@@ -88,7 +88,7 @@ button {
     border-radius: var(--border-radius);
     font-size: var(--size-option);
     font-weight: bold;
-    box-shadow: none;
+    box-shadow: var(--component-box-shadow);
     text-shadow: none;
     outline: none;
 }
