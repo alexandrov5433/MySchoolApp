@@ -11,7 +11,6 @@
 
 .profile-documents-container .document {
     border: 1px solid var(--black);
-    padding: 5px;
     background-color: var(--background-gray);
     display: flex;
     flex-direction: row;
@@ -25,6 +24,7 @@
 
 .profile-documents-container .file-icon-container {
     display: flex;
+    padding: 5px 0;
     width: 350px;
     align-items: center;
     justify-content: center;
@@ -51,4 +51,14 @@
     justify-content: space-evenly;
     align-items: center;
     width: 18vw;
+}
+
+.profile-documents-container .profile-documents-creator {
+    width: 90%;
+    height: fit-content;
+}
+
+.profile-documents-container .no-files-uploaded-container {
+    width: 90%;
+    height: 40vh;
 }
