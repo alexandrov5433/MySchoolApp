@@ -1,7 +1,8 @@
 .apply-now {
     height: fit-content;
     width: 100%;
-    border: 2px solid red;
+    border-radius: var(--border-radius);
+    /* border: 2px solid red; */
     background-color: var(--white);
     display: flex;
     flex-direction: column;
@@ -9,17 +10,6 @@
     gap: 30px;
     padding: 30px 0;
 }
-
-/* .apply-now form {
-    width: 1500px;
-    height: fit-content;
-    margin: 0 auto;
-    background-color: var(--white);
-    padding: 40px;
-    border-radius: 4px;
-    color: var(--dim-gray);
-    box-shadow: var(--component-box-shadow);
-} */
 
 .apply-now .title-container {
     font-size: var(--size-title);
@@ -31,7 +21,7 @@
     flex-direction: column;
     align-items: center;
     gap: 30px;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     width: 80%;
 }
 
@@ -41,12 +31,12 @@
     justify-content: space-evenly;
     align-items: center;
     flex-direction: row;
-    border: 2px solid rgb(0, 102, 255);
+    /* border: 2px solid rgb(0, 102, 255); */
 
 }
 
 .apply-now .input-elements {
-    border: 2px solid rgb(0, 255, 187);
+    /* border: 2px solid rgb(0, 255, 187); */
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -81,7 +71,7 @@
 }
 
 .apply-now .description-elements {
-    border: 2px solid rgb(0, 255, 187);
+    /* border: 2px solid rgb(0, 255, 187); */
     width: 40%;
     padding: 10px;
     background-color: var(--light-cold-gray);
@@ -103,57 +93,18 @@
 }
 
 .apply-now .file-uploads-container {
-    border: 2px solid rgb(85, 0, 255);
+    /* border: 2px solid rgb(85, 0, 255); */
     width: 100%;
     height: fit-content;
-
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .apply-now i{
     color: var(--rusty-red);
     font-size: var(--size-description);
 }
-
-/* .apply-now .form-group.special-input {
-    display: flex;
-    justify-content: left;
-    flex-direction: column;
-    span {
-        max-width: fit-content;
-        font-size: var(--size-description);
-    }
-} */
-
-/* .apply-now .radio-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    label {
-        margin-right: 15px;
-        font-size: var(--size-option);
-    }
-} */
-/* 
-.apply-now form .form-control {
-    background: var(--light-cold-gray);
-    border: none;
-    border-bottom: 4px solid var(--gray);
-    border-radius: var(--border-radius);
-    box-shadow: none;
-    outline: none;
-    color: var(--dim-gray);
-    text-indent: 8px;
-    height: 42px;
-} */
-
-/* .apply-now form .form-control.credentials {
-    width: 300px;
-}
-
-.apply-now form .btn {
-    padding: 15px 70px;
-} */
 
 .apply-now .no-acc-msg {
     color: var(--dim-gray);
