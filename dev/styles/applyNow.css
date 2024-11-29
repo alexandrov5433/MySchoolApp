@@ -76,13 +76,14 @@
     padding: 10px;
     background-color: var(--light-cold-gray);
     border-radius: var(--border-radius);
-    
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     span {
         color: var(--dim-gray);
         text-align: left;
-        display: block;
         font-size: var(--size-text);
-        margin-bottom: 15px;
+        display: block;
     }
 
     a {
