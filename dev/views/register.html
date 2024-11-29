@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/core.css">
     <link rel="stylesheet" href="../styles/navDropdown.css">
-    <link rel="stylesheet" href="../styles/register.css">
+    <link rel="stylesheet" href="../styles/applyNow.css">
+    <link rel="stylesheet" href="../styles/customFileInput.css">
+    <link rel="stylesheet" href="../styles/customFileUploadComponent.css">
 </head>
 
 <body>
@@ -41,69 +43,136 @@
             </div>
         </header>
         <main>
-            <div class="register">
-                <form>
-                    <div class="register-elements-container">
-                        <h2>Register</h2>
-                                <div class="form-group">
-                                     <select class="form-control credentials correct-input" name="registerAs" id="registerAs">
-                                        <option value="">Parent or Teacher?</option>
-                                        <option value="parent">Parent</option>
-                                        <option value="teacher">Teacher</option>
-                                     </select>
-                                </div>
-                                <!-- <div class="error-msg-group">
-                                    <span class="error">Error message here!</span>
-                                </div> -->
-                                <div class="form-group">
-                                    <input class="form-control credentials false-input" type="text" name="firstName" placeholder="First Name">
-                                </div>
-                                <!-- <div class="error-msg-group">
-                                    <span class="error">Error message here!</span>
-                                </div> -->
-                                <div class="form-group">
-                                    <input class="form-control credentials" type="text" name="lastName" placeholder="Last Name">
-                                </div>
-                                <!-- <div class="error-msg-group">
-                                    <span class="error">Error message here!</span>
-                                </div> -->
-                                <div class="form-group">
-                                    <input class="form-control credentials" type="email" name="email" placeholder="Email">
-                                </div>
-                                <!-- <div class="error-msg-group">
-                                    <span class="error">Error message here!</span>
-                                </div> -->
-                                <div class="form-group">
-                                    <input class="form-control credentials" type="password" name="password"
-                                        placeholder="Password">
-                                </div>
-                                <!-- <div class="error-msg-group">
-                                    <span class="error">Error message here!</span>
-                                </div> -->
-                                <div class="form-group password-container">
-                                    <input class="form-control credentials" type="password" name="repeatPassword"
-                                        placeholder="Repeat Password">
-                                </div>
-                                <!-- <div class="error-msg-group">
-                                    <span class="error">Error message here!</span>
-                                </div> -->
-                                <div class="form-group">
-                                    <input class="form-control credentials" type="text" name="authCode"
-                                        placeholder="Authentication Code">
-                                </div>
-        
-                                <!-- <div class="error-msg-group">
-                                    <span class="error">Error message here!Error message here!Error message here!</span>
-                                </div> -->
-                        <div class="form-btn">
-                            <button class="btn red-btn" type="submit">Register</button>
-                        </div>
-                        <div class="no-acc-msg-container">
+            <div class="apply-now">
 
-                            <span class="no-acc-msg">If you already have an account you can <a href="#">Log in</a> right away.</span>
-                        </div>
+                    <div class="title-container">
+                        <h2>Apply now to become a student</h2>
                     </div>
-                </form>
+
+                    <form class="form-element">
+                        <div class="main-elements">
+                            <div class="input-elements">
+                                <div class="form-group">
+                                    <label for="registerFirstName">First Name<i>*</i></label>
+                                    <input class="false-input" type="text" name="firstName" placeholder="First Name"
+                                        id="registerFirstName">
+                                    <div class="error-msg-container">
+                                        <span class="error">Error message here!Error message here!</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="registerLastName">Last Name<i>*</i></label>
+                                    <input class="correct-input" type="text" name="firstName" placeholder="Last Name"
+                                        id="registerLastName">
+                                    <div class="error-msg-container">
+                                        <span class="error">Error message here!Error message here!</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="registerDateOfBirth">Date Of Birth<i>*</i></label>
+                                    <input type="date" name="dateOfBirth" id="registerDateOfBirth">
+                                    <div class="error-msg-container">
+                                        <span class="error">Error message here!Error message here!</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="registerEmail">Email<i>*</i></label>
+                                    <input type="text" name="email" id="registerEmail" placeholder="Email">
+                                    <div class="error-msg-container">
+                                        <span class="error">Error message here!Error message here!</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="registerMobileNumber">Mobile Number<i>*</i></label>
+                                    <input type="tel" name="mobileNumber" id="registerMobileNumber" placeholder="Mobile Number">
+                                    <div class="error-msg-container">
+                                        <span class="error">Error message here!Error message here!</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="registerHomeNumber">Home Number</label>
+                                    <input type="tel" name="homeNumber" id="registerHomeNumber" placeholder="Home Number">
+                                    <div class="error-msg-container">
+                                        <span class="error">Error message here!Error message here!</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="registerStreet">Street<i>*</i></label>
+                                    <input type="text" name="street" id="registerStreet" placeholder="Street">
+                                    <div class="error-msg-container">
+                                        <span class="error">Error message here!Error message here!</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="registerHouseNumber">House Number<i>*</i></label>
+                                    <input type="text" name="houseNumber" id="registerHouseNumber" placeholder="House Number">
+                                    <div class="error-msg-container">
+                                        <span class="error">Error message here!Error message here!</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="registerCity">City<i>*</i></label>
+                                    <input type="text" name="city" id="registerCity" placeholder="City">
+                                    <div class="error-msg-container">
+                                        <span class="error">Error message here!Error message here!</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="description-elements">
+                                <span>Please fill out all mandatory<i>*</i> fields. With this form you are applying and creating an account at the same time. The needed documents are listed under <a href="#">FORMS
+                                        & DOCUMENTS</a>.</span>
+                                <span>After submitting the application, we will review it and send you an answer per Email as soon as possible. In this email, if accepted,
+                                    you will find a link for email confirmation and the "Parental Authentication Code", with which your parents can also
+                                    create accounts.</span>
+                                <span>Having trouble or questions? Please check the <a href="#">FAQ</a> or <a
+                                        href="#">CONTACT</a> us.</span>
+                            </div>
+                        </div>
+                        <div class="file-uploads-container">
+                            <div class="custom-file-upload-component">
+
+                                    
+                                <div class="label-container">
+                                    <label>Profile picture</label>
+                                </div>
+                                <label for="fileUploadPicture" class="custom-file-upload-btn">Select Photo
+                                    <input type="file" name="profilePicture" id="fileUploadPicture"></input>
+                                </label>
+                                <div class="selected-file-name-container add-margin-top">
+                                    <!-- incert file name in span element -->
+                                    <span></span>
+                                </div>
+                                <!-- <button class="green-btn">Upload</button> -->
+                            
+                            </div>
+                            <div class="custom-file-upload-component">
+
+                                    
+                                <div class="label-container">
+                                    <label>Documents<i>*</i></label>
+                                </div>
+                                <label for="fileUploadDocuments" class="custom-file-upload-btn">Select Files
+                                    <input type="file" name="documents" id="fileUploadDocuments" multiple></input>
+                                </label>
+                                <div class="selected-file-name-container add-margin-top">
+                                    <!-- incert file names in span elements -->
+                                    <span>sadfdfsdfsfdsfdsa</span>
+                                    <span>sadfdfsdfsfdsfdsa</span>
+                                    <span>sadfdfsdfsfdsfdsa</span>
+                                </div>
+                                <!-- <button class="green-btn">Upload</button> -->
+                            
+                            </div>
+                        </div>
+                        <div class="form-btn">
+                            <button class="btn red-btn" type="submit">Register & Apply</button>
+                        </div>
+                    </form>
+
+                    <span class="no-acc-msg">If you already have an account you can <a href="#">Log in</a> right
+                        away.</span>
+
             </div>
         </main>
     </div>

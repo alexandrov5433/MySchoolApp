@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySchool - Home</title>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/core.css">
+    <link rel="stylesheet" href="../styles/navDropdown.css">
+    <link rel="stylesheet" href="../styles/register.css">
+</head>
+
+<body>
+    <div class="flex-container">
+        <header class="header-container">
+            <div class="logo">
+                <p>St. Peter Middle School</p>
+            </div>
+
+            <div class="navigation nav-all">
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Forms & Documents</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="navigation nav-specific">
+                <nav>
+                    <ul>
+                        <li><a href="#">Student Grades</a></li>
+                        <li><a href="#">My Profile</a></li>
+                        <li class="logout-active"><a href="#">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <div class="register">
+                <form>
+                    <div class="register-elements-container">
+                        <h2>Register</h2>
+                                <div class="form-group">
+                                     <select class="form-control credentials correct-input" name="registerAs" id="registerAs">
+                                        <option value="">Parent or Teacher?</option>
+                                        <option value="parent">Parent</option>
+                                        <option value="teacher">Teacher</option>
+                                     </select>
+                                </div>
+                                <!-- <div class="error-msg-group">
+                                    <span class="error">Error message here!</span>
+                                </div> -->
+                                <div class="form-group">
+                                    <input class="form-control credentials false-input" type="text" name="firstName" placeholder="First Name">
+                                </div>
+                                <!-- <div class="error-msg-group">
+                                    <span class="error">Error message here!</span>
+                                </div> -->
+                                <div class="form-group">
+                                    <input class="form-control credentials" type="text" name="lastName" placeholder="Last Name">
+                                </div>
+                                <!-- <div class="error-msg-group">
+                                    <span class="error">Error message here!</span>
+                                </div> -->
+                                <div class="form-group">
+                                    <input class="form-control credentials" type="email" name="email" placeholder="Email">
+                                </div>
+                                <!-- <div class="error-msg-group">
+                                    <span class="error">Error message here!</span>
+                                </div> -->
+                                <div class="form-group">
+                                    <input class="form-control credentials" type="password" name="password"
+                                        placeholder="Password">
+                                </div>
+                                <!-- <div class="error-msg-group">
+                                    <span class="error">Error message here!</span>
+                                </div> -->
+                                <div class="form-group password-container">
+                                    <input class="form-control credentials" type="password" name="repeatPassword"
+                                        placeholder="Repeat Password">
+                                </div>
+                                <!-- <div class="error-msg-group">
+                                    <span class="error">Error message here!</span>
+                                </div> -->
+                                <div class="form-group">
+                                    <input class="form-control credentials" type="text" name="authCode"
+                                        placeholder="Authentication Code">
+                                </div>
+        
+                                <!-- <div class="error-msg-group">
+                                    <span class="error">Error message here!Error message here!Error message here!</span>
+                                </div> -->
+                        <div class="form-btn">
+                            <button class="btn red-btn" type="submit">Register</button>
+                        </div>
+                        <div class="no-acc-msg-container">
+
+                            <span class="no-acc-msg">If you already have an account you can <a href="#">Log in</a> right away.</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
