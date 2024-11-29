@@ -101,6 +101,13 @@
     gap: 30px;
 }
 
+.apply-now .form-btn {
+    button {
+        padding: 20px 50px;
+        font-size: var(--size-text);
+    }
+}
+
 .apply-now i{
     color: var(--rusty-red);
     font-size: var(--size-description);
