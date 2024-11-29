@@ -6,22 +6,80 @@
     <div class="navigation nav-all">
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Forms & Documents</a></li>
+                <li><a routerLink="/">Home</a></li>
+                <li><a routerLink="/about">About</a></li>
+                <li><a routerLink="/contact">Contact</a></li>
+                <li><a routerLink="/faq">FAQ</a></li>
+                <li><a routerLink="/forms-and-documents">Forms & Documents</a></li>
             </ul>
         </nav>
     </div>
-
-    <div class="navigation nav-specific">
-        <nav>
-            <ul>
-                <li><a href="#">Register</a></li>
-                <li><a href="#">Log In</a></li>
-                <li class="apply"><a href="#">Apply Now</a></li>
-            </ul>
-        </nav>
-    </div>
+    @if (userAuthorizationStatus === 'guest') {
+        <div class="navigation nav-specific">
+            <nav>
+                <ul>
+                    <li><a routerLink="/register">Register</a></li>
+                    <li><a routerLink="/log-in">Log In</a></li>
+                    <li class="apply"><a routerLink="/apply-now">Apply Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    } @else if (userAuthorizationStatus === 'parent') {
+        <div class="navigation nav-specific">
+            <nav>
+                <ul>
+                    <li><a href="#">Student Grades</a></li>
+                    <li><a href="#">My Profile</a></li>
+                    <li class="logout-active"><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    } @else if (userAuthorizationStatus === 'teacher') {
+        <div class="navigation nav-specific">
+            <nav>
+                <ul>
+                    <li>
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-btn underline">Subjects</a>
+                            <div class="dropdown-content">
+                                <a href="#">My Subjects</a>
+                                <a href="#">Create Subject</a>
+                                <a href="#">All Subjects</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-btn underline">Students</a>
+                            <div class="dropdown-content">
+                                <a href="#">Pending Applications</a>
+                                <a href="#">All Students</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">My Profile</a></li>
+                    <li class="logout-active"><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    } @else if (userAuthorizationStatus === 'student') {
+        <div class="navigation nav-specific">
+            <nav>
+                <ul>
+                    <li>
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-btn underline">Subjects</a>
+                            <div class="dropdown-content">
+                                <a href="#">My Subjects</a>
+                                <a href="#">All Subjects</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">My Grades</a></li>
+                    <li><a href="#">My Profile</a></li>
+                    <li class="logout-active"><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    }
 </header>

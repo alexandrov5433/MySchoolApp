@@ -79,3 +79,9 @@ Data:
 - city
 Owner: CRUD
 Non-owner: view only
+
+## Angular Folder Structure
+core - header, main
+account - login, register, apply-now
+basic - home, about, contact, faq, forms & documents, 404-page //// TODO-page ////
+specific - subjects, profiles(grades), students
