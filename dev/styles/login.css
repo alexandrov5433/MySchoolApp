@@ -1,52 +1,91 @@
-.login {
-    height: inherit;
+.login-view{
+    height: fit-content;
     width: 100%;
-}
-
-.login form {
-    max-width: 320px;
-    width: 100%;
-    margin: 0 auto;
-    background-color: var(--white);
-    padding: 40px;
     border-radius: var(--border-radius);
-    color: var(--dark-cold-gray);
+    /* border: 2px solid red; */
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 30px 0;
     box-shadow: var(--component-box-shadow);
 }
 
-.login .login-elements-container {
+.login-view .title-container {
+    font-size: var(--size-title);
+    text-align: center;
+}
+
+.login-view .form-element {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    align-items: center;
     gap: 30px;
-    color: var(--black);
+    /* border: 2px solid red; */
+    width: 80%;
+}
 
-    h2 {
-        font-size: var(--size-title);
+.login-view .main-elements {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    /* border: 2px solid rgb(0, 102, 255); */
+
+}
+
+.login-view .input-elements {
+    /* border: 2px solid rgb(0, 255, 187); */
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        width: 80%;
+    }
+    .form-group label{
+        font-weight: 100;
+        font-size: var(--size-small-msg);
+    }
+    .form-group input,
+    .form-group select {
+        background: var(--light-cold-gray);
+        border: none;
+        border-bottom: 4px solid var(--gray);
+        border-radius: var(--border-radius);
+        box-shadow: none;
+        outline: none;
+        color: var(--black);
+        text-indent: 8px;
+        height: 42px;
+        width: 100%;
+        font-size: var(--size-description);
     }
 }
 
-.login form .form-control {
-    background: var(--light-cold-gray);
-    border: none;
-    border-bottom: 4px solid var(--gray);
-    border-radius: var(--border-radius);
-    box-shadow: none;
-    outline: none;
-    color: inherit;
-    text-indent: 8px;
-    height: 42px;
+.login-view .form-btn {
+    button {
+        padding: 20px 50px;
+        font-size: var(--size-text);
+    }
 }
 
-.login form .form-control.credentials {
-    width: 300px;
+.login-view i{
+    color: var(--rusty-red);
+    font-size: var(--size-description);
 }
 
-.login form .btn {
-    padding: 15px 70px;
-}
-
-.login .no-acc-msg {
+.login-view .no-acc-msg,
+.login-view .mandatory-fieds-msg {
     color: var(--dim-gray);
     font-size: var(--size-small-msg);
 
@@ -59,21 +98,13 @@
 
 /* error communacation */
 /* show span and edit textContent when error */
-.login .error-msg-group {
+.login-view .error-msg-container {
     max-height: 100px;
-
-    span.error {
-        display: block;
-        color: var(--rusty-red);
-        font-size: var(--size-error-msg);
-    }
 }
 
-/* class to add by false validation */
-.login input.false-input {
-    border-bottom: 4px solid var(--rusty-red);
-}
-
-.login select.false-input {
-    border-bottom: 4px solid var(--rusty-red);
+.login-view .error {
+    max-width: 100%;
+    display: block;
+    color: var(--rusty-red);
+    font-size: var(--size-error-msg);
 }

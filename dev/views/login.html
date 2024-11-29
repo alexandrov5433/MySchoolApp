@@ -41,56 +41,58 @@
             </div>
         </header>
         <main>
-            <div class="login">
-                <form>
-                    <div class="login-elements-container">
-                        <h2>Login</h2>
+            <div class="login-view">
 
-                        <!-- <div class="form-group">
-                            <div class="radio-container">
-                                <label for="student-radio">Student</label><input id="student-radio" class="form-control" type="radio" name="loginAs" value="student">
+                <div class="title-container">
+                    <h2>Log In</h2>
+                </div>
+
+                <form class="form-element">
+                    <div class="main-elements">
+                        <div class="input-elements">
+
+                            <div class="form-group">
+                                <label for="loginAs">Parent, Teacher or Student?<i>*</i></label>
+                                <select class="form-control credentials" name="loginAs" id="loginAs">
+                                    <option value="">Parent, Teacher or Student?</option>
+                                    <option value="parent">Parent</option>
+                                    <option value="teacher">Teacher</option>
+                                    <option value="student">Student</option>
+                                </select>
+
+                                <div class="error-msg-container">
+                                    <span class="error">Error message here!Error message here!</span>
+                                </div>
                             </div>
-                            <div class="radio-container">
-                                <label for="parent-radio">Parent</label><input id="parent-radio" class="form-control" type="radio" name="loginAs" value="parent">
+
+                            <div class="form-group">
+                                <label for="email">Email<i>*</i></label>
+                                <input class="false-input" type="text" name="email" placeholder="Email"
+                                    id="email">
+                                <div class="error-msg-container">
+                                    <span class="error">Error message here!Error message here!</span>
+                                </div>
                             </div>
-                            <div class="radio-container">
-                                <label for="teacher-radio">Teacher</label><input id="teacher-radio" class="form-control" type="radio" name="loginAs" value="teacher">
+                            <div class="form-group">
+                                <label for="password">Password<i>*</i></label>
+                                <input class="false-input" type="password" name="password" placeholder="Password"
+                                    id="password">
+                                <div class="error-msg-container">
+                                    <span class="error">Error message here!Error message here!</span>
+                                </div>
                             </div>
-                        </div> -->
-                        <div class="form-group">
-                            <select class="form-control credentials" name="registerAs" id="registerAs">
-                                <option value="">Parent, Teacher or Student?</option>
-                                <option value="parent">Parent</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="teacher">Student</option>
-                            </select>
+                            
                         </div>
-                        <!-- <div class="error-msg-group">
-                            <span class="error">Error message here!Error message here!</span>
-                        </div> -->
-                        <div class="form-group">
-                            <input class="form-control credentials false-input" type="email" name="email" placeholder="Email">
-                        </div>
-                        <div class="error-msg-group">
-                            <span class="error">Error message here!Error message here!</span>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control credentials" type="password" name="password"
-                                placeholder="Password">
-                        </div>
-
-                        <!-- <div class="error-msg-group">
-                            <span class="error">Error message here!Error message here!</span>
-                        </div> -->
-
-                        <div class="form-btn">
-                            <button class="red-btn btn" type="submit">Log In</button>
-                        </div>
-
-                        <span class="no-acc-msg">No account? <a href="#">Register</a> or <a href="#">apply</a> to become
-                            a student.</span>
+                    </div>
+                    <div class="form-btn">
+                        <button class="red-btn" type="submit">Log In</button>
                     </div>
                 </form>
+
+                <span class="mandatory-fieds-msg">Mandatory<i>*</i> fields.</span>
+                <span class="no-acc-msg">No account? <a href="#">Register</a> or <a href="#">apply</a> to become
+                    a student.</span>
+
             </div>
         </main>
     </div>
