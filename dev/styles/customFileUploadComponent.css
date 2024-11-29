@@ -39,6 +39,10 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
         span {
             color: var(--dark-cold-gray);
         }
