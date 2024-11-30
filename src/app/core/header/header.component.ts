@@ -14,7 +14,7 @@ export class HeaderComponent {
   constructor(
     private userSevice: UserService,
     private router: Router
-  ) {}
+  ) { }
 
   get isUserLoggedIn(): boolean {
     return this.userSevice.isUserLoggedIn;
@@ -29,8 +29,17 @@ export class HeaderComponent {
     return status;
   }
 
-  logout():void {
-    this.userSevice.logout();
+  logout(): void {
+    this.userSevice.logout()
+      .subscribe({
+        complete: () => {
+          console.log('Logout successfull!');
+          this.router.navigate(['/home']);
+        },
+        error: (e) => {
+          console.error(e);
+        }
+      });;
     this.router.navigate(['/home']);
   }
 }
