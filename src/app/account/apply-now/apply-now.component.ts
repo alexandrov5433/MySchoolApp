@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-apply-now',
   imports: [],
   templateUrl: './apply-now.component.html',
-  styleUrls: ['./apply-now.component.css', '../../shared/styles/customFileUploadComponent.css'],
+  styleUrl: './apply-now.component.css',
   standalone: true
 })
 export class ApplyNowComponent {
