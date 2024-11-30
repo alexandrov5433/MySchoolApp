@@ -1,50 +1,31 @@
-/* separate component */
-.custom-file-upload-component {
-    border: 1px solid var(--black);
-    box-shadow: var(--component-box-shadow);
-    background-color: var(--background-gray);
-    width: auto;
-    height: inherit;
-    padding: 20px;
+.loader-container {
     display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-    .label-container {
-        font-size: var(--size-text);
-        font-weight: bold;
-        width: fit-content;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 3px solid var(--rusty-red);
+    border-right: 3px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
     }
 
-    .custom-file-upload-btn{
-        width: fit-content;
-        height: fit-content;
-        font-size: var(--size-description);
-        border-radius: var(--border-radius);
-        padding: 5px 10px;
-        background-color: var(--black);
-        box-shadow: var(--component-box-shadow);
-        color: var(--white);
-        input[type="file"] {
-            display: none;
-        }
+    100% {
+        transform: rotate(360deg);
     }
-    .custom-file-upload-btn:active{
-        background-color: var(--gray);
-    }
-    
-    .selected-file-name-container {
-        font-size: var(--size-description);
-        max-width: 80%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        gap: 10px;
-        span {
-            color: var(--dark-cold-gray);
-        }
-    }
+}
+
+/* use class to hide  loader */
+.loader-container.hide {
+    display: none;
 }
