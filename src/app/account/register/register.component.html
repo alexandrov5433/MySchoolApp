@@ -4,14 +4,14 @@
         <h2>Register</h2>
     </div>
 
-    <form class="form-element">
+    <form class="form-element" [formGroup]="registerForm" (ngSubmit)="register()">
         <div class="main-elements">
             <div class="input-elements">
 
                 <div class="form-group">
                     <label for="registerFirstName">Teacher Or Parent<i>*</i></label>
                     <select class="form-control credentials false-input" name="registerAs"
-                        id="registerAs">
+                        id="registerAs" formControlName="registerAs">
                         <option value="">Parent or Teacher?</option>
                         <option value="parent">Parent</option>
                         <option value="teacher">Teacher</option>
@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label for="registerFirstName">First Name<i>*</i></label>
                     <input class="false-input" type="text" name="firstName" placeholder="First Name"
-                        id="registerFirstName">
+                        id="registerFirstName" formControlName="firstName">
                     <div class="error-msg-container">
                         <span class="error">Error message here!Error message here!</span>
                     </div>
@@ -33,21 +33,21 @@
                 <div class="form-group">
                     <label for="registerLastName">Last Name<i>*</i></label>
                     <input class="correct-input" type="text" name="lastName" placeholder="Last Name"
-                        id="registerLastName">
+                        id="registerLastName" formControlName="lastName">
                     <div class="error-msg-container">
                         <span class="error">Error message here!Error message here!</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="registerDateOfBirth">Date Of Birth<i>*</i></label>
-                    <input type="date" name="dateOfBirth" id="registerDateOfBirth">
+                    <input type="date" name="dateOfBirth" id="registerDateOfBirth" formControlName="dateOfBirth">
                     <div class="error-msg-container">
                         <span class="error">Error message here!Error message here!</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="registerEmail">Email<i>*</i></label>
-                    <input type="text" name="email" id="registerEmail" placeholder="Email">
+                    <input type="text" name="email" id="registerEmail" placeholder="Email" formControlName="email">
                     <div class="error-msg-container">
                         <span class="error">Error message here!Error message here!</span>
                     </div>
@@ -55,14 +55,14 @@
                 <div class="form-group">
                     <label for="registerMobileNumber">Mobile Number<i>*</i></label>
                     <input type="tel" name="mobileNumber" id="registerMobileNumber"
-                        placeholder="Mobile Number">
+                        placeholder="Mobile Number" formControlName="mobileNumber">
                     <div class="error-msg-container">
                         <span class="error">Error message here!Error message here!</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="registerHomeNumber">Home Number</label>
-                    <input type="tel" name="homeNumber" id="registerHomeNumber" placeholder="Home Number">
+                    <input type="tel" name="homeNumber" id="registerHomeNumber" placeholder="Home Number" formControlName="homeNumber">
                     <div class="error-msg-container">
                         <span class="error">Error message here!Error message here!</span>
                     </div>
@@ -70,7 +70,7 @@
 
                 <div class="form-group">
                     <label for="registerStreet">Street<i>*</i></label>
-                    <input type="text" name="street" id="registerStreet" placeholder="Street">
+                    <input type="text" name="street" id="registerStreet" placeholder="Street" formControlName="street">
                     <div class="error-msg-container">
                         <span class="error">Error message here!Error message here!</span>
                     </div>
@@ -78,21 +78,21 @@
                 <div class="form-group">
                     <label for="registerHouseNumber">House Number<i>*</i></label>
                     <input type="text" name="houseNumber" id="registerHouseNumber"
-                        placeholder="House Number">
+                        placeholder="House Number" formControlName="houseNumber">
                     <div class="error-msg-container">
                         <span class="error">Error message here!Error message here!</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="registerCity">City<i>*</i></label>
-                    <input type="text" name="city" id="registerCity" placeholder="City">
+                    <input type="text" name="city" id="registerCity" placeholder="City" formControlName="city">
                     <div class="error-msg-container">
                         <span class="error">Error message here!Error message here!</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="authenticationCode">Authentication Code<i>*</i></label>
-                    <input type="text" name="authenticationCode" id="authenticationCode" placeholder="Authentication Code">
+                    <input type="text" name="authenticationCode" id="authenticationCode" placeholder="Authentication Code" formControlName="authenticationCode">
                     <div class="error-msg-container">
                         <span class="error">Error message here!Error message here!</span>
                     </div>
@@ -108,10 +108,10 @@
                     
                 </div>
                 <div>
-                    <span>After registering, please check your email. You should recieve a link for email confirmation after a few moments. Click the link to activate your account. After that you can <a href="#">LOG IN</a>.</span>
+                    <span>After registering, please check your email. You should recieve a link for email confirmation after a few moments. Click the link to activate your account. After that you can <a href="javascript:void(0)" routerLink="/log-in">LOG IN</a>.</span>
                 </div>
                 <div>
-                    <span>Having trouble or questions? Please check the <a href="#">FAQ</a> or <a href="#">CONTACT</a> us.</span>
+                    <span>Having trouble or questions? Please check the <a href="javascript:void(0)" routerLink="/faq">FAQ</a> or <a href="javascript:void(0)" routerLink="/contact">CONTACT</a> us.</span>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
                     <label>Profile Picture</label>
                 </div>
                 <label for="fileUploadPicture" class="custom-file-upload-btn">Select Photo
-                    <input type="file" name="profilePicture" id="fileUploadPicture">
+                    <input type="file" name="profilePicture" id="fileUploadPicture" formControlName="profilePicture">
                 </label>
                 <div class="selected-file-name-container add-margin-top">
                     <!-- incert file name in span element -->
@@ -129,15 +129,16 @@
                 </div>
             </div>
         </div>
-        <div class="loader-container">
-            <span class="loader"></span>
-        </div>
-        <div class="form-btn">
-            <button class="red-btn" type="submit">Register</button>
-        </div>
+        @if (isLoading) {
+            <app-loader></app-loader>
+        } @else {
+            <div class="form-btn">
+                <button class="red-btn" type="submit">Register</button>
+            </div>
+        }
     </form>
 
-    <span class="no-acc-msg">If you already have an account you can <a href="#">Log in</a> right
+    <span class="no-acc-msg">If you already have an account you can <a href="javascript:void(0)" routerLink="/log-in">Log in</a> right
         away.</span>
 
 </div>
