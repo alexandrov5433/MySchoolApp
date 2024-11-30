@@ -4,53 +4,61 @@
         <h2>Log In</h2>
     </div>
 
-    <form class="form-element">
+    <form class="form-element" [formGroup]="loginForm" (ngSubmit)="login()">
         <div class="main-elements">
             <div class="input-elements">
 
                 <div class="form-group">
                     <label for="loginAs">Parent, Teacher or Student?<i>*</i></label>
-                    <select class="form-control credentials" name="loginAs" id="loginAs">
+                    <select name="loginAs" id="loginAs" formControlName="loginAs"
+                        [class]="loginAsInfo.validationClass">
                         <option value="">Parent, Teacher or Student?</option>
                         <option value="parent">Parent</option>
                         <option value="teacher">Teacher</option>
                         <option value="student">Student</option>
                     </select>
-
+                    @if (loginAsInfo.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please select your status.</span>
                     </div>
+                    }
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email<i>*</i></label>
-                    <input class="false-input" type="text" name="email" placeholder="Email"
-                        id="email">
+                    <input type="text" name="email" placeholder="Email" id="email" formControlName="email"
+                    [class]="emailInfo.validationClass">
+                    @if (emailInfo.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your email.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
                     <label for="password">Password<i>*</i></label>
-                    <input class="false-input" type="password" name="password" placeholder="Password"
-                        id="password">
+                    <input type="password" name="password" placeholder="Password" id="password"
+                        formControlName="password"
+                        [class]="passwordInfo.validationClass">
+                    @if (passwordInfo.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your password.</span>
                     </div>
+                    }
                 </div>
-                
+
             </div>
         </div>
         <div class="loader-container">
             <span class="loader"></span>
         </div>
         <div class="form-btn">
-            <button class="red-btn" type="submit">Log In</button>
+            <button class="red-btn" type="submit" [disabled]="isLoginFormInvalid">Log In</button>
         </div>
     </form>
 
     <span class="mandatory-fieds-msg">Mandatory<i>*</i> fields.</span>
-    <span class="no-acc-msg">No account? <a routerLink="/register">Register</a> or <a routerLink="/apply-now">apply</a> to become
+    <span class="no-acc-msg">No account? <a routerLink="/register">Register</a> or <a routerLink="/apply-now">apply</a>
+        to become
         a student.</span>
 
 </div>
