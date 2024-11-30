@@ -3,16 +3,18 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, LoaderComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   standalone: true
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private ngUnsub = new Subject();
+  isLoading: boolean = false;
   loginForm = new FormGroup({
     loginAs: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
@@ -34,13 +36,22 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private router: Router
-  ) {}
+  ) { }
 
   login() {
     const userLogsInAs = this.loginForm.get('loginAs')?.value;
-    console.log('Logging in...');
-    this.userService.loginAs(userLogsInAs);
-    this.router.navigate(['/home']);
+    this.isLoading = true;
+    this.userService.loginAs(userLogsInAs)
+      .subscribe({
+        complete: () => {
+          console.log('Login successfull!');
+          this.router.navigate(['/home']);
+        },
+        error: (e) => {
+          this.isLoading = false;
+          console.error(e);
+        }
+      });
   }
 
   isTouched(control: string): boolean | undefined {
@@ -63,7 +74,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginForm.get('loginAs')?.valueChanges
       .pipe(takeUntil(this.ngUnsub))
       .subscribe(x => {
-        console.log(x);
         if (this.isMissingValue('loginAs')) {
           this.loginAsInfo.validationClass = 'false-input';
           this.loginAsInfo.showErrMsg = true;
@@ -76,7 +86,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginForm.get('email')?.valueChanges
       .pipe(takeUntil(this.ngUnsub))
       .subscribe(x => {
-        console.log(x);
         if (this.isMissingValue('email')) {
           this.emailInfo.validationClass = 'false-input';
           this.emailInfo.showErrMsg = true;
@@ -89,7 +98,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginForm.get('password')?.valueChanges
       .pipe(takeUntil(this.ngUnsub))
       .subscribe(x => {
-        console.log(x);
         if (this.isMissingValue('password')) {
           this.passwordInfo.validationClass = 'false-input';
           this.passwordInfo.showErrMsg = true;

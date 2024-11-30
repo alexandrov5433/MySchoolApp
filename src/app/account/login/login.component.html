@@ -48,10 +48,13 @@
 
             </div>
         </div>
-
-        <div class="form-btn">
-            <button class="red-btn" type="submit" [disabled]="isLoginFormInvalid">Log In</button>
-        </div>
+        @if (isLoading) {
+            <app-loader></app-loader>
+        } @else {
+            <div class="form-btn">
+                <button class="red-btn" type="submit" [disabled]="isLoginFormInvalid">Log In</button>
+            </div>
+        }
     </form>
 
     <span class="mandatory-fieds-msg">Mandatory<i>*</i> fields.</span>
