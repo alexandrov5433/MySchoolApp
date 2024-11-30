@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -30,8 +31,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     showErrMsg: false
   };
 
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
+
   login() {
-    console.log(this.loginForm.valid);
+    const userLogsInAs = this.loginForm.get('loginAs')?.value;
+    console.log('Logging in...');
+    this.userService.loginAs(userLogsInAs);
+    this.router.navigate(['/home']);
   }
 
   isTouched(control: string): boolean | undefined {

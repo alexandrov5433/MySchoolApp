@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -9,15 +10,27 @@ import { RouterLink } from '@angular/router';
   standalone: true
 })
 export class HeaderComponent {
-  get userAuthorizationStatus(): string {
-    //TODO create service for account management and status fetching
-    //expample return val lib
-    const auth = {
-      0: 'guest',
-      1: 'student',
-      2: 'parent',
-      3: 'teacher',
-    };
-    return auth[0];
+
+  constructor(
+    private userSevice: UserService,
+    private router: Router
+  ) {}
+
+  get isUserLoggedIn(): boolean {
+    return this.userSevice.isUserLoggedIn;
+  }
+
+  get userAuthorizationStatus(): string | undefined {
+    const status = this.userSevice.userAuthStatus;
+    if (!status) {
+      console.error(`HeaderComponent: Status is not of type string or is an empty string. Status: "${status}"`);
+      return;
+    }
+    return status;
+  }
+
+  logout():void {
+    this.userSevice.logout();
+    this.router.navigate(['/home']);
   }
 }
