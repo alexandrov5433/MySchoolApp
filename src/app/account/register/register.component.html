@@ -10,92 +10,124 @@
 
                 <div class="form-group">
                     <label for="registerFirstName">Teacher Or Parent<i>*</i></label>
-                    <select class="form-control credentials false-input" name="registerAs"
-                        id="registerAs" formControlName="registerAs">
+                    <select name="registerAs" id="registerAs" formControlName="registerAs"
+                        [class]="validationLib['registerAs'].validationClass">
                         <option value="">Parent or Teacher?</option>
                         <option value="parent">Parent</option>
                         <option value="teacher">Teacher</option>
                     </select>
-
+                    @if (validationLib['registerAs'].showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please select your status.</span>
                     </div>
+                    }
                 </div>
 
                 <div class="form-group">
                     <label for="registerFirstName">First Name<i>*</i></label>
-                    <input class="false-input" type="text" name="firstName" placeholder="First Name"
-                        id="registerFirstName" formControlName="firstName">
+                    <input type="text" name="firstName" placeholder="First Name" id="registerFirstName"
+                        formControlName="firstName" [class]="validationLib['firstName'].validationClass">
+                    @if (validationLib['firstName'].showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your first name.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
                     <label for="registerLastName">Last Name<i>*</i></label>
-                    <input class="correct-input" type="text" name="lastName" placeholder="Last Name"
-                        id="registerLastName" formControlName="lastName">
+                    <input type="text" name="lastName" placeholder="Last Name" id="registerLastName"
+                        formControlName="lastName" [class]="validationLib['lastName'].validationClass">
+                    @if (validationLib['lastName'].showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your last name.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
                     <label for="registerDateOfBirth">Date Of Birth<i>*</i></label>
-                    <input type="date" name="dateOfBirth" id="registerDateOfBirth" formControlName="dateOfBirth">
+                    <input type="date" name="dateOfBirth" id="registerDateOfBirth" formControlName="dateOfBirth"
+                        [class]="validationLib['dateOfBirth'].validationClass">
+                    @if (validationLib['dateOfBirth'].showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please select your date of birth.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
                     <label for="registerEmail">Email<i>*</i></label>
-                    <input type="text" name="email" id="registerEmail" placeholder="Email" formControlName="email">
+                    <input type="text" name="email" id="registerEmail" placeholder="Email" formControlName="email"
+                        [class]="validationLib['email'].validationClass">
+                    @if (validationLib['email'].showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your email. Examples: my.personal.email&#64;abc.com,
+                            my.email&#64;abc.xyz.com.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
                     <label for="registerMobileNumber">Mobile Number<i>*</i></label>
-                    <input type="tel" name="mobileNumber" id="registerMobileNumber"
-                        placeholder="Mobile Number" formControlName="mobileNumber">
+                    <input type="tel" name="mobileNumber" id="registerMobileNumber" placeholder="Mobile Number"
+                        formControlName="mobileNumber" [class]="validationLib['mobileNumber'].validationClass">
+                    @if (validationLib['mobileNumber'].showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your mobile number. Examples: +49 886 13497331, 0886 13497331,
+                            +359 886 13497331.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
                     <label for="registerHomeNumber">Home Number</label>
-                    <input type="tel" name="homeNumber" id="registerHomeNumber" placeholder="Home Number" formControlName="homeNumber">
+                    <input type="tel" name="homeNumber" id="registerHomeNumber" placeholder="Home Number"
+                        formControlName="homeNumber" [class]="validationLib['homeNumber'].validationClass">
+                    @if (validationLib['homeNumber'].showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Optionaly you may enter your home number. Examples: 055 988899, +359
+                            826688.</span>
                     </div>
+                    }
                 </div>
 
                 <div class="form-group">
                     <label for="registerStreet">Street<i>*</i></label>
-                    <input type="text" name="street" id="registerStreet" placeholder="Street" formControlName="street">
+                    <input type="text" name="street" id="registerStreet" placeholder="Street" formControlName="street"
+                        [class]="validationLib['street'].validationClass">
+                    @if (validationLib['street'].showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter the name of your street. Example: "Example-Park Main".</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
                     <label for="registerHouseNumber">House Number<i>*</i></label>
-                    <input type="text" name="houseNumber" id="registerHouseNumber"
-                        placeholder="House Number" formControlName="houseNumber">
+                    <input type="text" name="houseNumber" id="registerHouseNumber" placeholder="House Number"
+                        formControlName="houseNumber" [class]="validationLib['houseNumber'].validationClass">
+                    @if (validationLib['houseNumber'].showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your house number. Example: 23, 23a, 23A, 23 a, 12-a.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
                     <label for="registerCity">City<i>*</i></label>
-                    <input type="text" name="city" id="registerCity" placeholder="City" formControlName="city">
+                    <input type="text" name="city" id="registerCity" placeholder="City" formControlName="city"
+                        [class]="validationLib['city'].validationClass">
+                    @if (validationLib['city'].showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter the name of your city. Example: MyCity, mycity, "Example-City
+                            SecondWord".</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
                     <label for="authenticationCode">Authentication Code<i>*</i></label>
-                    <input type="text" name="authenticationCode" id="authenticationCode" placeholder="Authentication Code" formControlName="authenticationCode">
+                    <input type="text" name="authenticationCode" id="authenticationCode"
+                        placeholder="Authentication Code" formControlName="authenticationCode"
+                        [class]="validationLib['authenticationCode'].validationClass">
+                    @if (validationLib['authenticationCode'].showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter the authentication code.</span>
                     </div>
+                    }
                 </div>
             </div>
             <div class="description-elements">
@@ -103,15 +135,20 @@
                     <span>Please fill out all mandatory<i>*</i> fields.</span>
                 </div>
                 <div>
-                    <span>If you are a parent please use the authentication code, which you can find in the acceptance email we sent to your child.</span>
+                    <span>If you are a parent please use the authentication code, which you can find in the acceptance
+                        email we sent to your child.</span>
                     <span>If you are a teacher please use the authentication code, provided to you by the school.</span>
-                    
+
                 </div>
                 <div>
-                    <span>After registering, please check your email. You should recieve a link for email confirmation after a few moments. Click the link to activate your account. After that you can <a href="javascript:void(0)" routerLink="/log-in">LOG IN</a>.</span>
+                    <span>After registering, please check your email. You should recieve a link for email confirmation
+                        after a few moments. Click the link to activate your account. After that you can <a
+                            href="javascript:void(0)" routerLink="/log-in">LOG IN</a>.</span>
                 </div>
                 <div>
-                    <span>Having trouble or questions? Please check the <a href="javascript:void(0)" routerLink="/faq">FAQ</a> or <a href="javascript:void(0)" routerLink="/contact">CONTACT</a> us.</span>
+                    <span>Having trouble or questions? Please check the <a href="javascript:void(0)"
+                            routerLink="/faq">FAQ</a> or <a href="javascript:void(0)" routerLink="/contact">CONTACT</a>
+                        us.</span>
                 </div>
             </div>
         </div>
@@ -121,24 +158,33 @@
                     <label>Profile Picture</label>
                 </div>
                 <label for="fileUploadPicture" class="custom-file-upload-btn">Select Photo
-                    <input type="file" name="profilePicture" id="fileUploadPicture" formControlName="profilePicture">
+                    <input type="file" name="profilePicture" id="fileUploadPicture" formControlName="profilePicture"
+                        (change)="onFileSelect($event)" accept="image/*">
                 </label>
                 <div class="selected-file-name-container add-margin-top">
                     <!-- incert file name in span element -->
-                    <span></span>
+                     @if(profilePictureFileName) {
+                         <span>{{profilePictureFileName}}</span>
+                     }
                 </div>
             </div>
+            @if(validationLib.profilePicture.showErrMsg) {
+            <div class="error-msg-container">
+                <span class="error">Only the following image file types are acceptable: .JPEG, .JPG and .PNG.</span>
+            </div>
+            }
         </div>
         @if (isLoading) {
-            <app-loader></app-loader>
+        <app-loader></app-loader>
         } @else {
-            <div class="form-btn">
-                <button class="red-btn" type="submit">Register</button>
-            </div>
+        <div class="form-btn">
+            <button class="red-btn" type="submit" [disabled]="isRegisterFormInvalid">Register</button>
+        </div>
         }
     </form>
 
-    <span class="no-acc-msg">If you already have an account you can <a href="javascript:void(0)" routerLink="/log-in">Log in</a> right
+    <span class="no-acc-msg">If you already have an account you can <a href="javascript:void(0)"
+            routerLink="/log-in">Log in</a> right
         away.</span>
 
 </div>
