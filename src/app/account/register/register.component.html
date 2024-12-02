@@ -129,6 +129,28 @@
                     </div>
                     }
                 </div>
+                <div class="form-group">
+                    <label for="password">Password<i>*</i></label>
+                    <input type="text" name="password" id="password"
+                        placeholder="Password" formControlName="password"
+                        [class]="validationLib['password'].validationClass">
+                    @if (validationLib['password'].showErrMsg) {
+                    <div class="error-msg-container">
+                        <span class="error">The password may contain letters(lower or upper case), numbers and these symbols: "$%-_!&#64;+?=&,;.:". Other symbols are not allowed. Minimum length: 8 characters.</span>
+                    </div>
+                    }
+                </div>
+                <div class="form-group">
+                    <label for="rePassword">Repeat Password<i>*</i></label>
+                    <input type="text" name="rePassword" id="rePassword"
+                        placeholder="Repeat Password" formControlName="rePassword"
+                        [class]="validationLib['rePassword'].validationClass">
+                    @if (validationLib['rePassword'].showErrMsg) {
+                    <div class="error-msg-container">
+                        <span class="error">Passwords do not match.</span>
+                    </div>
+                    }
+                </div>
             </div>
             <div class="description-elements">
                 <div>

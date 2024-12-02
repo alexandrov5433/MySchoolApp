@@ -1,5 +1,5 @@
 
-export type validationLib = {
+export type ValidationLib = {
     registerAs: {
       validationClass: string,
       showErrMsg: boolean
@@ -41,6 +41,14 @@ export type validationLib = {
       showErrMsg: boolean
     },
     authenticationCode:{
+      validationClass: string,
+      showErrMsg: boolean
+    },
+    password: {
+      validationClass: string,
+      showErrMsg: boolean
+    },
+    rePassword: {
       validationClass: string,
       showErrMsg: boolean
     },
