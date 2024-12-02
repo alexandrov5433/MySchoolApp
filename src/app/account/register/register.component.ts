@@ -9,12 +9,15 @@ import { streetValidator } from '../../util/validators/street.validator';
 import { houseNumberValidator } from '../../util/validators/house-number.validator';
 import { mobileNumberValidator } from '../../util/validators/mobile-number.validator';
 import { cityValidator } from '../../util/validators/city.validator';
-import { validationLib } from '../../types/validationLib';
+import { ValidationLib } from '../../types/validationLib';
 import { homeNumberValidator } from '../../util/validators/home-number.validator';
 import { registerAsValidator } from '../../util/validators/register-as.validator';
 import { dateOfBirthValidator } from '../../util/validators/date-of-birth.validator';
 import { authenticationCodeValidator } from '../../util/validators/authentication-code.validator';
 import { firstNameValidator } from '../../util/validators/first-name.validator';
+import { passwordValidator } from '../../util/validators/password.validator';
+import { rePasswordValidator } from '../../util/validators/re-password.validator';
+import { RestComService } from '../../services/rest-com.service';
 
 @Component({
   selector: 'app-register',
@@ -36,13 +39,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     houseNumber: new FormControl('', [houseNumberValidator()]),
     city: new FormControl('', [cityValidator()]),
     authenticationCode: new FormControl('', [authenticationCodeValidator()]),
+    password: new FormControl('', [passwordValidator()]),
+    rePassword: new FormControl('', [rePasswordValidator(this)]),
     profilePicture: new FormControl(''),
   });
   isLoading = false;
   profilePictureFileName: string | null = null;
   profilePictureFile: File | null = null;
   private ngUnsub = new Subject();
-  validationLib: validationLib = {
+  validationLib: ValidationLib = {
     registerAs: {
       validationClass: '',
       showErrMsg: false
@@ -87,14 +92,47 @@ export class RegisterComponent implements OnInit, OnDestroy {
       validationClass: '',
       showErrMsg: false
     },
+    password: {
+      validationClass: '',
+      showErrMsg: false
+    },
+    rePassword: {
+      validationClass: '',
+      showErrMsg: false
+    },
     profilePicture: {
       showErrMsg: false
     }
   };
-  constructor() { }
+  constructor(private restCom: RestComService) { }
 
   register(): void {
     console.log(this.registerForm);
+    const formData = new FormData();
+    for (let ent of Object.entries(this.registerForm.value)) {
+      const key:string = ent[0];
+      const val:any = ent[1];
+      formData.set(key, val);
+    }
+    console.log(Object.fromEntries(formData.entries()));
+    if (this.profilePictureFile) {
+      formData.set('profilePicture', this.profilePictureFile);
+    }
+    console.log(Object.fromEntries(formData.entries()));
+
+    this.restCom.register(formData)
+      .subscribe({
+        next: (val) => {
+          console.log('Response', val);
+          
+        },
+        error: (err) => {
+          console.error(err);
+        },
+        complete: () => {
+          console.log('Done');
+        }
+      });
   }
 
   isTouched(control: string): boolean | undefined {
@@ -124,7 +162,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
       'street',
       'houseNumber',
       'city',
-      'authenticationCode'].forEach(control => {
+      'authenticationCode',
+      'password',
+      'rePassword'].forEach(control => {
         this.registerForm.get(control)?.valueChanges
           .pipe(takeUntil(this.ngUnsub))
           .subscribe(x => {
@@ -141,8 +181,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   // file input management for profile picture
-  onFileSelect(event: any) { 
-    if(!event.target.files[0]) {
+  onFileSelect(event: any) {
+    if (!event.target.files[0]) {
       this.profilePictureFileName = null;
       this.profilePictureFile = null;
       return;
