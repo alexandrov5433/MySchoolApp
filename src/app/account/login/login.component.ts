@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   login() {
     const userLogsInAs = this.loginForm.get('loginAs')?.value;
     this.isLoading = true;
-    this.userService.loginAs(userLogsInAs)
+    this.userService.login(userLogsInAs)
       .subscribe({
         complete: () => {
           console.log('Login successfull!');

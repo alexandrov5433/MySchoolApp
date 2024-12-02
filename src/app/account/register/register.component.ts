@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoaderComponent } from '../../shared/loader/loader.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { emailValidator } from '../../util/validators/email.validator';
 import { lastNameValidator } from '../../util/validators/last-name.validator';
@@ -17,7 +17,9 @@ import { authenticationCodeValidator } from '../../util/validators/authenticatio
 import { firstNameValidator } from '../../util/validators/first-name.validator';
 import { passwordValidator } from '../../util/validators/password.validator';
 import { rePasswordValidator } from '../../util/validators/re-password.validator';
-import { RestComService } from '../../services/rest-com.service';
+import { UserService } from '../../services/user.service';
+import parseServerMsg from '../../util/parseServerMsg';
+
 
 @Component({
   selector: 'app-register',
@@ -104,10 +106,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
       showErrMsg: false
     }
   };
-  constructor(private restCom: RestComService) { }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   register(): void {
-    console.log(this.registerForm);
+    const status = this.registerForm.get('registerAs')?.value || '';
     const formData = new FormData();
     for (let ent of Object.entries(this.registerForm.value)) {
       const key:string = ent[0];
@@ -120,17 +125,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
     console.log(Object.fromEntries(formData.entries()));
 
-    this.restCom.register(formData)
+    this.userService.register(formData, status)
       .subscribe({
         next: (val) => {
-          console.log('Response', val);
-          
+          console.log(val);
         },
         error: (err) => {
-          console.error(err);
+          console.error(parseServerMsg(err.error));
         },
         complete: () => {
           console.log('Done');
+          this.router.navigate(['/home']);
         }
       });
   }
