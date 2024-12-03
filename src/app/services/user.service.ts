@@ -18,21 +18,27 @@ export class UserService {
     return this.userAuthStat();
   }
 
-  login(status: string | undefined | null): Observable<Object> {
+  login(formData: FormData, status: string): Observable<Object> {
     return new Observable((subscriber) => {
       try {
         if (!status) {
           throw new Error(`UserService: Status is not of type string or is an empty string. Status: "${status}"`);
         }
-        //TODO http req comes here
-        this.isLoggedIn.set(true);
-        this.userAuthStat.set(status);
-        subscriber.complete();
-        // setTimeout(() => {
-        //   subscriber.complete();
-        //   // subscriber.error(new Error('Checking slowly.'));
-        // }, 2000);
-        // throw new Error('asdadsasd');
+        this.http.post('http://localhost:3000/user/login', formData, {
+          responseType: 'json'
+        }).subscribe({
+          next: (val) => {
+            subscriber.next(val);
+          },
+          error: (err) => {
+            subscriber.error(err)
+          },
+          complete: () => {
+            this.isLoggedIn.set(true);
+            this.userAuthStat.set(status);
+            subscriber.complete();
+          },
+        });
       } catch (e) {
         subscriber.error(e);
       }
@@ -64,11 +70,11 @@ export class UserService {
         if (!['parent', 'teacher'].includes(status)) {
           throw new Error(`UserService: User cannot register with status "${status}".`);
         }
-        this.http.post('http://localhost:3000/user', formData, {
+        this.http.post('http://localhost:3000/user/register', formData, {
           responseType: 'json'
         }).subscribe({
           next: (val) => {
-            console.log('Form next:', val);
+            subscriber.next(val)
           },
           error: (err) => {
             subscriber.error(err)

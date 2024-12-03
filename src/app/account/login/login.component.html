@@ -4,31 +4,30 @@
         <h2>Log In</h2>
     </div>
 
-    <form class="form-element" [formGroup]="loginForm" (ngSubmit)="login()">
+    <form class="form-element" [formGroup]="form" (ngSubmit)="login()">
         <div class="main-elements">
             <div class="input-elements">
 
                 <div class="form-group">
                     <label for="loginAs">Parent, Teacher or Student?<i>*</i></label>
                     <select name="loginAs" id="loginAs" formControlName="loginAs"
-                        [class]="loginAsInfo.validationClass">
+                        [class]="validationLib.loginAs.validationClass">
                         <option value="">Parent, Teacher or Student?</option>
                         <option value="parent">Parent</option>
                         <option value="teacher">Teacher</option>
                         <option value="student">Student</option>
                     </select>
-                    @if (loginAsInfo.showErrMsg) {
+                    @if (validationLib.loginAs.showErrMsg) {
                     <div class="error-msg-container">
                         <span class="error">Please select your status.</span>
                     </div>
                     }
                 </div>
-
                 <div class="form-group">
                     <label for="email">Email<i>*</i></label>
                     <input type="text" name="email" placeholder="Email" id="email" formControlName="email"
-                    [class]="emailInfo.validationClass">
-                    @if (emailInfo.showErrMsg) {
+                    [class]="validationLib.email.validationClass">
+                    @if (validationLib.email.showErrMsg) {
                     <div class="error-msg-container">
                         <span class="error">Please enter your email.</span>
                     </div>
@@ -38,8 +37,8 @@
                     <label for="password">Password<i>*</i></label>
                     <input type="password" name="password" placeholder="Password" id="password"
                         formControlName="password"
-                        [class]="passwordInfo.validationClass">
-                    @if (passwordInfo.showErrMsg) {
+                        [class]="validationLib.password.validationClass">
+                    @if (validationLib.password.showErrMsg) {
                     <div class="error-msg-container">
                         <span class="error">Please enter your password.</span>
                     </div>
@@ -48,7 +47,7 @@
 
             </div>
         </div>
-        @if (isLoading) {
+        @if (isLoading()) {
             <app-loader></app-loader>
         } @else {
             <div class="form-btn">

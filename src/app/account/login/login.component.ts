@@ -1,9 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
+import { LoginValidationLib } from '../../types/loginValidationLib';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -14,98 +16,99 @@ import { LoaderComponent } from '../../shared/loader/loader.component';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private ngUnsub = new Subject();
-  isLoading: boolean = false;
-  loginForm = new FormGroup({
+  isLoading: WritableSignal<boolean> = signal(false);
+  
+  // showServerErrorMsg: WritableSignal<boolean> = signal(false);
+  // errorMsgFromServer: WritableSignal<string> = signal('');
+
+  form = new FormGroup({
     loginAs: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
   });
-  loginAsInfo = {
-    validationClass: '',
-    showErrMsg: false
-  };
-  emailInfo = {
-    validationClass: '',
-    showErrMsg: false
-  };
-  passwordInfo = {
-    validationClass: '',
-    showErrMsg: false
+
+  validationLib: LoginValidationLib = {
+    loginAs: {
+      validationClass: '',
+      showErrMsg: false
+    },
+    email: {
+      validationClass: '',
+      showErrMsg: false
+    },
+    password: {
+      validationClass: '',
+      showErrMsg: false
+    }
   };
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
-  login() {
-    const userLogsInAs = this.loginForm.get('loginAs')?.value;
-    this.isLoading = true;
-    this.userService.login(userLogsInAs)
-      .subscribe({
-        complete: () => {
-          console.log('Login successfull!');
-          this.router.navigate(['/home']);
-        },
-        error: (e) => {
-          this.isLoading = false;
-          console.error(e);
-        }
+  showSnackBar(msg: string) {
+      this.snackBar.open(msg, 'OK', {
+        duration: 7000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom'
       });
   }
 
-  isTouched(control: string): boolean | undefined {
-    return this.loginForm.get(control)?.touched;
-  }
-
-  isMissingValue(control: string): boolean | undefined {
-    return this.loginForm.get(control)?.errors?.['required'];
+  login() {
+    this.isLoading.set(true);
+    const formData = new FormData();
+    for (let ent of Object.entries(this.form.value)) {
+      const key: string = ent[0];
+      const val: any = ent[1];
+      formData.set(key, val);
+    }
+    const stutus = this.form.get('loginAs')?.value || '';
+    this.userService.login(formData, stutus)
+      .subscribe({
+        next: (val) => {
+          console.log(val)
+        },
+        error: (err) => {
+          this.isLoading.set(false);
+          this.showSnackBar(err);
+          console.error(err);
+        },
+        complete: () => {
+          this.isLoading.set(false);
+          console.log('Login successfull!');
+          this.router.navigate(['/home']);
+          this.showSnackBar('Login successfull!');
+        },
+      });
   }
 
   get isLoginFormInvalid(): boolean {
-    if (this.loginForm.touched) {
-      return this.loginForm.invalid;
+    if (this.form.touched) {
+      return this.form.invalid;
     }
     return true;
   }
 
   ngOnInit(): void {
-    // loginAs error messaging
-    this.loginForm.get('loginAs')?.valueChanges
-      .pipe(takeUntil(this.ngUnsub))
-      .subscribe(x => {
-        if (this.isMissingValue('loginAs')) {
-          this.loginAsInfo.validationClass = 'false-input';
-          this.loginAsInfo.showErrMsg = true;
-        } else {
-          this.loginAsInfo.validationClass = 'correct-input';
-          this.loginAsInfo.showErrMsg = false;
-        }
-      });
-    // email error messaging
-    this.loginForm.get('email')?.valueChanges
-      .pipe(takeUntil(this.ngUnsub))
-      .subscribe(x => {
-        if (this.isMissingValue('email')) {
-          this.emailInfo.validationClass = 'false-input';
-          this.emailInfo.showErrMsg = true;
-        } else {
-          this.emailInfo.validationClass = 'correct-input';
-          this.emailInfo.showErrMsg = false;
-        }
-      });
-    // password error messaging
-    this.loginForm.get('password')?.valueChanges
-      .pipe(takeUntil(this.ngUnsub))
-      .subscribe(x => {
-        if (this.isMissingValue('password')) {
-          this.passwordInfo.validationClass = 'false-input';
-          this.passwordInfo.showErrMsg = true;
-        } else {
-          this.passwordInfo.validationClass = 'correct-input';
-          this.passwordInfo.showErrMsg = false;
-        }
-      });
+    // form validation
+    ['loginAs',
+      'email',
+      'password',
+    ].forEach(control => {
+      this.form.get(control)?.valueChanges
+        .pipe(takeUntil(this.ngUnsub))
+        .subscribe(() => {
+          if (this.form.get(control)?.errors?.['required']) {
+            (this.validationLib as any)[control].validationClass = 'false-input';
+            (this.validationLib as any)[control].showErrMsg = true;
+          } else {
+            (this.validationLib as any)[control].validationClass = 'correct-input';
+            (this.validationLib as any)[control].showErrMsg = false;
+          }
+        });
+    });
   }
 
   ngOnDestroy(): void {
