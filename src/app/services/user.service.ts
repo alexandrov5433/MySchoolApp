@@ -67,14 +67,15 @@ export class UserService {
         this.http.post('http://localhost:3000/user', formData, {
           responseType: 'json'
         }).subscribe({
-          next: (val) => { console.log('Form next:', val);
+          next: (val) => {
+            console.log('Form next:', val);
           },
           error: (err) => {
-            subscriber.error(err)        
+            subscriber.error(err)
           },
           complete: () => {
             console.log('SUCCESS');
-            
+
             this.isLoggedIn.set(true);
             this.userAuthStat.set(status);
             subscriber.complete();
@@ -95,15 +96,9 @@ export class UserService {
         this.http.post('http://localhost:3000/application', formData, {
           responseType: 'json'
         }).subscribe({
-          next: (val) => { console.log('Form next:', val);
-          },
-          error: (err) => {
-            subscriber.error(err)        
-          },
-          complete: () => {
-            console.log('SUCCESS');
-            subscriber.complete();
-          },
+          next: val => subscriber.next(val),
+          error: err => subscriber.error(err),
+          complete: () => subscriber.complete()
         });
       } catch (e) {
         subscriber.error(e);

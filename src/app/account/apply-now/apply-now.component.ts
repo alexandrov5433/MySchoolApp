@@ -114,8 +114,8 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
     console.log('Apply!');
     const formData = new FormData();
     for (let ent of Object.entries(this.form.value)) {
-      const key:string = ent[0];
-      const val:any = ent[1];
+      const key: string = ent[0];
+      const val: any = ent[1];
       formData.set(key, val);
     }
     formData.set('profilePicture', (this.profilePictureFile || ''));
@@ -123,7 +123,15 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
     this.documentsFiles.forEach(file => {
       formData.append(file.name, file);
     });
-    console.log([...formData.entries()]);
+    // console.log([...formData.entries()]);
+    this.userService.apply(formData).subscribe({
+      next: val => console.log(val),
+      error: err => console.error(err),
+      complete: () => {
+        console.log('APPIED SUCCESSFULLY');
+        this.router.navigate(['/home']);
+      }
+    });
   }
 
   isTouched(control: string): boolean | undefined {
@@ -203,7 +211,7 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
     if (!event.target.files[0]) {
       return;
     }
-    for (let f of event.target.files) {  
+    for (let f of event.target.files) {
       if (!f.name.endsWith('.pdf')) {
         continue;
       }
