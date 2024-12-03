@@ -144,8 +144,8 @@
                     <label for="rePassword">Repeat Password<i>*</i></label>
                     <input type="text" name="rePassword" id="rePassword"
                         placeholder="Repeat Password" formControlName="rePassword"
-                        [class]="validationLib['rePassword'].validationClass">
-                    @if (validationLib['rePassword'].showErrMsg) {
+                        [class]="validationLib['rePassword']?.validationClass">
+                    @if (validationLib['rePassword']?.showErrMsg) {
                     <div class="error-msg-container">
                         <span class="error">Passwords do not match.</span>
                     </div>

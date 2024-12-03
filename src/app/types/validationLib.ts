@@ -48,7 +48,7 @@ export type ValidationLib = {
       validationClass: string,
       showErrMsg: boolean
     },
-    rePassword: {
+    rePassword?: {
       validationClass: string,
       showErrMsg: boolean
     },
