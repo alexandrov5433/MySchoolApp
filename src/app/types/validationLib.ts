@@ -40,7 +40,7 @@ export type ValidationLib = {
       validationClass: string,
       showErrMsg: boolean
     },
-    authenticationCode:{
+    authenticationCode?:{
       validationClass: string,
       showErrMsg: boolean
     },
@@ -60,6 +60,7 @@ export type ValidationLib = {
       showErrMsg: boolean
     }
     documents?: {
+      validationClass: string,
       showErrMsg: boolean
     }
   };

@@ -122,8 +122,8 @@
                     <label for="authenticationCode">Authentication Code<i>*</i></label>
                     <input type="text" name="authenticationCode" id="authenticationCode"
                         placeholder="Authentication Code" formControlName="authenticationCode"
-                        [class]="validationLib['authenticationCode'].validationClass">
-                    @if (validationLib['authenticationCode'].showErrMsg) {
+                        [class]="validationLib['authenticationCode']?.validationClass">
+                    @if (validationLib['authenticationCode']?.showErrMsg) {
                     <div class="error-msg-container">
                         <span class="error">Please enter the authentication code.</span>
                     </div>
