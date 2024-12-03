@@ -103,6 +103,20 @@ button:disabled:active {
     transform: translateY(0) !important;
 }
 
+input {
+    background: var(--light-cold-gray);
+    border: none;
+    border-bottom: 4px solid var(--gray);
+    border-radius: var(--border-radius);
+    box-shadow: none;
+    outline: none;
+    color: var(--black);
+    text-indent: 8px;
+    height: 42px;
+    width: 100%;
+    font-size: var(--size-description);
+}
+
 input.correct-input {
     border-color: var(--mint-green) !important;
 }

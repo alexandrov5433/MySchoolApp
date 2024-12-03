@@ -1,0 +1,26 @@
+<div class="create-new-subject">
+    <div class="window">
+        <div class="info">
+            <div class="window-title">
+                <p>Create New Subject</p>
+            </div>
+            <div class="form-container">
+                <form class="subject-creation-form">
+                    <div class="group">
+                        <label for="subject-title">Subject title:</label>
+                        <input type="text" id="subject-title" [class]="showError() ? 'false-input' : ''" #subjectTitle>
+                    </div>
+                </form>
+            </div>
+            @if (showError()) {
+                <div class="error-container">
+                    <p>Please enter a title. Example: History.</p>
+                </div>
+            }
+        </div>
+        <div class="controls">
+            <button class="green-btn" (click)="onCreate(subjectTitle.value)">Create</button>
+            <button class="red-btn" (click)="onCancel()">Cancel</button>
+        </div>
+    </div>
+</div>

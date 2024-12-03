@@ -82,7 +82,7 @@ div.navigation li:hover {
     box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.7);
     z-index: 1;
     background-color: var(--white);
-    border-radius: 5px;      
+    /* border-radius: 5px;       */
 }
 
 .dropdown-content a {

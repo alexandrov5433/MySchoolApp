@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private isLoggedIn: WritableSignal<boolean> = signal(false);
-  private userAuthStat: WritableSignal<string | null> = signal(null); //student, parent, teacher
+  private isLoggedIn: WritableSignal<boolean> = signal(true); //TODO change to default 'false', just testing
+  private userAuthStat: WritableSignal<string | null> = signal('teacher'); //student, parent, teacher  //TODO change to default 'null', just testing
   constructor(private http: HttpClient) { }
 
   get isUserLoggedIn(): boolean {
