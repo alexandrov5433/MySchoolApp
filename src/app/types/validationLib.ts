@@ -52,7 +52,14 @@ export type ValidationLib = {
       validationClass: string,
       showErrMsg: boolean
     },
+    applyNowRePassword?: {
+      validationClass: string,
+      showErrMsg: boolean
+    },
     profilePicture: {
+      showErrMsg: boolean
+    }
+    documents?: {
       showErrMsg: boolean
     }
   };
