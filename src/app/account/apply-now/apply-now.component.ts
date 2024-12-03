@@ -127,7 +127,9 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
     // console.log([...formData.entries()]);
     this.userService.apply(formData).subscribe({
       next: val => console.log(val),
-      error: err => console.error(err),
+      error: err => {
+        this.isLoading.set(false);
+        console.error(err)},
       complete: () => {
         console.log('APPIED SUCCESSFULLY');
         this.router.navigate(['/home']);
