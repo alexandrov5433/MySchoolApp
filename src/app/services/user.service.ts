@@ -85,4 +85,29 @@ export class UserService {
       }
     });
   }
+
+  apply(formData: FormData): Observable<Object> {
+    return new Observable((subscriber) => {
+      try {
+        if (this.isLoggedIn()) {
+          throw new Error(`UserService: User with status "${this.userAuthStat()}" is already logged in.`);
+        }
+        this.http.post('http://localhost:3000/application', formData, {
+          responseType: 'json'
+        }).subscribe({
+          next: (val) => { console.log('Form next:', val);
+          },
+          error: (err) => {
+            subscriber.error(err)        
+          },
+          complete: () => {
+            console.log('SUCCESS');
+            subscriber.complete();
+          },
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
 }
