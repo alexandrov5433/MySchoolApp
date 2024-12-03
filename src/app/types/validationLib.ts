@@ -1,6 +1,6 @@
 
 export type ValidationLib = {
-    registerAs: {
+    registerAs?: {
       validationClass: string,
       showErrMsg: boolean
     },

@@ -11,12 +11,12 @@
                 <div class="form-group">
                     <label for="registerFirstName">Teacher Or Parent<i>*</i></label>
                     <select name="registerAs" id="registerAs" formControlName="registerAs"
-                        [class]="validationLib['registerAs'].validationClass">
+                        [class]="validationLib['registerAs']?.validationClass">
                         <option value="">Parent or Teacher?</option>
                         <option value="parent">Parent</option>
                         <option value="teacher">Teacher</option>
                     </select>
-                    @if (validationLib['registerAs'].showErrMsg) {
+                    @if (validationLib['registerAs']?.showErrMsg) {
                     <div class="error-msg-container">
                         <span class="error">Please select your status.</span>
                     </div>
