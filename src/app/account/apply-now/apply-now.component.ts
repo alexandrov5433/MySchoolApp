@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal, Signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { emailValidator } from '../../util/validators/email.validator';
 import { lastNameValidator } from '../../util/validators/last-name.validator';
@@ -42,7 +42,7 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
     documents: new FormControl('', [documentsValidator()]),
   });
 
-  isLoading: Signal<boolean> = signal(false);
+  isLoading: WritableSignal<boolean> = signal(false);
 
   profilePictureFileName: string | null = null;
   profilePictureFile: File | null = null;
@@ -111,6 +111,7 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
   ) { }
 
   apply() {
+    this.isLoading.set(true);
     console.log('Apply!');
     const formData = new FormData();
     for (let ent of Object.entries(this.form.value)) {
@@ -132,6 +133,7 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
         this.router.navigate(['/home']);
       }
     });
+    this.isLoading.set(false);
   }
 
   isTouched(control: string): boolean | undefined {
