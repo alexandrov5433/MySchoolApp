@@ -4,134 +4,203 @@
         <h2>Apply now to become a student</h2>
     </div>
 
-    <form class="form-element">
+    <form class="form-element" [formGroup]="form" (ngSubmit)="apply()">
         <div class="main-elements">
             <div class="input-elements">
                 <div class="form-group">
-                    <label for="registerFirstName">First Name<i>*</i></label>
-                    <input class="false-input" type="text" name="firstName" placeholder="First Name"
-                        id="registerFirstName">
+                    <label for="firstName">First Name<i>*</i></label>
+                    <input [class]="validationLib.firstName.validationClass" type="text" name="firstName"
+                        placeholder="First Name" id="firstName" formControlName="firstName">
+                    @if (validationLib.firstName.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your first name.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
-                    <label for="registerLastName">Last Name<i>*</i></label>
-                    <input class="correct-input" type="text" name="lastName" placeholder="Last Name"
-                        id="registerLastName">
+                    <label for="lastName">Last Name<i>*</i></label>
+                    <input [class]="validationLib.lastName.validationClass" type="text" name="lastName"
+                        placeholder="Last Name" id="lastName" formControlName="lastName">
+                    @if (validationLib.lastName.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your last name.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
-                    <label for="registerDateOfBirth">Date Of Birth<i>*</i></label>
-                    <input type="date" name="dateOfBirth" id="registerDateOfBirth">
+                    <label for="dateOfBirth">Date Of Birth<i>*</i></label>
+                    <input [class]="validationLib.dateOfBirth.validationClass" type="date" name="dateOfBirth"
+                        id="dateOfBirth" formControlName="dateOfBirth">
+                    @if (validationLib.dateOfBirth.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please select your date of birth.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
-                    <label for="registerEmail">Email<i>*</i></label>
-                    <input type="text" name="email" id="registerEmail" placeholder="Email">
+                    <label for="email">Email<i>*</i></label>
+                    <input [class]="validationLib.email.validationClass" type="text" name="email" id="email"
+                        placeholder="Email" formControlName="email">
+                    @if (validationLib.email.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your email. Examples: my.personal.email&#64;abc.com,
+                            my.email&#64;abc.xyz.com.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
-                    <label for="registerMobileNumber">Mobile Number<i>*</i></label>
-                    <input type="tel" name="mobileNumber" id="registerMobileNumber" placeholder="Mobile Number">
+                    <label for="mobileNumber">Mobile Number<i>*</i></label>
+                    <input [class]="validationLib.mobileNumber.validationClass" type="tel" name="mobileNumber"
+                        id="mobileNumber" placeholder="Mobile Number" formControlName="mobileNumber">
+                    @if (validationLib.mobileNumber.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your mobile number. Examples: +49 886 13497331, 0886 13497331,
+                            +359 886 13497331.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
-                    <label for="registerHomeNumber">Home Number</label>
-                    <input type="tel" name="homeNumber" id="registerHomeNumber" placeholder="Home Number">
+                    <label for="homeNumber">Home Number</label>
+                    <input [class]="validationLib.homeNumber.validationClass" type="tel" name="homeNumber"
+                        id="homeNumber" placeholder="Home Number" formControlName="homeNumber">
+                    @if (validationLib.homeNumber.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Optionaly you may enter your home number. Examples: 055 988899, +359
+                            826688.</span>
                     </div>
+                    }
                 </div>
 
                 <div class="form-group">
-                    <label for="registerStreet">Street<i>*</i></label>
-                    <input type="text" name="street" id="registerStreet" placeholder="Street">
+                    <label for="street">Street<i>*</i></label>
+                    <input [class]="validationLib.street.validationClass" type="text" name="street" id="street"
+                        placeholder="Street" formControlName="street">
+                    @if (validationLib.street.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter the name of your street. Example: "Example-Park Main".</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
-                    <label for="registerHouseNumber">House Number<i>*</i></label>
-                    <input type="text" name="houseNumber" id="registerHouseNumber" placeholder="House Number">
+                    <label for="houseNumber">House Number<i>*</i></label>
+                    <input [class]="validationLib.houseNumber.validationClass" type="text" name="houseNumber"
+                        id="houseNumber" placeholder="House Number" formControlName="houseNumber">
+                    @if (validationLib.houseNumber.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">Please enter your house number. Example: 23, 23a, 23A, 23 a, 12-a.</span>
                     </div>
+                    }
                 </div>
                 <div class="form-group">
-                    <label for="registerCity">City<i>*</i></label>
-                    <input type="text" name="city" id="registerCity" placeholder="City">
+                    <label for="city">City<i>*</i></label>
+                    <input [class]="validationLib.city.validationClass" type="text" name="city" id="city"
+                        placeholder="City" formControlName="city">
+                    @if (validationLib.city.showErrMsg) {
                     <div class="error-msg-container">
-                        <span class="error">Error message here!Error message here!</span>
+                        <span class="error">lease enter the name of your city. Example: MyCity, mycity, "Example-City
+                            SecondWord".</span>
                     </div>
+                    }
+                </div>
+                <div class="form-group">
+                    <label for="password">Password<i>*</i></label>
+                    <input [class]="validationLib.password.validationClass" type="text" name="password" id="password"
+                        placeholder="Password" formControlName="password">
+                    @if (validationLib.password.showErrMsg) {
+                    <div class="error-msg-container">
+                        <span class="error">The password may contain letters(lower or upper case), numbers and these
+                            symbols: "$%-_!&#64;+?=&,;.:". Other symbols are not allowed. Minimum length: 8
+                            characters.</span>
+                    </div>
+                    }
+                </div>
+                <div class="form-group">
+                    <label for="applyNowRePassword">Repeat Password<i>*</i></label>
+                    <input [class]="validationLib.applyNowRePassword?.validationClass" type="text"
+                        name="applyNowRePassword" id="applyNowRePassword" placeholder="Repeat Password"
+                        formControlName="applyNowRePassword">
+                    @if (validationLib.applyNowRePassword?.showErrMsg) {
+                    <div class="error-msg-container">
+                        <span class="error">Passwords do not match.</span>
+                    </div>
+                    }
                 </div>
             </div>
             <div class="description-elements">
                 <div>
-                    <span>Please fill out all mandatory<i>*</i> fields. With this form you are applying and creating an account at the same time. The needed documents are listed under <a href="#">FORMS
+                    <span>Please fill out all mandatory<i>*</i> fields. With this form you are applying and creating an
+                        account at the same time. The needed documents are listed under <a href="#">FORMS
                             & DOCUMENTS</a>.</span>
                 </div>
                 <div>
-                    <span>After submitting the application, we will review it and send you an answer per Email as soon as possible. In this email, if accepted,
-                        you will find a link for email confirmation and the authentication code, with which your parents can also
+                    <span>After submitting the application, we will review it and send you an answer per Email as soon
+                        as possible. In this email, if accepted,
+                        you will find a link for email confirmation and the authentication code, with which your parents
+                        can also
                         create accounts.</span>
                 </div>
                 <div>
-                    <span>Having trouble or questions? Please check the <a href="#">FAQ</a> or <a
-                            href="#">CONTACT</a> us.</span>
+                    <span>Having trouble or questions? Please check the <a href="#">FAQ</a> or <a href="#">CONTACT</a>
+                        us.</span>
                 </div>
             </div>
         </div>
         <div class="file-uploads-container">
             <div class="custom-file-upload-component">
 
-                    
                 <div class="label-container">
-                    <label>Profile picture</label>
+                    <label>Profile Picture</label>
                 </div>
                 <label for="fileUploadPicture" class="custom-file-upload-btn">Select Photo
-                    <input type="file" name="profilePicture" id="fileUploadPicture">
+                    <input type="file" name="profilePicture" id="fileUploadPicture" formControlName="profilePicture"
+                        (change)="onProfilePictureFileSelect($event)">
                 </label>
+                <button class="red-btn" type="button" (click)="clearPictureFile()">Remove Picture</button>
                 <div class="selected-file-name-container add-margin-top">
-                    <!-- incert file name in span element -->
-                    <span></span>
+                    @if(profilePictureFileName) {
+                    <span>{{profilePictureFileName}}</span>
+                    }
                 </div>
-                <!-- <button class="green-btn">Upload</button> -->
-            
             </div>
+            @if (validationLib.profilePicture.showErrMsg) {
+            <div class="error-msg-container">
+                <span class="error">Only the following image file types are acceptable: .JPEG, .JPG and .PNG.</span>
+            </div>
+            }
             <div class="custom-file-upload-component">
 
-                    
+
                 <div class="label-container">
                     <label>Documents<i>*</i></label>
                 </div>
                 <label for="fileUploadDocuments" class="custom-file-upload-btn">Select Files
-                    <input type="file" name="documents" id="fileUploadDocuments" multiple>
+                    <input type="file" name="documents" id="fileUploadDocuments" multiple formControlName="documents"
+                        (change)="onDocumentsFilesSelect($event)">
                 </label>
+                <button class="red-btn" type="button" (click)="clearAllFiles()">Clear All Files</button>
                 <div class="selected-file-name-container add-margin-top">
-                    <!-- incert file names in span elements -->
-                    <span>sadfdfsdfsfdsfdsa</span>
-                    <span>sadfdfsdfsfdsfdsa</span>
-                    <span>sadfdfsdfsfdsfdsa</span>
+                    @for (fileName of documentsFilesNames; track $index) {
+                    <span>{{fileName}}</span>
+                    }
                 </div>
-                <!-- <button class="green-btn">Upload</button> -->
-            
+
             </div>
+            @if (validationLib.documents?.showErrMsg) {
+            <div class="error-msg-container">
+                <span class="error">Please select your documents. Only PDF files are allowed.</span>
+            </div>
+            }
         </div>
+        @if(isLoading()) {
         <div class="loader-container">
             <span class="loader"></span>
         </div>
+        } @else {
         <div class="form-btn">
-            <button class="red-btn" type="submit">Apply</button>
+            <!--  -->
+            <button class="red-btn" type="submit" [disabled]="isFormInvalid">Apply</button>
         </div>
+        }
     </form>
 
     <span class="no-acc-msg">If you already have an account you can <a href="#">Log in</a> right
