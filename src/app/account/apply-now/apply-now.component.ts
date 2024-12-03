@@ -112,9 +112,18 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
 
   apply() {
     console.log('Apply!');
-    console.log(this.documentsFilesNames);
-    console.log(this.documentsFiles);
-
+    const formData = new FormData();
+    for (let ent of Object.entries(this.form.value)) {
+      const key:string = ent[0];
+      const val:any = ent[1];
+      formData.set(key, val);
+    }
+    formData.set('profilePicture', (this.profilePictureFile || ''));
+    formData.set('documents', (this.documentsFilesNames[0] || ''));
+    this.documentsFiles.forEach(file => {
+      formData.append(file.name, file);
+    });
+    console.log([...formData.entries()]);
   }
 
   isTouched(control: string): boolean | undefined {
