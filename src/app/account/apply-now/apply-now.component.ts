@@ -131,11 +131,11 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
         this.isLoading.set(false);
         console.error(err)},
       complete: () => {
+        this.isLoading.set(false);
         console.log('APPIED SUCCESSFULLY');
         this.router.navigate(['/home']);
       }
     });
-    this.isLoading.set(false);
   }
 
   isTouched(control: string): boolean | undefined {
