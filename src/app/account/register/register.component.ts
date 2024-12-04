@@ -19,6 +19,7 @@ import { passwordValidator } from '../../util/validators/password.validator';
 import { rePasswordValidator } from '../../util/validators/re-password.validator';
 import { UserService } from '../../services/user.service';
 import parseServerMsg from '../../util/parseServerMsg';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -108,7 +109,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   };
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   register(): void {
@@ -131,13 +133,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
           console.log(val);
         },
         error: (err) => {
+          this.showSnackBar(parseServerMsg(err.error).msg);
           console.error(parseServerMsg(err.error));
         },
         complete: () => {
-          console.log('Done');
+          this.showSnackBar('Registration successfull!');
           this.router.navigate(['/home']);
         }
       });
+  }
+
+  showSnackBar(msg: string) {
+    this.snackBar.open(msg, 'OK', {
+      duration: 7000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
   }
 
   isTouched(control: string): boolean | undefined {

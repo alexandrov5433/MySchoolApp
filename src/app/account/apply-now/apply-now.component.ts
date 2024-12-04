@@ -16,6 +16,8 @@ import { documentsValidator } from '../../util/validators/documents.validator';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import parseServerMsg from '../../util/parseServerMsg';
 
 
 @Component({
@@ -107,7 +109,8 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   apply() {
@@ -129,12 +132,22 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
       next: val => console.log(val),
       error: err => {
         this.isLoading.set(false);
-        console.error(err)},
+        console.error(err)
+        this.showSnackBar(parseServerMsg(err.error).msg)
+      },
       complete: () => {
         this.isLoading.set(false);
-        console.log('APPIED SUCCESSFULLY');
+        this.showSnackBar('You have applied successfully!')
         this.router.navigate(['/home']);
       }
+    });
+  }
+
+  showSnackBar(msg: string) {
+    this.snackBar.open(msg, 'OK', {
+      duration: 7000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
     });
   }
 

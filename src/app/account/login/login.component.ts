@@ -6,6 +6,7 @@ import { UserService } from '../../services/user.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { LoginValidationLib } from '../../types/loginValidationLib';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import parseServerMsg from '../../util/parseServerMsg';
 
 @Component({
   selector: 'app-login',
@@ -72,7 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
         error: (err) => {
           this.isLoading.set(false);
-          this.showSnackBar(err);
+          this.showSnackBar(parseServerMsg(err.error).msg);
           console.error(err);
         },
         complete: () => {
