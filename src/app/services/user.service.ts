@@ -81,7 +81,8 @@ export class UserService {
           throw new Error(`UserService: User cannot register with status "${status}".`);
         }
         this.http.post('http://localhost:3000/user/register', formData, {
-          responseType: 'json'
+          responseType: 'json',
+          withCredentials: true,
         }).subscribe({
           next: (val) => {
             subscriber.next(val)
@@ -110,7 +111,8 @@ export class UserService {
           throw new Error(`UserService: User with status "${this.userAuthStat()}" is already logged in.`);
         }
         this.http.post('http://localhost:3000/application', formData, {
-          responseType: 'json'
+          responseType: 'json',
+          withCredentials: true,
         }).subscribe({
           next: val => subscriber.next(val),
           error: err => subscriber.error(err),
