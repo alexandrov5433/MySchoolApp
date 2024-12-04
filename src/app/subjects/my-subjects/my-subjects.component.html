@@ -1,1 +1,40 @@
-<p>my-subjects works!</p>
+<div class="subjects-view">
+    <div class="location">
+        <span>My Subjects</span>
+    </div>
+
+    @if (subjectCards()?.results?.length) {
+        <div class="subjects-container">
+        @for (card of subjectCards()?.results; track $index) {
+        
+                <div class="subject-component">
+                    <div class="top-segment">
+                        <img src="background/{{card.backgroundImageNumber}}" alt="A colorful background image.">
+                    </div>
+                    <div class="middle-segment">
+                        <div class="segment-content">
+                            <div class="middle-upper">
+                                <span>{{card.title}}</span>
+                            </div>
+                            <div class="middle-lower">
+                                <span class="subject-details">{{card.teacher}}</span>
+                                <span class="subject-details">ID {{card.displayId}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-segment">
+                        <div class="segment-controls">
+                            <div class="bottom-upper">
+                                <button class="green-btn" (click)="view(card._id)">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    } @else {
+        <div class="no-results">
+            <span>No results!</span>
+        </div>
+    }
+</div>
