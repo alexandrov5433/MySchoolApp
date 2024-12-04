@@ -8,7 +8,8 @@ import parseServerMsg from '../../util/parseServerMsg';
   selector: 'app-create-subject',
   imports: [],
   templateUrl: './create-subject.component.html',
-  styleUrl: './create-subject.component.css'
+  styleUrl: './create-subject.component.css',
+  standalone: true
 })
 export class CreateSubjectComponent {
   showError: WritableSignal<boolean> = signal(false);
