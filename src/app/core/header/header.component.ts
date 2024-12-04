@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import parseServerMsg from '../../util/parseServerMsg';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,8 @@ export class HeaderComponent {
 
   constructor(
     private userSevice: UserService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   get isUserLoggedIn(): boolean {
@@ -32,14 +35,23 @@ export class HeaderComponent {
   logout(): void {
     this.userSevice.logout()
       .subscribe({
-        complete: () => {
-          console.log('Logout successfull!');
-          this.router.navigate(['/home']);
+        next: val => console.log(val),
+        error: (err) => {
+          console.error(err);
+          this.showSnackBar(parseServerMsg(err.error).msg);
         },
-        error: (e) => {
-          console.error(e);
+        complete: () => {
+          this.showSnackBar('Log out successfull!');
+          this.router.navigate(['/home']);
         }
       });;
-    this.router.navigate(['/home']);
+  }
+
+  showSnackBar(msg: string) {
+    this.snackBar.open(msg, 'OK', {
+      duration: 7000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
   }
 }

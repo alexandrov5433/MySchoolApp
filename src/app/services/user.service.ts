@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private isLoggedIn: WritableSignal<boolean> = signal(true); //TODO change to default 'false', just testing
-  private userAuthStat: WritableSignal<string | null> = signal('teacher'); //student, parent, teacher  //TODO change to default 'null', just testing
+  private isLoggedIn: WritableSignal<boolean> = signal(false); //TODO change to default 'false', just testing
+  private userAuthStat: WritableSignal<string | null> = signal(null); //student, parent, teacher  //TODO change to default 'null', just testing
   constructor(private http: HttpClient) { }
 
   get isUserLoggedIn(): boolean {
@@ -25,7 +25,8 @@ export class UserService {
           throw new Error(`UserService: Status is not of type string or is an empty string. Status: "${status}"`);
         }
         this.http.post('http://localhost:3000/user/login', formData, {
-          responseType: 'json'
+          responseType: 'json',
+          withCredentials: true
         }).subscribe({
           next: (val) => {
             subscriber.next(val);
@@ -48,13 +49,22 @@ export class UserService {
   logout(): Observable<Object> {
     return new Observable((subscriber) => {
       try {
-        // if (!status) {
-        //   throw new Error(`UserService: Status is not of type string or is an empty string. Status: "${status}"`);
-        // }
-        //TODO http req comes here
-        this.isLoggedIn.set(false);
-        this.userAuthStat.set(null);
-        subscriber.complete();
+        this.http.get('http://localhost:3000/user/logout', {
+          responseType: 'json',
+          withCredentials: true
+        }).subscribe({
+          next: (val) => {
+            subscriber.next(val);
+          },
+          error: (err) => {
+            subscriber.error(err)
+          },
+          complete: () => {
+            this.isLoggedIn.set(false);
+            this.userAuthStat.set(null);
+            subscriber.complete();
+          },
+        });
       } catch (e) {
         subscriber.error(e);
       }
