@@ -26,9 +26,12 @@ export class CreateSubjectComponent {
       return;
     }
     this.showError.set(false);
+    let newSubjectId: string;
     this.subjectsService.createNewSubject(title)
       .subscribe({
-        next: val => console.log(val),
+        next: val => {
+          newSubjectId = parseServerMsg(val as string).newSubjectId;
+        },
         error: err => {
           this.showSnackBar(parseServerMsg(err.error).msg);
           console.error(err);
@@ -36,6 +39,7 @@ export class CreateSubjectComponent {
         complete: () => {
           this.showSnackBar('Subject created!');
           this.router.navigate(['/home']);
+          //TODO redirect to newly created subject
         }
       });
   }
