@@ -15,6 +15,7 @@ export class SubjectsService {
       try {
         this.http.post('http://localhost:3000/subjects/create-new-subject', JSON.stringify({title}), {
           responseType: 'json',
+          withCredentials: true,
           headers: {
             'Content-Type': 'application/json'
           }
