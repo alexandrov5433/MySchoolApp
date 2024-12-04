@@ -1,1 +1,45 @@
-<p>all-subjects works!</p>
+<div class="subjects-view">
+    <div class="location">
+        <span>All Subjects</span>
+    </div>
+    <div class="search-container">
+        <label for="serach-text">Search:</label>
+        <input type="text" id="serach-text" placeholder="Subject title" #title>
+        <input type="text" id="serach-text" placeholder="Subject ID" #displayId>
+        <button class="yellow-btn" (click)="search(title.value, displayId.value)">Search</button>
+    </div>
+    @if (subjectCards()?.results?.length) {
+        <div class="subjects-container">
+        @for (card of subjectCards()?.results; track $index) {
+        
+                <div class="subject-component">
+                    <div class="top-segment">
+                        <img src="background/{{card.backgroundImageNumber}}" alt="A colorful background image.">
+                    </div>
+                    <div class="middle-segment">
+                        <div class="segment-content">
+                            <div class="middle-upper">
+                                <span>{{card.title}}</span>
+                            </div>
+                            <div class="middle-lower">
+                                <span class="subject-details">{{card.teacher}}</span>
+                                <span class="subject-details">ID {{card.displayId}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-segment">
+                        <div class="segment-controls">
+                            <div class="bottom-upper">
+                                <button class="green-btn" (click)="view(card._id)">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    } @else {
+        <div class="no-results">
+            <span>No results!</span>
+        </div>
+    }
+</div>
