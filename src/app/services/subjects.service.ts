@@ -13,8 +13,11 @@ export class SubjectsService {
   createNewSubject(title: string):Observable<Object> {
     return new Observable((subscriber) => {
       try {
-        this.http.post('http://localhost:3000/subjects/create-subject', JSON.stringify({title}), {
-          responseType: 'json'
+        this.http.post('http://localhost:3000/subjects/create-new-subject', JSON.stringify({title}), {
+          responseType: 'json',
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }).subscribe({
           next: val => subscriber.next(val),
           error: err => subscriber.error(err),
