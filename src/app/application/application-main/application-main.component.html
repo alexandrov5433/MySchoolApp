@@ -19,14 +19,14 @@
                     <div class="application-id">ApplicantID: {{appDisplayId}}</div>
                 </div>
                 <div class="mininav">
-                    <button class="colorize">Details</button>
-                    <button>Uploaded Documents</button>
+                    <button [class]="colorizeNavBtn() === 'details' ? 'colorize' : ''" (click)="navigateTo('details')">Details</button>
+                    <button [class]="colorizeNavBtn() === 'documents' ? 'colorize' : ''" (click)="navigateTo('documents')">Uploaded Documents</button>
                 </div>
             </div>
             @if (isTeacherViewing) {
                 <div class="controls-container">
-                    <button class="green-btn">Accept</button>
-                    <button class="red-btn">Decline</button>
+                    <button class="green-btn" (click)="acceptApp()">Accept</button>
+                    <button class="red-btn" (click)="declineApp()">Decline</button>
                 </div>
             }
         </div>
