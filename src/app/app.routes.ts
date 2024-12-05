@@ -7,6 +7,7 @@ import { CreateSubjectComponent } from './subjects/create-subject/create-subject
 import { AllSubjectsComponent } from './subjects/all-subjects/all-subjects.component';
 import { MySubjectsComponent } from './subjects/my-subjects/my-subjects.component';
 import { SubjectDetailsComponent } from './subjects/subject/subject-details/subject-details.component';
+import { PendingApplicationsComponent } from './application/pending-applications/pending-applications.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -29,6 +30,7 @@ export const routes: Routes = [
         ]
     },
 
+    {path: 'pending-applications', component: PendingApplicationsComponent},
 
     {path: 'todo-page', component: TodoPageComponent},
 ];
