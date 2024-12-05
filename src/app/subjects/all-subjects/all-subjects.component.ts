@@ -30,7 +30,6 @@ export class AllSubjectsComponent implements OnInit {
   }
 
   view(_id: string) {
-    console.log(_id);
     this.router.navigate([`/subject-details/${_id}`]);
   }
 
