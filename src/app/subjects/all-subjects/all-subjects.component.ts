@@ -51,8 +51,8 @@ export class AllSubjectsComponent implements OnInit {
           this.subjectCards.set(subjectCardsResult);
         },
         error: err => {
+          console.error(err);
           const msg = parseServerMsg(err.error).msg;
-          console.error(msg);
           this.showSnackBar(msg);
         },
         complete: () => {}
