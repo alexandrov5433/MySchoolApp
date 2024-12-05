@@ -30,7 +30,7 @@ export class MySubjectsComponent {
 
   view(_id: string) {
     console.log(_id);
-    //TODO redirect to subject
+    this.router.navigate([`/subject-details/${_id}`]);
   }
 
   ngOnInit(): void {

@@ -31,7 +31,7 @@ export class AllSubjectsComponent implements OnInit {
 
   view(_id: string) {
     console.log(_id);
-    //TODO redirect to subject
+    this.router.navigate([`/subject-details/${_id}`]);
   }
 
   search(title: string, displayId: string) {
