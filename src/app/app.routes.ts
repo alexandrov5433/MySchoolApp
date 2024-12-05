@@ -23,7 +23,11 @@ export const routes: Routes = [
     {path: 'create-subject', component: CreateSubjectComponent},
     {path: 'all-subjects', component: AllSubjectsComponent},
     {path: 'my-subjects', component: MySubjectsComponent},
-    {path: 'subject-details/:_id', component: SubjectDetailsComponent},
+    {path: 'subject-details/:_id', component: SubjectDetailsComponent, 
+        children: [
+            
+        ]
+    },
 
 
     {path: 'todo-page', component: TodoPageComponent},
