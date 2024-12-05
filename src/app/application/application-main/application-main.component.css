@@ -1,0 +1,138 @@
+.application-main-view {
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+}
+
+.application-main-view .location {
+    border-bottom: 1px solid var(--black);
+
+    span {
+        font-size: var(--size-option);
+        font-weight: bold;
+    }
+}
+
+.application-main-view .container {
+    box-shadow: var(--component-box-shadow);
+    border-radius: var(--border-radius);
+    background-color: var(--white);
+    margin-top: 20px;
+}
+
+.application-main-view .image-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    img {
+        position: absolute;
+        width: 100%;
+        height: 100%; 
+        z-index: 1;
+    }
+    div {
+        position: absolute;
+        z-index: 2;
+        color: var(--black);
+        font-size: var(--size-big-title);
+        font-weight: bold;
+    }
+}
+.application-main-view .applicant-pic-container {
+    position: relative;
+    width: 150px;
+    height: 350px;
+    z-index: 3;
+    img {
+        border: 4px solid var(--black);
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.application-main-view .upper-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 150px;
+}
+
+.application-main-view .lower-content {
+    display: flex;
+    border-top: 5px solid var(--black);
+    flex-direction: column;
+    align-items: center;
+}
+
+.application-main-view .infos-and-mininav {
+    height: 100%;
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.application-main-view .infos {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    .name {
+        font-size: var(--size-mid-title);
+        font-weight: bold;
+    }
+    .application-id {
+        font-size: var(--size-option);
+        font-weight: bold;
+        color: var(--gray);
+    }
+}
+
+.application-main-view .mininav {
+    display: flex;
+    height: 40px;
+    button {
+        display: inline;
+        font-size: var(--size-description);
+        background-color: var(--background-gray);
+        border-bottom: transparent;
+        border-radius: 0;
+        font-weight: bold;
+        padding: 0 12px;
+        border: transparent;
+        color: var(--black);
+        height: inherit;
+    }
+    button:hover {
+        color: var(--rusty-red);
+    }
+    /* add this class to indicate the active field/button */
+    button.colorize {
+        background-color: var(--black);
+        color: var(--white);
+    }
+}
+
+.application-main-view .controls-container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    button {
+        height: 40px;
+        width: 120px; 
+    }
+}
+
+/* add class to hide a button */
+.application-main-view button.hide{
+    display: none;
+}
