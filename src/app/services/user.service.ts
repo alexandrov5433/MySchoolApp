@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment as env } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private isLoggedIn: WritableSignal<boolean> = signal(true); //TODO change to default 'false', just testing
-  private userAuthStat: WritableSignal<string | null> = signal('teacher'); //student, parent, teacher  //TODO change to default 'null', just testing
+  private userAuthStat: WritableSignal<string> = signal('teacher'); //student, parent, teacher  //TODO change to default '', just testing
   constructor(private http: HttpClient) { }
 
   get isUserLoggedIn(): boolean {
@@ -24,7 +25,7 @@ export class UserService {
         if (!status) {
           throw new Error(`UserService: Status is not of type string or is an empty string. Status: "${status}"`);
         }
-        this.http.post('http://localhost:3000/user/login', formData, {
+        this.http.post(`${env.restUrlBase}/user/login`, formData, {
           responseType: 'json',
           withCredentials: true
         }).subscribe({
@@ -49,7 +50,7 @@ export class UserService {
   logout(): Observable<Object> {
     return new Observable((subscriber) => {
       try {
-        this.http.get('http://localhost:3000/user/logout', {
+        this.http.get(`${env.restUrlBase}/user/logout`, {
           responseType: 'json',
           withCredentials: true
         }).subscribe({
@@ -61,7 +62,7 @@ export class UserService {
           },
           complete: () => {
             this.isLoggedIn.set(false);
-            this.userAuthStat.set(null);
+            this.userAuthStat.set('');
             subscriber.complete();
           },
         });
@@ -80,7 +81,7 @@ export class UserService {
         if (!['parent', 'teacher'].includes(status)) {
           throw new Error(`UserService: User cannot register with status "${status}".`);
         }
-        this.http.post('http://localhost:3000/user/register', formData, {
+        this.http.post(`${env.restUrlBase}/user/register`, formData, {
           responseType: 'json',
           withCredentials: true,
         }).subscribe({
@@ -110,7 +111,7 @@ export class UserService {
         if (this.isLoggedIn()) {
           throw new Error(`UserService: User with status "${this.userAuthStat()}" is already logged in.`);
         }
-        this.http.post('http://localhost:3000/application', formData, {
+        this.http.post(`${env.restUrlBase}/application`, formData, {
           responseType: 'json',
           withCredentials: true,
         }).subscribe({
