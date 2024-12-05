@@ -29,7 +29,6 @@ export class MySubjectsComponent {
   }
 
   view(_id: string) {
-    console.log(_id);
     this.router.navigate([`/subject-details/${_id}`]);
   }
 
