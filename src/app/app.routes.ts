@@ -6,6 +6,7 @@ import { ApplyNowComponent } from './account/apply-now/apply-now.component';
 import { CreateSubjectComponent } from './subjects/create-subject/create-subject.component';
 import { AllSubjectsComponent } from './subjects/all-subjects/all-subjects.component';
 import { MySubjectsComponent } from './subjects/my-subjects/my-subjects.component';
+import { SubjectDetailsComponent } from './subjects/subject/subject-details/subject-details.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -22,7 +23,7 @@ export const routes: Routes = [
     {path: 'create-subject', component: CreateSubjectComponent},
     {path: 'all-subjects', component: AllSubjectsComponent},
     {path: 'my-subjects', component: MySubjectsComponent},
-    {path: 'subject-details', redirectTo: '/todo-page'},
+    {path: 'subject-details/:_id', component: SubjectDetailsComponent},
 
 
     {path: 'todo-page', component: TodoPageComponent},
