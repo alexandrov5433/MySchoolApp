@@ -1,3 +1,7 @@
+:host {
+    width: 100%;
+}
+
 .application-main-view {
     display: flex;
     flex-direction: column;
