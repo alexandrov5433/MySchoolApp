@@ -1,23 +1,26 @@
 <div class="application-uploaded-documents">
-
-    <div class="document">
-
-        <div class="file-icon-container">
-            <img src="../../public/icons/pdf/128.png" alt="file icon">
-        </div>
-
-        <div class="info">
-            <div class="name-container">
-                <span>Name of the uploaded file comes here. Lorem ipsum dolor sit amet
-                    consectetur, adipisicing elit. Quam, voluptatem!</span>
+    @if (appData()?.applicationDocuments?.length) {
+        @for (f of files(); track $index) {
+            <div class="document">
+                <div class="file-icon-container">
+                    <img [src]="getFileIconPath(f.mimeType)" alt="file icon">
+                </div>
+        
+                <div class="info">
+                    <div class="name-container">
+                        <span>{{f.originalName}}</span>
+                    </div>
+                </div>
+        
+                <div class="controls">
+                    <button class="green-btn" (click)="downloadFile(f._id)">Download</button>
+                </div>
             </div>
+        }
+    } @else {
+        <div class="no-results">
+            <span>No Documents!</span>
         </div>
-
-        <div class="controls">
-            <button class="green-btn">Download</button>
-            <button class="red-btn">Delete</button>
-        </div>
-
-    </div>
+    }
 
 </div>
