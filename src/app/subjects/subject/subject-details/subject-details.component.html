@@ -1,22 +1,22 @@
 <div class="subject-details-view">
     <div class="location">
-        <span>My Subjects - History</span>
+        <span>Subject - {{subjectDetails()?.subject?.title}}</span>
     </div>
     <div class="container">
 
         <div class="image-container">
-            <img src="../../public/background/fire-light-water.jpg" alt="fire-light-water">
-            <div>History</div>
+            <img src="background/{{subjectDetails()?.subject?.backgroundImageNumber}}" alt="fire-light-water">
+            <div>{{subjectDetails()?.subject?.title}}</div>
         </div>
 
         <div class="upper-content">
             <div class="teacher-pic-container">
-                <img src="../../public/profile-photos/test-teacher-profile-picture.jpg" alt="teacher-profile-picture">
+                <img [src]="teacherPicSrc()" alt="teacher-profile-picture">
             </div>
             <div class="infos-and-mininav">
                 <div class="infos">
-                    <div class="name">Michaela Ivanova</div>
-                    <div class="subject-id">#2332ht</div>
+                    <div class="name">{{subjectDetails()?.subject?.teacher}}</div>
+                    <div class="subject-id">ID {{subjectDetails()?.subject?.displayId}}</div>
                 </div>
                 <div class="mininav">
                     <button >Participating Students</button>
