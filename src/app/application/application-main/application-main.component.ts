@@ -6,6 +6,7 @@ import parseServerMsg from '../../util/parseServerMsg';
 import { Application } from '../../types/application';
 import { environment as env } from '../../../environments/environment.development';
 import { UserService } from '../../services/user.service';
+import { InterElementCommunicationService } from '../../services/inter-element-communication.service';
 
 @Component({
   selector: 'app-application-main',
@@ -19,26 +20,27 @@ export class ApplicationMainComponent implements OnInit {
   appData: WritableSignal<Application | null> = signal(null);
   applicantPicUrl: Signal<string> = computed(() => {
     const picId = this.appData()?.applicant.profilePicture || '';
-    return `${env.restUrlBase}/file/${picId}`;
+    return `${env.restUrlBase}/file/stream/${picId}`;
   });
+  colorizeNavBtn: WritableSignal<string> = signal('details'); //set either to "details" of "documents"
 
-  
   constructor(
     private pendingAppService: PendingApplicationService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private userService: UserService
+    private userService: UserService,
+    private iec: InterElementCommunicationService
   ) { }
 
-  get applicantName():string {
+  get applicantName(): string {
     return (this.appData()?.applicant.firstName + ' ' + this.appData()?.applicant.lastName);
   }
 
-  get appDisplayId():string {
+  get appDisplayId(): string {
     return this.appData()?.applicant.displayId || '';
   }
-  
-  get isTeacherViewing():boolean {
+
+  get isTeacherViewing(): boolean {
     if (this.userService.userAuthStatus === 'teacher') {
       return true;
     }
@@ -53,6 +55,22 @@ export class ApplicationMainComponent implements OnInit {
     });
   }
 
+  navigateTo(path: string) {
+    const url = `/application/${this.appId}/${path}`;
+    this.router.navigate([url]);
+    this.colorizeNavBtn.set(path);
+  }
+
+  acceptApp() {
+    console.log(`Application ACCEPTED! _id: `, this.appId);
+    //TODO
+  }
+
+  declineApp() {
+    console.log(`Application DECLINED! _id: `, this.appId);
+    //TODO
+  }
+
   @Input()
   set _id(_id: string) {
     this.appId = _id;
@@ -65,13 +83,16 @@ export class ApplicationMainComponent implements OnInit {
           const result: Application = parseServerMsg(val as string);
           console.log(result);
           this.appData.set(result);
+          this.iec.pendingApplicationData.set(result);
         },
         error: err => {
           console.error(err);
           const msg = parseServerMsg(err.error).msg;
           this.showSnackBar(msg);
         },
-        complete: () => { }
+        complete: () => {
+          this.navigateTo('details');
+        }
       });
   }
 }
