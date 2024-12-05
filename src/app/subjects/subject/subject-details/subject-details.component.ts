@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-subject-details',
   imports: [],
   templateUrl: './subject-details.component.html',
-  styleUrl: './subject-details.component.css'
+  styleUrl: './subject-details.component.css',
+  standalone: true
 })
 export class SubjectDetailsComponent {
 
