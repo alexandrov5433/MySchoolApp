@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class PendingApplicationsComponent implements OnInit {
   pendingApplications: WritableSignal<PendingApplications | null> = signal(null);
-  baseUrlForPicture: WritableSignal<string> = signal(`${env.restUrlBase}/file/`);
+  baseUrlForPicture: WritableSignal<string> = signal(`${env.restUrlBase}/file/stream/`);
 
   constructor (
     private pendingAppService: PendingApplicationService,
