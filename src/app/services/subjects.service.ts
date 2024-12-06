@@ -1,15 +1,19 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { EventEmitter, Injectable, model, ModelSignal, signal, WritableSignal } from '@angular/core';
+import { Observable, Subject as rxjsSubject } from 'rxjs';
 import { environment as env } from '../../environments/environment.development';
+import { Subject } from '../types/subject';
+import parseServerMsg from '../util/parseServerMsg';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectsService {
+  subjectData: WritableSignal<Subject | null> = signal(null);
+  realoadDataTriggerForChildren = new rxjsSubject<any>();
+  realoadDataTriggerForParent = new rxjsSubject<any>();
 
   constructor(private http: HttpClient) { }
-
 
   createNewSubject(title: string):Observable<Object> {
     return new Observable((subscriber) => {
@@ -69,8 +73,33 @@ export class SubjectsService {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }).subscribe({
-          next: val => subscriber.next(val),
-          error: err => subscriber.error(err),
+          next: val => {
+            this.subjectData.set(parseServerMsg(val as string));
+          },
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+
+  /**
+   * Adds or removes participant to/from subject.
+   * @param subjectId The _id of the Subject document.
+   * @param userId The _id of the student User.
+   * @param action To join or leave the subject.
+   */
+  participationControl(subjectId: string, userId: string, action: 'join' | 'leave') {
+    return new Observable((subscriber) => {
+      try {
+        this.http.post(`${env.restUrlBase}/subjects/participants/manage`, { subjectId, userId, action }, {
+          responseType: 'json',
+          withCredentials: true,
+        }).subscribe({
+          next: val => subscriber.next(parseServerMsg(val as string).msg),
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
           complete: () => subscriber.complete()
         });
       } catch (e) {
