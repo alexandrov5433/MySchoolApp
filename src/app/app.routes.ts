@@ -20,13 +20,13 @@ export const routes: Routes = [
     { path: 'faq', redirectTo: '/todo-page' },
     { path: 'forms-and-documents', redirectTo: '/todo-page' },
 
-    { path: 'log-in', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'apply-now', component: ApplyNowComponent },
+    { path: 'log-in', component: LoginComponent, title: 'Log In' },
+    { path: 'register', component: RegisterComponent, title: 'Register' },
+    { path: 'apply-now', component: ApplyNowComponent, title: 'Apply Now' },
 
-    { path: 'create-subject', component: CreateSubjectComponent },
-    { path: 'all-subjects', component: AllSubjectsComponent },
-    { path: 'my-subjects', component: MySubjectsComponent },
+    { path: 'create-subject', component: CreateSubjectComponent, title: 'Create New Subject' },
+    { path: 'all-subjects', component: AllSubjectsComponent, title: 'All Subjects' },
+    { path: 'my-subjects', component: MySubjectsComponent, title: 'My Subjects' },
     {
         path: 'subject-details/:_id', component: SubjectDetailsComponent,
         children: [
@@ -34,11 +34,11 @@ export const routes: Routes = [
         ]
     },
 
-    { path: 'pending-applications', component: PendingApplicationsComponent },
+    { path: 'pending-applications', component: PendingApplicationsComponent, title: 'Pending Applications' },
     {
-        path: 'application/:_id', component: ApplicationMainComponent, children: [
-            { path: 'details', component: ApplicationDetailsComponent },
-            { path: 'documents', component: ApplicationDocumentsComponent }
+        path: 'application/:_id', component: ApplicationMainComponent, title: 'Application', children: [
+            { path: 'details', component: ApplicationDetailsComponent, title: 'Application - Details' },
+            { path: 'documents', component: ApplicationDocumentsComponent, title: 'Application - Documents', }
         ]
     },
 
