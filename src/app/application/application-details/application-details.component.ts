@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, Input, OnInit, signal, WritableSignal } from '@angular/core';
 import { PendingApplicationService } from '../../services/pending-application.service';
-import { InterElementCommunicationService } from '../../services/inter-element-communication.service';
 import { Application } from '../../types/application';
 
 @Component({
@@ -15,7 +14,7 @@ export class ApplicationDetailsComponent implements OnInit {
   appData: WritableSignal<Application | null> = signal(null);
 
   constructor (
-    private iec: InterElementCommunicationService
+    private pendingAppService: PendingApplicationService
   ) {}
 
   @Input()
@@ -24,7 +23,13 @@ export class ApplicationDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appData.set(this.iec.pendingApplicationData());
-    console.log('app-details-cmp. _id: ', this.appData()?._id);
+    this.pendingAppService.getApplicationById(this.appId)
+    .subscribe({
+      next: val => { },
+      error: err => console.error(err),
+      complete: () => {
+        this.appData.set(this.pendingAppService.pendingApplicationData());
+      }
+    });
   }
 }
