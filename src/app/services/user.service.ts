@@ -2,21 +2,28 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from '../../environments/environment.development';
+import parseServerMsg from '../util/parseServerMsg';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private isLoggedIn: WritableSignal<boolean> = signal(true); //TODO change to default 'false', just testing
-  private userAuthStat: WritableSignal<string> = signal('teacher'); //student, parent, teacher  //TODO change to default '', just testing
+  private isLoggedIn: WritableSignal<boolean> = signal(false); //TODO change to default 'false', just testing
+  private userAuthStat: WritableSignal<string> = signal(''); //student, parent, teacher  //TODO change to default '', just testing
+  private userId: WritableSignal<string> = signal('');
+
   constructor(private http: HttpClient) { }
 
   get isUserLoggedIn(): boolean {
     return this.isLoggedIn();
   }
 
-  get userAuthStatus(): string | null {
+  get userAuthStatus(): string {
     return this.userAuthStat();
+  }
+  
+  get user_Id(): string {
+    return this.userId();
   }
 
   login(formData: FormData, status: string): Observable<Object> {
@@ -30,6 +37,10 @@ export class UserService {
           withCredentials: true
         }).subscribe({
           next: (val) => {
+            const user_id = parseServerMsg(val as string).user_id || '';
+            console.log('login user_id:', user_id);
+            
+            this.userId.set(user_id);
             subscriber.next(val);
           },
           error: (err) => {
@@ -63,6 +74,7 @@ export class UserService {
           complete: () => {
             this.isLoggedIn.set(false);
             this.userAuthStat.set('');
+            this.userId.set('');
             subscriber.complete();
           },
         });
@@ -86,14 +98,14 @@ export class UserService {
           withCredentials: true,
         }).subscribe({
           next: (val) => {
+            const user_id = parseServerMsg(val as string).user_id || '';
+            this.userId.set(user_id);
             subscriber.next(val)
           },
           error: (err) => {
             subscriber.error(err)
           },
           complete: () => {
-            console.log('SUCCESS');
-
             this.isLoggedIn.set(true);
             this.userAuthStat.set(status);
             subscriber.complete();
