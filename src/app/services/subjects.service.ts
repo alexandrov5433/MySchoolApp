@@ -108,4 +108,21 @@ export class SubjectsService {
     });
   }
 
+  publishAnnouncement(formData: FormData) {
+    return new Observable((subscriber) => {
+      try {
+        this.http.post(`${env.restUrlBase}/announcement`, formData, {
+          responseType: 'json',
+          withCredentials: true,
+        }).subscribe({
+          next: val => subscriber.next(parseServerMsg(val as string).msg),
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+
 }

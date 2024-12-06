@@ -1,1 +1,71 @@
-<p>subject-announcements works!</p>
+<div class="announcements-container">
+    @if (curUserStatus() === 'teacher') {
+        <div class="teacher-announcement-creator">
+            <form [formGroup]="form" (ngSubmit)="publish()">
+                <div class="group">
+                    <div class="label-container">
+                        <label for="title">Title</label>
+                    </div>
+                    <input type="text" id="title" (onChange)="validate('title')" formControlName='title' 
+                    [class]="validationLib.title.validationClass">
+                    @if (validationLib.title.showErrMsg) {
+                        <div class="error-msg-container">
+                            <span class="error">Please enter the title.</span>
+                        </div>
+                    }
+                </div>
+                <div class="group add-margin-top">
+                    <div class="label-container">
+                        <label for="announcement">Announcement</label>
+                    </div>
+                    <textarea name="description" id="announcement" (onChange)="validate('description')" formControlName="description"></textarea>
+                    @if (validationLib.description.showErrMsg) {
+                        <div class="error-msg-container">
+                            <span class="error">Please enter the announcement.</span>
+                        </div>
+                    }
+                </div>
+                <button class="green-btn add-margin-top">Publish Announcement</button>
+            </form>
+        </div>
+    }
+    @if (subject()?.announcements?.length) {
+        @for (elem of subject()?.announcements; track $index) {
+            <div class="announcement">
+                <div class="upper">
+                    <div class="info">
+                        <div class="title-container">
+                            <p>{{elem.title}}</p>
+                        </div>
+                        <div class="datetime-container">
+                            <p>
+                                12.03.2024 11:45
+                            </p>
+                        </div>
+                    </div>
+                    <div class="teacher-announcement-controls">
+                        <button class="delete">Delete</button>
+                    </div>
+                </div>
+                <div class="lower">
+                    <div>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a
+                            minima
+                            blanditiis aliquid expedita voluptate ad diseniti sapiente ipsam enim ab.
+                            Placeat repellat dolore, officiis eveniet id magnam? Cupiditate porro
+                            voluptas
+                            adipisci ut laboriosam? Dolor exercitationem, vitae adipisci iure aperiam
+                            omnis
+                            error eum provident maxime rem quod illum natus officiis. Corrupti ullam
+                            omnis
+                            dicta quo quis voluptates facilis praesentium nobis, nulla totam?</p>
+                    </div>
+                </div>
+            </div>
+        }
+    } @else {
+        <div class="no-results">
+            <span>No Announcements</span>
+        </div>
+    }
+</div>
