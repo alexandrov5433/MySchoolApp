@@ -118,6 +118,9 @@
     button:hover {
         color: var(--rusty-red);
     }
+    button:active {
+        transform: translateY(0);
+    }
     /* add this class to indicate the active field/button */
     button.colorize {
         background-color: var(--black);
