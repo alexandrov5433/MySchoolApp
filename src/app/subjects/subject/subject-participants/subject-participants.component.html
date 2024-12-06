@@ -1,1 +1,36 @@
-<p>subject-participants works!</p>
+<div class="participants-container">
+    @if (subject()?.participants?.length) {
+        @for (part of subject()?.participants; track $index) {
+            <div class="participant">
+        
+                <div class="profile-picture-container">
+                    <img src="{{baseUrlForPicture()}}{{part.profilePicture}}" alt="student picture">
+                </div>
+        
+                <div class="first">
+                    <div class="info">
+                        <div class="name-container">
+                            <p>{{part.firstName + ' '}}{{part.lastName}}</p>
+                        </div>
+                        <div class="email-container">
+                            <p>
+                                {{part.email}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @if (showTeacherControls()) {
+                    <div class="teacher-participant-controls">
+                        <button class="green-btn">View Profile</button>
+                        <button class="red-btn">Remove</button>
+                    </div>
+                }
+            </div>
+        }
+    } @else {
+        <div class="no-results">
+            <span>No Participants yet!</span>
+        </div>
+    }                   
+    
+</div>
