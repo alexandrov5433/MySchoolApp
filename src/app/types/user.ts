@@ -20,5 +20,6 @@ export type User = {
     parents?: Array<string>,
     //student
     activeStudent?: boolean,
-    backgroundImageNumber?: string
+    backgroundImageNumber?: string,
+    password?: string
 }
