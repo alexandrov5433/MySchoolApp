@@ -1,12 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from '../../environments/environment.development';
+import { Application } from '../types/application';
+import parseServerMsg from '../util/parseServerMsg';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PendingApplicationService {
+
+  pendingApplicationData: WritableSignal<Application | null> = signal(null);
 
   constructor(private http: HttpClient) { }
 /**
@@ -54,8 +58,33 @@ export class PendingApplicationService {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }).subscribe({
-          next: val => subscriber.next(val),
-          error: err => subscriber.error(err),
+          next: val => {
+            const result: Application = parseServerMsg(val as string);
+            this.pendingApplicationData.set(result);
+          },
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+
+  /**
+   * Sends a request to the server to either accept the applicant and make him a student or to decline the application.
+   * @param _id The _id of the Application.
+   * @param action The action to take.
+   */
+  manageApplication(_id: string, action: 'accept' | 'reject') {
+    return new Observable((subscriber) => {
+      try {
+        this.http.post(`${env.restUrlBase}/application/manage`, { _id, action }, {
+          responseType: 'json',
+          withCredentials: true,
+        }).subscribe({
+          next: val => subscriber.next(parseServerMsg(val as string).msg),
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
           complete: () => subscriber.complete()
         });
       } catch (e) {
