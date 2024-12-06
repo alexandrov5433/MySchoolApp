@@ -41,8 +41,6 @@ export class SubjectAnnouncementsComponent implements OnInit, OnDestroy {
   ) { }
 
   publish() {
-    console.log(this.subject());
-    
     this.validate('title');
     this.validate('description');
     if (this.form.invalid) {
@@ -53,20 +51,20 @@ export class SubjectAnnouncementsComponent implements OnInit, OnDestroy {
     formData.append('title', (this.form.value as any).title);
     formData.append('description', (this.form.value as any).title);
     formData.append('dateTime', new Date().getTime().toString());
-    // this.subjectsService.publishAnnouncement(formData)
-    //   .subscribe({
-    //     next: val => {
-    //       this.showSnackBar(val as string);
-    //     },
-    //     error: err => {
-    //       this.showSnackBar(err as string);
-    //     },
-    //     complete: () => {
-    //       this.loadData();
-    //       this.form.reset();
-    //       this.validationLib.title.validationClass = '';
-    //     }
-    //   });
+    this.subjectsService.publishAnnouncement(formData)
+      .subscribe({
+        next: val => {
+          this.showSnackBar(val as string);
+        },
+        error: err => {
+          this.showSnackBar(err as string);
+        },
+        complete: () => {
+          this.loadData();
+          this.form.reset();
+          this.validationLib.title.validationClass = '';
+        }
+      });
   }
 
   validate(control: string) {
