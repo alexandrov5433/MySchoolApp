@@ -1,10 +1,10 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, Input, signal, WritableSignal } from '@angular/core';
 import { Application } from '../../types/application';
-import { InterElementCommunicationService } from '../../services/inter-element-communication.service';
 import { File } from '../../types/file';
 import { FileService } from '../../services/file.service';
 import parseServerMsg from '../../util/parseServerMsg';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PendingApplicationService } from '../../services/pending-application.service';
 
 @Component({
   selector: 'app-application-documents',
@@ -14,15 +14,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   standalone: true
 })
 export class ApplicationDocumentsComponent {
-  // private appId: string = '';
+  private appId: string = '';
   appData: WritableSignal<Application | null> = signal(null);
   files: WritableSignal<Array<File> | null> = signal(null);
   constructor(
-    private iec: InterElementCommunicationService,
+    private pendingAppService: PendingApplicationService,
     private fileService: FileService,
     private snackBar: MatSnackBar
   ) { }
 
+  @Input()
+  set _id(_id: string) {
+    this.appId = _id;
+  }
+  
   showSnackBar(msg: string) {
     this.snackBar.open(msg, 'OK', {
       duration: 7000,
@@ -36,8 +41,13 @@ export class ApplicationDocumentsComponent {
     console.log('DOWNLOAD file _id: ', _id);
     this.fileService.getFileDownloadById(_id)
       .subscribe({
-        next: val => {
-          console.log(val);
+        next: (res: any) => {
+          const blob: Blob = res.body as Blob;
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.download = _id;
+          a.href = url;
+          a.click();
         },
         error: err => {
           console.error(err);
@@ -62,8 +72,14 @@ export class ApplicationDocumentsComponent {
   }
 
   ngOnInit(): void {
-    this.appData.set(this.iec.pendingApplicationData());
-    console.log('app-details-cmp. _id: ', this.appData()?._id);
-    this.files.set(this.appData()?.applicationDocuments as any);
+    this.pendingAppService.getApplicationById(this.appId)
+    .subscribe({
+      next: val => { },
+      error: err => console.error(err),
+      complete: () => {
+        this.appData.set(this.pendingAppService.pendingApplicationData());
+        this.files.set(this.appData()?.applicationDocuments as any);
+      }
+    });
   }
 }
