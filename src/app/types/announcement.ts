@@ -5,4 +5,5 @@ export type Announcement = {
     teacher: User | string,
     title: string,
     description: string,
+    dateTime: string
 };
