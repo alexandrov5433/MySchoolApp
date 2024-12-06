@@ -11,6 +11,10 @@ import { PendingApplicationsComponent } from './application/pending-applications
 import { ApplicationMainComponent } from './application/application-main/application-main.component';
 import { ApplicationDetailsComponent } from './application/application-details/application-details.component';
 import { ApplicationDocumentsComponent } from './application/application-documents/application-documents.component';
+import { SubjectParticipantsComponent } from './subjects/subject/subject-participants/subject-participants.component';
+import { SubjectAnnouncementsComponent } from './subjects/subject/subject-announcements/subject-announcements.component';
+import { SubjectAssignmentsComponent } from './subjects/subject/subject-assignments/subject-assignments.component';
+import { SubjectMaterialsComponent } from './subjects/subject/subject-materials/subject-materials.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -28,9 +32,11 @@ export const routes: Routes = [
     { path: 'all-subjects', component: AllSubjectsComponent, title: 'All Subjects' },
     { path: 'my-subjects', component: MySubjectsComponent, title: 'My Subjects' },
     {
-        path: 'subject-details/:_id', component: SubjectDetailsComponent,
-        children: [
-
+        path: 'subject-details/:_id', component: SubjectDetailsComponent, title: 'Subject', children: [
+            { path: 'participants', component: SubjectParticipantsComponent, title: 'Subject Participants' },
+            { path: 'announcements', component: SubjectAnnouncementsComponent, title: 'Subject Announcements' },
+            { path: 'assignments', component: SubjectAssignmentsComponent, title: 'Subject Assignments' },
+            { path: 'materials', component: SubjectMaterialsComponent, title: 'Subject Materials' }
         ]
     },
 

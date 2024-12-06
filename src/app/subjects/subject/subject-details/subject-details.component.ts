@@ -1,29 +1,63 @@
-import { Component, computed, Input, OnInit, Signal, signal, WritableSignal } from '@angular/core';
-import { SubjectDetails } from '../../../types/subjectDetails';
+import { Component, computed, Input, OnDestroy, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { SubjectsService } from '../../../services/subjects.service';
-import parseServerMsg from '../../../util/parseServerMsg';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment as env } from '../../../../environments/environment.development';
+import { Subject } from '../../../types/subject';
+import { UserService } from '../../../services/user.service';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Subject as rxjsSubject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-subject-details',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './subject-details.component.html',
   styleUrl: './subject-details.component.css',
   standalone: true
 })
-export class SubjectDetailsComponent implements OnInit {
-  subjectDetails: WritableSignal<SubjectDetails | null> = signal(null);
+export class SubjectDetailsComponent implements OnInit, OnDestroy{
+  private ngDestroyer = new rxjsSubject();
+  subject: WritableSignal<Subject | null> = signal(null);
   subjectId: string = '';
+  curUserStatus: WritableSignal<string> = signal('');
+  curUserId: WritableSignal<string> = signal('');
+
+  //for teacher
   teacherPicSrc: Signal<string> = computed(() => {
-    const picId: string = this.subjectDetails()?.subject.teacherPictureId || '';
-    return `${env.restUrlBase}/file/${picId}`;
+    if (!this.subject()) {
+      return '';
+    }
+    const picId: string = this.subject()?.teacher.profilePicture || '';
+    return `${env.restUrlBase}/file/stream/${picId}`;
   });
+  teacherName: Signal<string> = computed(() => {
+    if (!this.subject()) {
+      return '';
+    }
+    const firstName = this.subject()?.teacher.firstName || '';
+    const lastName = this.subject()?.teacher.lastName || '';
+    return `${firstName} ${lastName}`;
+  });
+
+  //for student
+  showParticipationBtns: WritableSignal<boolean> = signal(false);
+  canJoin: WritableSignal<boolean> = signal(false);
 
   constructor(
     private subjectsService: SubjectsService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private userService: UserService,
+    private router: Router
   ) { }
+
+  checkMustDisplayParticipationBtns() {
+    if (this.curUserStatus() === 'student') {
+      const isParticipant = this.subject()?.participants.find(p => p._id === this.curUserId());
+      this.canJoin.set(!Boolean(isParticipant));
+      this.showParticipationBtns.set(true);   
+    } else {
+      this.showParticipationBtns.set(false);
+    }
+  }
 
   showSnackBar(msg: string) {
     this.snackBar.open(msg, 'OK', {
@@ -33,31 +67,80 @@ export class SubjectDetailsComponent implements OnInit {
     });
   }
 
+  joinSubject() {
+    this.subjectsService.participationControl(this.subjectId, this.curUserId(), 'join')
+      .subscribe({
+        next: val => this.showSnackBar(val as string),
+        error: err => this.showSnackBar(err as string),
+        complete: () => {
+          this.loadData();
+          this.subjectsService.realoadDataTriggerForChildren.next('trigger');
+        }
+      });
+  }
+
+  leaveSubject() {
+    this.subjectsService.participationControl(this.subjectId, this.curUserId(), 'leave')
+      .subscribe({
+        next: val => this.showSnackBar(val as string),
+        error: err => this.showSnackBar(err as string),
+        complete: () => {
+          this.loadData();
+          this.subjectsService.realoadDataTriggerForChildren.next('trigger');
+        }
+      });
+  }
+
   @Input()
   set _id(_id: string) {
     this.subjectId = _id;
   }
 
-  ngOnInit(): void {
-    console.log('_id recieved: ', this.subjectId);
-    this.subjectsService.getSubjectById(this.subjectId)
-      .subscribe({
-        next: val => {
-          const subjectResult: SubjectDetails = parseServerMsg(val as string);
-          console.log(subjectResult);
-          this.subjectDetails.set(subjectResult);
-        },
-        error: err => {
-          console.error(err);
-          const msg = parseServerMsg(err.error).msg;
-          this.showSnackBar(msg);
-        },
-        complete: () => { }
-      });
+  navigateTo(path: string) {
+    const url = `/subject-details/${this.subjectId}/${path}`;
+    this.router.navigate([url]);
   }
 
-  private getTeacherPicture(_id: string) {
+  private loadData() {
+    this.subjectsService.getSubjectById(this.subjectId)
+    .subscribe({
+      next: val => { },
+      error: err => {
+        console.error(err);
+        this.showSnackBar(err);
+      },
+      complete: () => {
+        this.subject.set(this.subjectsService.subjectData());
+        this.curUserStatus.set(this.userService.userAuthStatus);
+        this.curUserId.set(this.userService.user_Id);
+        this.checkMustDisplayParticipationBtns();
+      }
+    });
+  }
 
+  ngOnInit(): void {
+    console.log(this.subjectId);
+    if (
+      !this.router.url.endsWith('participants') &&
+      !this.router.url.endsWith('announcements') &&
+      !this.router.url.endsWith('assignments') &&
+      !this.router.url.endsWith('materials')
+    ) {
+      this.navigateTo('participants');
+    }
+    this.subjectsService.realoadDataTriggerForParent
+    .pipe(takeUntil(this.ngDestroyer))
+    .subscribe({
+      next: val => {
+        this.loadData();
+      }
+    });
+    this.loadData();
+  }
+
+  ngOnDestroy(): void {
+    this.ngDestroyer.next(true);
+    this.ngDestroyer.complete();
   }
 
 }

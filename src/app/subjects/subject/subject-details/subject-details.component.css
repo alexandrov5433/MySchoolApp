@@ -1,3 +1,7 @@
+:host {
+    width: 100%;
+}
+
 .subject-details-view {
     display: flex;
     flex-direction: column;
@@ -115,6 +119,9 @@
     button:hover {
         color: var(--rusty-red);
     }
+    button:active {
+        transform: translateY(0);
+    }
     /* add this class to indicate the active field/button */
     button.colorize {
         background-color: var(--black);
@@ -125,6 +132,7 @@
 .subject-details-view .controls-container {
     display: flex;
     height: 100%;
+    min-width: 10vw;
     flex-direction: column;
     justify-content: space-evenly;
     button {

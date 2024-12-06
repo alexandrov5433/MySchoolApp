@@ -1,12 +1,12 @@
 <div class="subject-details-view">
     <div class="location">
-        <span>Subject - {{subjectDetails()?.subject?.title}}</span>
+        <span>Subject - {{subject()?.title}}</span>
     </div>
     <div class="container">
 
         <div class="image-container">
-            <img src="background/{{subjectDetails()?.subject?.backgroundImageNumber}}" alt="fire-light-water">
-            <div>{{subjectDetails()?.subject?.title}}</div>
+            <img src="background/{{subject()?.backgroundImageNumber}}" alt="fire-light-water">
+            <div>{{subject()?.title}}</div>
         </div>
 
         <div class="upper-content">
@@ -15,24 +15,29 @@
             </div>
             <div class="infos-and-mininav">
                 <div class="infos">
-                    <div class="name">{{subjectDetails()?.subject?.teacher}}</div>
-                    <div class="subject-id">ID {{subjectDetails()?.subject?.displayId}}</div>
+                    <div class="name">{{teacherName()}}</div>
+                    <div class="subject-id">ID {{subject()?.displayId}}</div>
                 </div>
                 <div class="mininav">
-                    <button >Participating Students</button>
-                    <button>Announcements</button>
-                    <button class="colorize">Assignments</button>
-                    <button>Download Material</button>
+                    <button routerLink="/subject-details/{{subjectId}}/participants" routerLinkActive="colorize">Participating Students</button>
+                    <button routerLink="/subject-details/{{subjectId}}/announcements" routerLinkActive="colorize">Announcements</button>
+                    <button routerLink="/subject-details/{{subjectId}}/assignments" routerLinkActive="colorize">Assignments</button>
+                    <button routerLink="/subject-details/{{subjectId}}/materials" routerLinkActive="colorize">Download Material</button>
                 </div>
             </div>
             <div class="controls-container">
-                <button class="green-btn">Join</button>
-                <button class="red-btn">Leave</button>
+            @if (showParticipationBtns()) {
+                    @if (canJoin()) {
+                        <button class="green-btn" (click)="joinSubject()">Join</button>
+                    } @else {
+                        <button class="red-btn" (click)="leaveSubject()">Leave</button>
+                    }
+                }
             </div>
         </div>
 
         <div class="lower-content">
-            <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem, modi voluptates dignissimos recusandae tempore optio cumque, laborum quas earum doloremque delectus repudiandae nulla placeat in ipsam possimus culpa. Corrupti, quae commodi! Eveniet reiciendis porro voluptatum provident quas, quaerat laboriosam veritatis perspiciatis vel! Similique nesciunt minus facere sapiente facilis harum inventore est, explicabo delectus, beatae cumque laboriosam quia sit. Veniam quibusdam consectetur voluptate nesciunt ipsum cupiditate officiis, necessitatibus assumenda eum dolores est perspiciatis error unde, officia quod dolor iste earum quisquam? A, tempora eos! Incidunt aspernatur repudiandae consequuntur? Consequatur laudantium suscipit pariatur sequi iure, explicabo commodi neque necessitatibus, dolore repellendus, fugiat impedit doloribus? Porro temporibus illo cum recusandae dignissimos ducimus modi facilis quibusdam quisquam, aperiam doloremque fuga quidem ipsam praesentium quaerat hic, sed facere reprehenderit quas quo omnis sapiente impedit! Totam dicta accusantium et consectetur dolorum exercitationem reprehenderit, eum minus corrupti rem quod praesentium dignissimos ut dolor cupiditate maxime quam repudiandae. Voluptatum excepturi porro voluptate, laudantium accusamus repudiandae officiis, odit asperiores sequi voluptates aperiam repellendus unde distinctio iure error explicabo accusantium molestiae quibusdam! Deleniti aliquid asperiores, cum laudantium mollitia commodi libero tempore iusto, sunt explicabo voluptatum adipisci odio quos dolorum excepturi magni ipsum vero voluptatibus eum. Voluptatibus expedita officia tenetur impedit facilis recusandae repellat, aspernatur necessitatibus cumque. Iusto fugiat maiores illo, doloribus quia quasi repellendus! Aspernatur voluptate eos corporis repudiandae delectus nostrum molestias minus aliquam possimus aut? Sunt impedit voluptatibus, quia repellat beatae doloremque officia veritatis architecto aliquid veniam, totam fugiat. Eveniet reprehenderit, corporis esse est, mollitia deserunt ipsa soluta sit quos, dicta perferendis quae. Ad eaque maxime consectetur deserunt incidunt, autem molestiae mollitia repellat nesciunt porro quaerat voluptate error architecto? Dolores obcaecati molestias architecto neque exercitationem numquam ratione fugiat accusamus eligendi ipsa minus quo ullam animi magnam dignissimos tempora, libero perspiciatis quia veritatis totam doloremque veniam sunt? Illo, quam repellat?</span>
+            <router-outlet></router-outlet>
         </div>
 
     </div>
