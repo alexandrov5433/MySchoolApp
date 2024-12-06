@@ -191,3 +191,7 @@ select.false-input {
     font-weight: bold;
     color: var(--dim-gray);
 }
+
+span.error {
+    color: var(--rusty-red);
+}
