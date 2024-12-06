@@ -1,36 +1,36 @@
 import { Component, computed, Input, OnInit, Signal, signal, WritableSignal } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { PendingApplicationService } from '../../services/pending-application.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import parseServerMsg from '../../util/parseServerMsg';
 import { Application } from '../../types/application';
 import { environment as env } from '../../../environments/environment.development';
 import { UserService } from '../../services/user.service';
-import { InterElementCommunicationService } from '../../services/inter-element-communication.service';
 
 @Component({
   selector: 'app-application-main',
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './application-main.component.html',
   styleUrl: './application-main.component.css',
   standalone: true
 })
 export class ApplicationMainComponent implements OnInit {
-  private appId: string = '';
+  appId: string = '';
   appData: WritableSignal<Application | null> = signal(null);
   applicantPicUrl: Signal<string> = computed(() => {
     const picId = this.appData()?.applicant.profilePicture || '';
     return `${env.restUrlBase}/file/stream/${picId}`;
   });
-  colorizeNavBtn: WritableSignal<string> = signal('details'); //set either to "details" of "documents"
 
   constructor(
     private pendingAppService: PendingApplicationService,
     private router: Router,
     private snackBar: MatSnackBar,
     private userService: UserService,
-    private iec: InterElementCommunicationService
   ) { }
+
+  get applicantBackgrondPicPath(): string {
+    return `/background/${this.appData()?.applicant.backgroundImageNumber}`;
+  }
 
   get applicantName(): string {
     return (this.appData()?.applicant.firstName + ' ' + this.appData()?.applicant.lastName);
@@ -58,17 +58,28 @@ export class ApplicationMainComponent implements OnInit {
   navigateTo(path: string) {
     const url = `/application/${this.appId}/${path}`;
     this.router.navigate([url]);
-    this.colorizeNavBtn.set(path);
   }
 
   acceptApp() {
-    console.log(`Application ACCEPTED! _id: `, this.appId);
-    //TODO
+    this.pendingAppService.manageApplication(this.appId, 'accept')
+      .subscribe({
+        next: val => this.showSnackBar(val as string),
+        error: err => this.showSnackBar(err as string),
+        complete: () => {
+          this.router.navigate(['/home']);
+        }
+      });
   }
 
-  declineApp() {
-    console.log(`Application DECLINED! _id: `, this.appId);
-    //TODO
+  rejectApp() {
+    this.pendingAppService.manageApplication(this.appId, 'reject')
+    .subscribe({
+      next: val => this.showSnackBar(val as string),
+      error: err => this.showSnackBar(err as string),
+      complete: () => {
+        this.router.navigate(['/home']);
+      }
+    });
   }
 
   @Input()
@@ -77,21 +88,15 @@ export class ApplicationMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!this.router.url.endsWith('details') && !this.router.url.endsWith('documents')) {
+      this.router.navigate([`/application/${this.appId}/details`]);
+    }
     this.pendingAppService.getApplicationById(this.appId)
       .subscribe({
-        next: val => {
-          const result: Application = parseServerMsg(val as string);
-          console.log(result);
-          this.appData.set(result);
-          this.iec.pendingApplicationData.set(result);
-        },
-        error: err => {
-          console.error(err);
-          const msg = parseServerMsg(err.error).msg;
-          this.showSnackBar(msg);
-        },
+        next: val => { },
+        error: err => console.error(err),
         complete: () => {
-          this.navigateTo('details');
+          this.appData.set(this.pendingAppService.pendingApplicationData());
         }
       });
   }

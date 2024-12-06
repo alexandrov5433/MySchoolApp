@@ -1,11 +1,11 @@
 <div class="application-main-view">
     <div class="location">
-        <span>Application Details</span>
+        <span>Application</span>
     </div>
     <div class="container">
 
         <div class="image-container">
-            <img src="../../public/background/fire-light-water.jpg" alt="fire-light-water">
+            <img [src]="applicantBackgrondPicPath" alt="fire-light-water">
             <div>Application</div>
         </div>
 
@@ -19,14 +19,16 @@
                     <div class="application-id">ApplicantID: {{appDisplayId}}</div>
                 </div>
                 <div class="mininav">
-                    <button [class]="colorizeNavBtn() === 'details' ? 'colorize' : ''" (click)="navigateTo('details')">Details</button>
-                    <button [class]="colorizeNavBtn() === 'documents' ? 'colorize' : ''" (click)="navigateTo('documents')">Uploaded Documents</button>
+                    <button routerLink="/application/{{appId}}/details" routerLinkActive="colorize">Details</button>
+                    <button routerLink="/application/{{appId}}/documents" routerLinkActive="colorize">Uploaded Documents</button>
+                    <!-- <button [class]="colorizeNavBtn() === 'details' ? 'colorize' : ''" (click)="navigateTo('details')">Details</button>
+                    <button [class]="colorizeNavBtn() === 'documents' ? 'colorize' : ''" (click)="navigateTo('documents')">Uploaded Documents</button> -->
                 </div>
             </div>
             @if (isTeacherViewing) {
                 <div class="controls-container">
                     <button class="green-btn" (click)="acceptApp()">Accept</button>
-                    <button class="red-btn" (click)="declineApp()">Decline</button>
+                    <button class="red-btn" (click)="rejectApp()">Reject</button>
                 </div>
             }
         </div>
