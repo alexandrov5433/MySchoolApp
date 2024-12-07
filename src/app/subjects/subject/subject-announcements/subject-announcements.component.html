@@ -1,5 +1,5 @@
 <div class="announcements-container">
-    @if (curUserStatus() === 'teacher') {
+    @if (isTeacherCreator()) {
         <div class="teacher-announcement-creator">
             <form [formGroup]="form" (ngSubmit)="publish()">
                 <div class="group">
@@ -39,26 +39,19 @@
                         </div>
                         <div class="datetime-container">
                             <p>
-                                12.03.2024 11:45
+                                TODO format {{elem.dateTime}}
                             </p>
                         </div>
                     </div>
-                    <div class="teacher-announcement-controls">
-                        <button class="delete">Delete</button>
-                    </div>
+                    @if (showTeacherControls()) {
+                        <div class="teacher-announcement-controls">
+                            <button class="delete" (click)="delete(elem._id)">Delete</button>
+                        </div>
+                    }
                 </div>
                 <div class="lower">
                     <div>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a
-                            minima
-                            blanditiis aliquid expedita voluptate ad diseniti sapiente ipsam enim ab.
-                            Placeat repellat dolore, officiis eveniet id magnam? Cupiditate porro
-                            voluptas
-                            adipisci ut laboriosam? Dolor exercitationem, vitae adipisci iure aperiam
-                            omnis
-                            error eum provident maxime rem quod illum natus officiis. Corrupti ullam
-                            omnis
-                            dicta quo quis voluptates facilis praesentium nobis, nulla totam?</p>
+                        <p>{{elem.description}}</p>
                     </div>
                 </div>
             </div>

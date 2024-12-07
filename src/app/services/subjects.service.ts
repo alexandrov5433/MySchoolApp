@@ -124,5 +124,25 @@ export class SubjectsService {
       }
     });
   }
+  removeAnnouncement(subjectId: string, announId: string) {
+    return new Observable((subscriber) => {
+      try {
+        this.http.delete(`${env.restUrlBase}/announcement`, {
+          params: {
+            subjectId,
+            announId
+          },
+          responseType: 'json',
+          withCredentials: true,
+        }).subscribe({
+          next: val => subscriber.next(parseServerMsg(val as string).msg),
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
 
 }

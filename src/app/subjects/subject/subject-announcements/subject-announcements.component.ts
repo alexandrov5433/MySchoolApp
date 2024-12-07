@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, Input, OnDestroy, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subject as rxjsSubject, takeUntil } from 'rxjs';
 import { Subject } from '../../../types/subject';
@@ -40,6 +40,13 @@ export class SubjectAnnouncementsComponent implements OnInit, OnDestroy {
     private userService: UserService
   ) { }
 
+  isTeacherCreator: Signal<boolean> = computed(() => {
+    if (this.subject()?.teacher._id == this.curUserId()) {
+      return true;
+    }
+    return false;
+  });
+
   publish() {
     this.validate('title');
     this.validate('description');
@@ -47,6 +54,7 @@ export class SubjectAnnouncementsComponent implements OnInit, OnDestroy {
       return;
     }
     const formData = new FormData();
+    formData.append('subjectId', this.subject()?._id || '');
     formData.append('teacher', this.curUserId());
     formData.append('title', (this.form.value as any).title);
     formData.append('description', (this.form.value as any).title);
@@ -65,6 +73,22 @@ export class SubjectAnnouncementsComponent implements OnInit, OnDestroy {
           this.validationLib.title.validationClass = '';
         }
       });
+  }
+
+  delete(announId:string) {
+    console.log(announId);
+    this.subjectsService.removeAnnouncement(this.subjectId, announId)
+    .subscribe({
+      next: val => {
+        this.showSnackBar(val as string);
+      },
+      error: err => {
+        this.showSnackBar(err as string);
+      },
+      complete: () => {
+        this.loadData();
+      }
+    });
   }
 
   validate(control: string) {
