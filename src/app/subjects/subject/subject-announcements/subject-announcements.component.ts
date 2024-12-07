@@ -107,10 +107,6 @@ export class SubjectAnnouncementsComponent implements OnInit, OnDestroy {
     }
   }
 
-  showTeacherControls() {
-    return this.curUserStatus() === 'teacher' ? true : false;
-  }
-
   @Input()
   set _id(_id: string) {
     this.subjectId = _id;
