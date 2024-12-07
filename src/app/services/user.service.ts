@@ -10,7 +10,8 @@ import parseServerMsg from '../util/parseServerMsg';
 export class UserService {
   private isLoggedIn: WritableSignal<boolean> = signal(true); //TODO change to default 'false', just testing
   private userAuthStat: WritableSignal<string> = signal('teacher'); //student, parent, teacher  //TODO change to default '', just testing
-  private userId: WritableSignal<string> = signal('');
+  private userId: WritableSignal<string> = signal('674f4745eec4c2605c986bdf'); //TODO change to default '', just testing '674f4745eec4c2605c986bdf' teacher;
+  //6751dd938a4ccb0c14d08fe5 student ivan ivanov
 
   constructor(private http: HttpClient) { }
 
