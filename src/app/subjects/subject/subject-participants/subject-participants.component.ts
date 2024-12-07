@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, Input, OnDestroy, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { SubjectsService } from '../../../services/subjects.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
@@ -26,9 +26,12 @@ export class SubjectParticipantsComponent implements OnInit, OnDestroy {
     private userService: UserService
   ) { }
 
-  showTeacherControls() {
-    return this.curUserStatus() === 'teacher' ? true : false;
-  }
+  isTeacherCreator: Signal<boolean> = computed(() => {
+    if (this.subject()?.teacher._id == this.curUserId()) {
+      return true;
+    }
+    return false;
+  });
 
   @Input()
   set _id(_id: string) {
