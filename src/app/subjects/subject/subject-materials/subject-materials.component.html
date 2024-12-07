@@ -1,1 +1,56 @@
-<p>subject-materials works!</p>
+<div class="materials-container">
+    @if (isTeacherCreator()) {
+        <div class="teacher-material-creator">
+            <form class="material-creator-form">
+                <div class="group add-margin-top">
+                    <div class="label-container">
+                        <label>File to upload</label>
+                    </div>
+                    <label for="materialFileUpload" class="single-custom-file-upload-btn">Select File
+                        <input type="file" id="materialFileUpload" (change)="getFile($event)">
+                    </label>
+                    <div class="add-margin-top single-selected-file-name-container">
+                        <span>{{materialFileName()}}</span>
+                    </div>
+                </div>
+                @if (showFileSelectError()) {
+                    <div class="error-msg-container">
+                        <span class="error">Please select a file.</span>
+                    </div>
+                }
+                <div class="button-group">
+                    <button class="green-btn" type="button" (click)="createMaterial()">Create Material</button>
+                    <button class="red-btn" type="button" (click)="removeFile()">Remove File</button>
+                </div>
+            </form>
+        </div>
+    }
+    @if (subject()?.materials?.length) {
+        @for (file of subject()?.materials; track $index) {
+            <div class="material">
+        
+                <div class="file-icon-container">
+                    <img [src]="getFileIconPath(file.mimeType)" alt="file icon">
+                </div>
+        
+                <div class="info">
+                    <div class="name-container">
+                        <p>{{file.originalName}}</p>
+                    </div>
+                </div>
+        
+                <div class="teacher-material-controls">
+                    <button class="green-btn" (click)="downloadFile(file._id)">Download</button>
+                    @if (isTeacherCreator()) {
+                        <button class="red-btn" (click)="deleteFile(file._id)">Delete</button>
+                    }
+                </div>
+        
+            </div>
+        }
+    } @else {
+        <div class="no-results">
+            <span>No materials available.</span>
+        </div>
+    }
+</div>
