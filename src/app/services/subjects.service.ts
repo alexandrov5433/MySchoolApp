@@ -51,7 +51,7 @@ export class SubjectsService {
           }
         }).subscribe({
           next: val => subscriber.next(val),
-          error: err => subscriber.error(err),
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
           complete: () => subscriber.complete()
         });
       } catch (e) {
@@ -134,6 +134,77 @@ export class SubjectsService {
           },
           responseType: 'json',
           withCredentials: true,
+        }).subscribe({
+          next: val => subscriber.next(parseServerMsg(val as string).msg),
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+
+  createAssignment(formData: FormData) {
+    return new Observable((subscriber) => {
+      try {
+        this.http.post(`${env.restUrlBase}/assignment`, formData, {
+          responseType: 'json',
+          withCredentials: true,
+        }).subscribe({
+          next: val => subscriber.next(parseServerMsg(val as string).msg),
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+
+  uploadSolution(formData: FormData) {
+    return new Observable((subscriber) => {
+      try {
+        this.http.post(`${env.restUrlBase}/assignment/solution`, formData, {
+          responseType: 'json',
+          withCredentials: true,
+        }).subscribe({
+          next: val => subscriber.next(parseServerMsg(val as string).msg),
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+
+  createMaterial(formData: FormData) {
+    return new Observable((subscriber) => {
+      try {
+        this.http.post(`${env.restUrlBase}/material`, formData, {
+          responseType: 'json',
+          withCredentials: true,
+        }).subscribe({
+          next: val => subscriber.next(parseServerMsg(val as string).msg),
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+  removeMaterial(subjectId: string, materialId: string) {
+    return new Observable((subscriber) => {
+      try {
+        this.http.delete(`${env.restUrlBase}/material`, {
+          responseType: 'json',
+          withCredentials: true,
+          params: {
+            subjectId,
+            materialId
+          }
         }).subscribe({
           next: val => subscriber.next(parseServerMsg(val as string).msg),
           error: err => subscriber.error(parseServerMsg(err.error).msg),
