@@ -17,7 +17,7 @@
 .participants-container .participant {
     border: 1px solid var(--black);
     height: fit-content;
-    width: 80%;
+    width: 90%;
     padding: 10px 0;
     background-color: var(--background-gray);
     display: flex;
@@ -47,7 +47,6 @@
     width: 40%;
     flex-direction: row;
     justify-content: space-between;
-    background-color: var(--cosmic-latte);
     padding: 10px;
     .name-container {
         font-size: var(--size-mid-title);
@@ -61,9 +60,10 @@
 
 .participants-container .teacher-participant-controls {
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    width: 18vw;
+    width: 20%;
     button {
         height: fit-content;
         width: fit-content;
