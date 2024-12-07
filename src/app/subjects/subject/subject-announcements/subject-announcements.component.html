@@ -43,7 +43,7 @@
                             </p>
                         </div>
                     </div>
-                    @if (showTeacherControls()) {
+                    @if (isTeacherCreator()) {
                         <div class="teacher-announcement-controls">
                             <button class="delete" (click)="delete(elem._id)">Delete</button>
                         </div>
