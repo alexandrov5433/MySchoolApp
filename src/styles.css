@@ -191,6 +191,7 @@ select.false-input {
     background-color: var(--black);
     box-shadow: var(--component-box-shadow);
     color: var(--white);
+    z-index: 5;
     input[type="file"] {
         display: none;
     }
