@@ -15,6 +15,7 @@ import { PendingApplicationService } from '../../services/pending-application.se
 })
 export class ApplicationDocumentsComponent {
   private appId: string = '';
+  private blob: any = '';
   appData: WritableSignal<Application | null> = signal(null);
   files: WritableSignal<Array<File> | null> = signal(null);
   constructor(
@@ -27,7 +28,7 @@ export class ApplicationDocumentsComponent {
   set _id(_id: string) {
     this.appId = _id;
   }
-  
+
   showSnackBar(msg: string) {
     this.snackBar.open(msg, 'OK', {
       duration: 7000,
@@ -39,20 +40,20 @@ export class ApplicationDocumentsComponent {
   downloadFile(_id: string) {
     //TODO
     console.log('DOWNLOAD file _id: ', _id);
-    this.fileService.getFileDownloadById(_id)
+    this.fileService.getFileStreamById(_id)
       .subscribe({
-        next: (res: any) => {
-          const blob: Blob = res.body as Blob;
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.download = _id;
-          a.href = url;
-          a.click();
+        next: (data: any) => {
+          this.blob = new Blob([data], { type: data.type });
+
+          const downloadURL = window.URL.createObjectURL(data);
+          const link = document.createElement('a');
+          link.href = downloadURL;
+          link.download = `file.${data.type.split('/')[1]}`;
+          link.click();
         },
         error: err => {
           console.error(err);
-          const msg = parseServerMsg(err.error).msg;
-          this.showSnackBar(msg);
+          this.showSnackBar(err as string);
         },
         complete: () => { }
       });
@@ -73,13 +74,13 @@ export class ApplicationDocumentsComponent {
 
   ngOnInit(): void {
     this.pendingAppService.getApplicationById(this.appId)
-    .subscribe({
-      next: val => { },
-      error: err => console.error(err),
-      complete: () => {
-        this.appData.set(this.pendingAppService.pendingApplicationData());
-        this.files.set(this.appData()?.applicationDocuments as any);
-      }
-    });
+      .subscribe({
+        next: val => { },
+        error: err => console.error(err),
+        complete: () => {
+          this.appData.set(this.pendingAppService.pendingApplicationData());
+          this.files.set(this.appData()?.applicationDocuments as any);
+        }
+      });
   }
 }
