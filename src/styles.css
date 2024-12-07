@@ -182,6 +182,38 @@ select.false-input {
     }
 }
 
+.single-custom-file-upload-btn{
+    width: fit-content;
+    height: fit-content;
+    font-size: var(--size-description);
+    border-radius: var(--border-radius);
+    padding: 5px 10px;
+    background-color: var(--black);
+    box-shadow: var(--component-box-shadow);
+    color: var(--white);
+    input[type="file"] {
+        display: none;
+    }
+}
+.single-custom-file-upload-btn:active{
+    background-color: var(--gray);
+}
+
+.single-selected-file-name-container {
+    font-size: var(--size-description);
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+    span {
+        color: var(--dark-cold-gray);
+    }
+}
+
 .no-results {
     padding: 100px 0;
     height: 100%;
