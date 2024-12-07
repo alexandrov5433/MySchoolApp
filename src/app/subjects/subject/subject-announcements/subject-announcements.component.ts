@@ -5,6 +5,7 @@ import { Subject } from '../../../types/subject';
 import { SubjectsService } from '../../../services/subjects.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../services/user.service';
+import { formatDateTime } from '../../../util/time';
 
 
 @Component({
@@ -57,7 +58,7 @@ export class SubjectAnnouncementsComponent implements OnInit, OnDestroy {
     formData.append('subjectId', this.subject()?._id || '');
     formData.append('teacher', this.curUserId());
     formData.append('title', (this.form.value as any).title);
-    formData.append('description', (this.form.value as any).title);
+    formData.append('description', (this.form.value as any).description);
     formData.append('dateTime', new Date().getTime().toString());
     this.subjectsService.publishAnnouncement(formData)
       .subscribe({
@@ -89,6 +90,11 @@ export class SubjectAnnouncementsComponent implements OnInit, OnDestroy {
         this.loadData();
       }
     });
+  }
+
+  //format datatime
+  format(ms: string | number) {
+    return formatDateTime(ms);
   }
 
   validate(control: string) {
