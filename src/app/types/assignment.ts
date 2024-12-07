@@ -4,10 +4,10 @@ import { User } from "./user";
 
 export type Assignment = {
     _id: string,
-    teacher: User | string,
+    teacher: User,
     title: string,
     description: string,
     deadline: string,
-    resource: File | string,
-    assignmentSubmitions: Array<AssignmentSubmition> | Array<string>
+    resource?: File,
+    assignmentSubmitions?: Array<AssignmentSubmition>
 };
