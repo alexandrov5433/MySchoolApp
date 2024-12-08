@@ -180,6 +180,12 @@ select.false-input {
             color: var(--dark-cold-gray);
         }
     }
+
+    .file-upload-buttons-container {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
 }
 
 .single-custom-file-upload-btn{
