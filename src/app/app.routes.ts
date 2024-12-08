@@ -15,6 +15,10 @@ import { SubjectParticipantsComponent } from './subjects/subject/subject-partici
 import { SubjectAnnouncementsComponent } from './subjects/subject/subject-announcements/subject-announcements.component';
 import { SubjectAssignmentsComponent } from './subjects/subject/subject-assignments/subject-assignments.component';
 import { SubjectMaterialsComponent } from './subjects/subject/subject-materials/subject-materials.component';
+import { ProfileMainComponent } from './profile/profile-main/profile-main.component';
+import { ProfileDetailsComponent } from './profile/profile-details/profile-details.component';
+import { ProfileDocumentsComponent } from './profile/profile-documents/profile-documents.component';
+import { ProfileGradesComponent } from './profile/profile-grades/profile-grades.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -45,6 +49,13 @@ export const routes: Routes = [
         path: 'application/:_id', component: ApplicationMainComponent, title: 'Application', children: [
             { path: 'details', component: ApplicationDetailsComponent, title: 'Application - Details' },
             { path: 'documents', component: ApplicationDocumentsComponent, title: 'Application - Documents', }
+        ]
+    },
+    {
+        path: 'profile/:_id', component: ProfileMainComponent, title: 'Profile', children: [
+            { path: 'details', component: ProfileDetailsComponent, title: 'Profile - Details' },
+            { path: 'documents', component: ProfileDocumentsComponent, title: 'Profile - Documents', },
+            { path: 'grades', component: ProfileGradesComponent, title: 'Profile - Grades', }
         ]
     },
 

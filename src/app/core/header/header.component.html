@@ -20,7 +20,7 @@
                 <nav>
                     <ul>
                         <li><a href="#">Student Grades</a></li>
-                        <li><a href="#">My Profile</a></li>
+                        <li><a href="javascript:void(0)" routerLink="/profile/{{userId()}}">My Profile</a></li>
                         <li class="logout-active"><a href="javascript:void(0)" (click)="logout()">Logout</a></li>
                     </ul>
                 </nav>
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a href="#">My Profile</a></li>
+                        <li><a href="javascript:void(0)" routerLink="/profile/{{userId()}}">My Profile</a></li>
                         <li class="logout-active"><a href="javascript:void(0)" (click)="logout()">Logout</a></li>
                     </ul>
                 </nav>
@@ -59,15 +59,15 @@
                     <ul>
                         <li>
                             <div class="dropdown">
-                                <a href="javascript:void(0)" routerLink="/all-subjects" class="dropdown-btn underline">Subjects</a>
+                                <a routerLink="/all-subjects" class="dropdown-btn underline">Subjects</a>
                                 <div class="dropdown-content">
-                                    <a href="javascript:void(0)" routerLink="/my-subjects">My Subjects</a>
-                                    <a href="javascript:void(0)" routerLink="/all-subjects">All Subjects</a>
+                                    <a routerLink="/my-subjects">My Subjects</a>
+                                    <a routerLink="/all-subjects">All Subjects</a>
                                 </div>
                             </div>
                         </li>
-                        <li><a href="#">My Grades</a></li>
-                        <li><a href="#">My Profile</a></li>
+                        <li><a routerLink="/profile/{{userId()}}/grades">My Grades</a></li>
+                        <li><a routerLink="/profile/{{userId()}}">My Profile</a></li>
                         <li class="logout-active"><a href="javascript:void(0)" (click)="logout()">Logout</a></li>
                     </ul>
                 </nav>
