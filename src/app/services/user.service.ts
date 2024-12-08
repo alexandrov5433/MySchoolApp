@@ -3,15 +3,17 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from '../../environments/environment.development';
 import parseServerMsg from '../util/parseServerMsg';
+import { User } from '../types/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private isLoggedIn: WritableSignal<boolean> = signal(true); //TODO change to default 'false', just testing
-  private userAuthStat: WritableSignal<string> = signal('teacher'); //student, parent, teacher  //TODO change to default '', just testing
-  private userId: WritableSignal<string> = signal('674f4745eec4c2605c986bdf'); //TODO change to default '', just testing '674f4745eec4c2605c986bdf' teacher;
+  private userAuthStat: WritableSignal<string> = signal('student'); //student, parent, teacher  //TODO change to default '', just testing
+  private userId: WritableSignal<string> = signal('6751dd938a4ccb0c14d08fe5'); //TODO change to default '', just testing '674f4745eec4c2605c986bdf' teacher;
   //6751dd938a4ccb0c14d08fe5 student ivan ivanov
+  private userData: WritableSignal<User | null> = signal(null);
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +27,10 @@ export class UserService {
   
   get user_Id(): string {
     return this.userId();
+  }
+
+  get user_data(): User | null {
+    return this.userData();
   }
 
   login(formData: FormData, status: string): Observable<Object> {
@@ -130,6 +136,32 @@ export class UserService {
         }).subscribe({
           next: val => subscriber.next(val),
           error: err => subscriber.error(err),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+
+  getUserData(userId: string):Observable<Object> {
+    return new Observable((subscriber) => {
+      try {
+        this.http.get(`${env.restUrlBase}/profile/user`, {
+          params: {
+            userId
+          },
+          responseType: 'json',
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).subscribe({
+          next: val => {
+            this.userData.set(parseServerMsg(val as string));
+            // subscriber.next(parseServerMsg(val as string))
+          },
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
           complete: () => subscriber.complete()
         });
       } catch (e) {
