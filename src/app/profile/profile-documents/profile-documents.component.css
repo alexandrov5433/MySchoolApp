@@ -1,3 +1,7 @@
+:host {
+    width: 100%;
+}
+
 .profile-documents-container {
     width: 100%;
     height: fit-content;
@@ -51,6 +55,8 @@
     justify-content: space-evenly;
     align-items: center;
     width: 18vw;
+    gap: 20px;
+    padding: 0 20px;
 }
 
 .profile-documents-container .profile-documents-creator {

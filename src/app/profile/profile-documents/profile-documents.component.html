@@ -1,56 +1,57 @@
 <div class="profile-documents-container">
-
+    @if (userIdForProfileData() === viewerId()) {
     <div class="profile-documents-creator">
         <div class="custom-file-upload-component">
 
-            
-                <div class="label-container">
-                    <label>Select and upload a file</label>
-                </div>
-                <label for="fileUpload" class="custom-file-upload-btn">Select File
-                    <input type="file" id="fileUpload"></input>
-                </label>
-                <div class="selected-file-name-container add-margin-top">
-                    <span>Name of selected file.Name of selected file.Name of selected file.Name
-                        of selected file.Name of selected file.Name of selected file.Name of
-                        selected file.Name of selected file.Name of selected file.Name of
-                        selected file.</span>
-                </div>
-                <button class="green-btn">Upload</button>
+
+            <div class="label-container">
+                <label>Select and upload a file</label>
+            </div>
+            <label for="fileUpload" class="custom-file-upload-btn">Select File
+                <input type="file" id="fileUpload" (change)="getDocument($event)">
+            </label>
+            <div class="selected-file-name-container add-margin-top">
+                <span>{{documentFileName()}}</span>
+            </div>
+            @if (showFileSelectError()) {
+            <div class="error-container">
+                <span class="error">Please select a file.</span>
+            </div>
+            }
+            <div class="file-upload-buttons-container">
+                <button class="green-btn" (click)="uploadDocument()">Upload File</button>
+                <button class="red-btn" (click)="removeDocument()">Clear File</button>
+            </div>
 
         </div>
     </div>
-
-    <!-- <div class="no-files-uploaded-container">
-        <div class="no-files-uploaded">
-            <div class="elements-container">
-                <div class="no-files-image-container">
-                    <img src="../../public/icons/unknownfile/128.png" alt="empty file gray icon">
+    }
+    @if (userDocuments()?.length) {
+        @for (document of userDocuments(); track $index) {
+            <div class="document">
+        
+                <div class="file-icon-container">
+                    <img src="{{getFileIconPath(document.mimeType)}}" alt="file icon">
                 </div>
-                <label>No uploaded files.</label>
+        
+                <div class="info">
+                    <div class="name-container">
+                        <span>{{document.originalName}}</span>
+                    </div>
+                </div>
+        
+                <div class="controls">
+                    <button class="green-btn" (click)="downloadFile(document._id)">Download</button>
+                    @if (userIdForProfileData() === viewerId()) {
+                    <button class="red-btn" (click)="deleteFile(document._id)">Delete</button>
+                    }
+        
+                </div>
+        
             </div>
-        </div>
-    </div> -->
-
-
-    <div class="document">
-
-        <div class="file-icon-container">
-            <img src="../../public/icons/pdf/128.png" alt="file icon">
-        </div>
-
-        <div class="info">
-            <div class="name-container">
-                <span>Name of the uploaded file comes here. Lorem ipsum dolor sit amet
-                    consectetur, adipisicing elit. Quam, voluptatem!</span>
-            </div>
-        </div>
-
-        <div class="controls">
-            <button class="green-btn">Download</button>
-            <button class="red-btn">Delete</button>
-        </div>
-
-    </div>
+        }
+    } @else {
+    <app-no-files-uploaded></app-no-files-uploaded>
+    }
 
 </div>
