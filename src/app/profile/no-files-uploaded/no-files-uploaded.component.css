@@ -1,0 +1,35 @@
+/* separate component */
+.no-files-uploaded {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-gray);
+
+    .elements-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .no-files-image-container {
+        display: flex;
+        width: 150px;
+        height: 150px;
+        align-items: center;
+        justify-content: center;
+        img {
+            height: auto;
+            max-width: 100%;
+        }
+    }
+
+    label {
+        font-size: var(--size-text);
+        color: var(--gray);
+        font-weight: bold;
+    }
+}
