@@ -1,3 +1,7 @@
+:host {
+    width: 100%;
+}
+
 .profile-grades {
     width: 100%;
     height: fit-content;
