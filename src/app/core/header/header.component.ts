@@ -24,13 +24,9 @@ export class HeaderComponent implements OnInit{
     return this.userSevice.isUserLoggedIn;
   }
 
-  get userAuthorizationStatus(): string | undefined {
-    const status = this.userSevice.userAuthStatus;
-    if (!status) {
-      console.error(`HeaderComponent: Status is not of type string or is an empty string. Status: "${status}"`);
-      return;
-    }
-    return status;
+  get userAuthorizationStatus(): string {
+    return this.userSevice.userAuthStatus;
+ 
   }
 
   logout(): void {

@@ -19,8 +19,8 @@
             <div class="navigation nav-specific">
                 <nav>
                     <ul>
-                        <li><a href="#">Student Grades</a></li>
-                        <li><a href="javascript:void(0)" routerLink="/profile/{{userId()}}">My Profile</a></li>
+                        <li><a href="#">My Students</a></li>
+                        <li><a href="javascript:void(0)" routerLink="/profile/{{userId()}}/details">My Profile</a></li>
                         <li class="logout-active"><a href="javascript:void(0)" (click)="logout()">Logout</a></li>
                     </ul>
                 </nav>
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a href="javascript:void(0)" routerLink="/profile/{{userId()}}">My Profile</a></li>
+                        <li><a href="javascript:void(0)" routerLink="/profile/{{userId()}}/details">My Profile</a></li>
                         <li class="logout-active"><a href="javascript:void(0)" (click)="logout()">Logout</a></li>
                     </ul>
                 </nav>
@@ -67,7 +67,7 @@
                             </div>
                         </li>
                         <li><a routerLink="/profile/{{userId()}}/grades">My Grades</a></li>
-                        <li><a routerLink="/profile/{{userId()}}">My Profile</a></li>
+                        <li><a routerLink="/profile/{{userId()}}/details">My Profile</a></li>
                         <li class="logout-active"><a href="javascript:void(0)" (click)="logout()">Logout</a></li>
                     </ul>
                 </nav>
