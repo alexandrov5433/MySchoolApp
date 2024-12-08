@@ -1,38 +1,33 @@
 <div class="profile-view">
     <div class="location">
-        <span>Student Profile</span>
+        <span>Profile</span>
     </div>
     <div class="container">
 
         <div class="image-container">
-            <img src="../../public/background/fire-light-water.jpg" alt="fire-light-water">
-            <div>Student Profile</div>
+            <img src="/background/{{userProfileData()?.backgroundImageNumber}}" alt="colorfull background picture">
+            <div>Profile</div>
         </div>
 
         <div class="upper-content">
             <div class="person-pic-container">
-                <img src="../../public/profile-photos/test-teacher-profile-picture.jpg" alt="teacher-profile-picture">
+                <img src="{{userPicSrc()}}" alt="profile-picture">
             </div>
             <div class="infos-and-mininav">
                 <div class="infos">
-                    <div class="name">Michaela Ivanova</div>
-                    <div class="application-id">StudentID: 2332ht</div>
+                    <div class="name">{{userProfileData()?.firstName}} {{userProfileData()?.lastName}}</div>
+                    <div class="application-id">StudentID: {{userProfileData()?.displayId}}</div>
                 </div>
                 <div class="mininav">
-                    <button class="colorize">Details</button>
-                    <button>Documents</button>
-                    <button>Grades</button>
+                    <button routerLink="/profile/{{userIdForProfileData()}}/details" routerLinkActive="colorize">Details</button>
+                    <button routerLink="/profile/{{userIdForProfileData()}}/documents" routerLinkActive="colorize">Documents</button>
+                    <button routerLink="/profile/{{userIdForProfileData()}}/grades" routerLinkActive="colorize">Grades</button>
                 </div>
             </div>
-            <!-- <div class="controls-container">
-                <button class="green-btn">Accept</button>
-                <button class="red-btn">Decline</button>
-            </div> -->
         </div>
 
         <div class="lower-content">
             <router-outlet></router-outlet>
-            <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem, modi voluptates dignissimos recusandae tempore optio cumque, laborum quas earum doloremque delectus repudiandae nulla placeat in ipsam possimus culpa. Corrupti, quae commodi! Eveniet reiciendis porro voluptatum provident quas, quaerat laboriosam veritatis perspiciatis vel! Similique nesciunt minus facere sapiente facilis harum inventore est, explicabo delectus, beatae cumque laboriosam quia sit. Veniam quibusdam consectetur voluptate nesciunt ipsum cupiditate officiis, necessitatibus assumenda eum dolores est perspiciatis error unde, officia quod dolor iste earum quisquam? A, tempora eos! Incidunt aspernatur repudiandae consequuntur? Consequatur laudantium suscipit pariatur sequi iure, explicabo commodi neque necessitatibus, dolore repellendus, fugiat impedit doloribus? Porro temporibus illo cum recusandae dignissimos ducimus modi facilis quibusdam quisquam, aperiam doloremque fuga quidem ipsam praesentium quaerat hic, sed facere reprehenderit quas quo omnis sapiente impedit! Totam dicta accusantium et consectetur dolorum exercitationem reprehenderit, eum minus corrupti rem quod praesentium dignissimos ut dolor cupiditate maxime quam repudiandae. Voluptatum excepturi porro voluptate, laudantium accusamus repudiandae officiis, odit asperiores sequi voluptates aperiam repellendus unde distinctio iure error explicabo accusantium molestiae quibusdam! Deleniti aliquid asperiores, cum laudantium mollitia commodi libero tempore iusto, sunt explicabo voluptatum adipisci odio quos dolorum excepturi magni ipsum vero voluptatibus eum. Voluptatibus expedita officia tenetur impedit facilis recusandae repellat, aspernatur necessitatibus cumque. Iusto fugiat maiores illo, doloribus quia quasi repellendus! Aspernatur voluptate eos corporis repudiandae delectus nostrum molestias minus aliquam possimus aut? Sunt impedit voluptatibus, quia repellat beatae doloremque officia veritatis architecto aliquid veniam, totam fugiat. Eveniet reprehenderit, corporis esse est, mollitia deserunt ipsa soluta sit quos, dicta perferendis quae. Ad eaque maxime consectetur deserunt incidunt, autem molestiae mollitia repellat nesciunt porro quaerat voluptate error architecto? Dolores obcaecati molestias architecto neque exercitationem numquam ratione fugiat accusamus eligendi ipsa minus quo ullam animi magnam dignissimos tempora, libero perspiciatis quia veritatis totam doloremque veniam sunt? Illo, quam repellat?</span>
         </div>
 
     </div>
