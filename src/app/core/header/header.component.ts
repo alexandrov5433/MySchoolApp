@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import parseServerMsg from '../../util/parseServerMsg';
+import { User } from '../../types/user';
 
 @Component({
   selector: 'app-header',
@@ -13,8 +14,13 @@ import parseServerMsg from '../../util/parseServerMsg';
 })
 export class HeaderComponent implements OnInit{
   userId: Signal<string> = computed(() => {
-    return this.userSevice.user_Id
+    return this.userSevice.user_Id;
   });
+  userAuthStatus: Signal<string> = computed(() => {
+    return this.userSevice.userAuthStatus;
+  });
+
+  parentChildren: WritableSignal<Array<User> | null> = signal(null);
 
   constructor(
     private userSevice: UserService,
@@ -56,6 +62,17 @@ export class HeaderComponent implements OnInit{
 
   ngOnInit(): void {
     console.log('header userId', this.userId()); 
+    if (this.userAuthStatus() === 'parent') {
+      this.userSevice.getChildrenForParent(this.userId())
+        .subscribe({
+          next: val => this.parentChildren.set(val as Array<User>),
+          error: err => {
+            console.error(err);
+            this.showSnackBar(err);
+          },
+          complete: () => {}
+        });
+    }
   }
 
 }

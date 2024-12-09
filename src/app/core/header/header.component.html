@@ -19,7 +19,17 @@
             <div class="navigation nav-specific">
                 <nav>
                     <ul>
-                        <li><a href="#">My Students</a></li>
+                        <li><a href="javascript:void(0)">Add Student</a></li>
+                        <li>
+                            <div class="dropdown">
+                                <a href="javascript:void(0)" class="dropdown-btn underline">My Students</a>
+                                <div class="dropdown-content">
+                                    @for (child of parentChildren(); track $index) {
+                                        <a href="javascript:void(0)" routerLink="profile/{{child._id}}/details">{{child.firstName}} {{child.lastName}}</a>
+                                    }
+                                </div>
+                            </div>
+                        </li>
                         <li><a href="javascript:void(0)" routerLink="/profile/{{userId()}}/details">My Profile</a></li>
                         <li class="logout-active"><a href="javascript:void(0)" (click)="logout()">Logout</a></li>
                     </ul>
