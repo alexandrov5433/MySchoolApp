@@ -1,0 +1,21 @@
+<div class="add-child-window-container">
+    <div class="window">
+        <div class="info">
+            <div class="question-container">
+                <p>Parental authentication code for student:</p>
+            </div>
+            <div class="auth-code-input-container">
+                <input type="text" [class]="validationClass()" #authCode>
+            </div>
+            @if (displayError()) {
+                <div>
+                    <span class="error">Please enter code.</span>
+                </div>
+            }
+        </div>
+        <div class="controls">
+            <button class="green-btn" (click)="addStudent(authCode.value)">Add Student</button>
+            <button class="red-btn" (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</div>

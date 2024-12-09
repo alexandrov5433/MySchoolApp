@@ -19,6 +19,7 @@ import { ProfileMainComponent } from './profile/profile-main/profile-main.compon
 import { ProfileDetailsComponent } from './profile/profile-details/profile-details.component';
 import { ProfileDocumentsComponent } from './profile/profile-documents/profile-documents.component';
 import { ProfileGradesComponent } from './profile/profile-grades/profile-grades.component';
+import { AddChildComponent } from './account/add-child/add-child.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -31,6 +32,7 @@ export const routes: Routes = [
     { path: 'log-in', component: LoginComponent, title: 'Log In' },
     { path: 'register', component: RegisterComponent, title: 'Register' },
     { path: 'apply-now', component: ApplyNowComponent, title: 'Apply Now' },
+    { path: 'add-student', component: AddChildComponent, title: 'Add Student'},
 
     { path: 'create-subject', component: CreateSubjectComponent, title: 'Create New Subject' },
     { path: 'all-subjects', component: AllSubjectsComponent, title: 'All Subjects' },
