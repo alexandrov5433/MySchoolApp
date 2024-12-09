@@ -1,0 +1,42 @@
+<div class="pending-applications-view">
+    <div class="location">
+        <span>Pending Applications</span>
+    </div>
+    <div class="search-container">
+        <label for="serach-text">Search:</label>
+        <input type="text" id="serach-text" placeholder="Applicant First Name" #firstName>
+        <input type="text" id="serach-text" placeholder="Applicant Last Name" #lastName>
+        <input type="text" id="serach-text" placeholder="Applicant ID" #displayId>
+        <button class="yellow-btn" (click)="search(firstName.value, lastName.value, displayId.value)">Search</button>
+    </div>
+
+    @if(pendingApplications()?.results?.length) {
+        <div class="applications-container">
+            <div class="all-applications-container">
+
+                @for (app of pendingApplications()?.results; track $index) {
+                    <div class="single-application">
+                        <div class="student-photo">
+                            <img src="{{baseUrlForPicture()}}{{app.profilePictureId}}" alt="photo if student">
+                        </div>
+                        <div class="application-name">
+                            <p>{{app.applicantName}}</p>
+                        </div>
+                        <div class="application-id">
+                            <p>Applicant ID {{app.displayId}}</p>
+                        </div>
+                        <div class="control">
+                            <button class="yellow-btn" (click)="viewApp(app._id)">View Application</button>
+                        </div>
+                    </div>
+                }
+       
+            </div>
+        </div>
+    } @else {
+        <div class="no-results">
+            <span>No results!</span>
+        </div>
+    }
+
+</div>
