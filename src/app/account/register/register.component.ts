@@ -119,7 +119,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     for (let ent of Object.entries(this.registerForm.value)) {
       const key:string = ent[0];
       const val:any = ent[1];
-      formData.set(key, val);
+      formData.set(key, val.trim());
     }
     console.log(Object.fromEntries(formData.entries()));
     if (this.profilePictureFile) {
