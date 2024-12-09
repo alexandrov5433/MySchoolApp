@@ -1,0 +1,21 @@
+<div class="add-grade-window-container">
+    <div class="window">
+        <div class="info">
+            <div class="question-container">
+                <p>Grade to add:</p>
+            </div>
+            <div class="grade-input-container">
+                <input type="number" [class]="validationClass()" #grade>
+            </div>
+            @if (showError()) {
+                <div>
+                    <span class="error">Please enter a grade.</span>
+                </div>
+            }
+        </div>
+        <div class="controls">
+            <button class="green-btn" (click)="addGrade(grade.value)">Add Grade</button>
+            <button class="red-btn" (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</div>
