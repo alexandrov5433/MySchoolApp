@@ -1,9 +1,10 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../types/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-profile-details',
@@ -11,7 +12,8 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './profile-details.component.html',
   styleUrl: './profile-details.component.css'
 })
-export class ProfileDetailsComponent {
+export class ProfileDetailsComponent implements OnInit, OnDestroy{
+  private ngDestroyer = new Subject();
   userIdForProfileData: WritableSignal<string> = signal('');
   userProfileData: WritableSignal<User | null> = signal(null);
 
@@ -46,7 +48,21 @@ export class ProfileDetailsComponent {
   ngOnInit(): void {
     this.userIdForProfileData.set(this.route.snapshot.paramMap.get('_id') || '');
     console.log('userIdForProfileData: ', this.userIdForProfileData());
-    
+    this.route.params
+    .pipe(takeUntil(this.ngDestroyer))
+    .subscribe({
+      next: val => {
+        this.userIdForProfileData.set(val['_id']),
+        this.loadUserData();
+      },
+      error: err => console.error('observe params error', err),
+      complete: () => {},
+    });
     this.loadUserData()
+  }
+
+  ngOnDestroy(): void {
+    this.ngDestroyer.next(true);
+    this.ngDestroyer.complete();
   }
 }

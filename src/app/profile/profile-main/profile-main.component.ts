@@ -1,9 +1,10 @@
-import { Component, computed, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { Component, computed, OnDestroy, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../types/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment as env } from '../../../environments/environment.development';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-profile-main',
@@ -11,10 +12,20 @@ import { environment as env } from '../../../environments/environment.developmen
   templateUrl: './profile-main.component.html',
   styleUrl: './profile-main.component.css'
 })
-export class ProfileMainComponent implements OnInit {
+export class ProfileMainComponent implements OnInit, OnDestroy {
+  private ngDestroyer = new Subject();
+
   userProfileData: WritableSignal<User | null> = signal(null);
   userIdForProfileData: WritableSignal<string> = signal('');
   viewerId: WritableSignal<string> = signal('');
+  userOwnerOfProfileStatus: Signal<string> = computed(() => {
+    const status = this.userProfileData()?.status;
+    return status ? status : '';
+  });
+  userOwnerOfProfileIdTitle: Signal<string> = computed(() => {
+    const status = this.userProfileData()?.status;
+    return status ? status?.toUpperCase() : '';
+  });
 
   constructor(
     private userService: UserService,
@@ -52,14 +63,25 @@ export class ProfileMainComponent implements OnInit {
       verticalPosition: 'bottom'
     });
   }
-  // currentUserStatus() {
-  //   return this.userService.userAuthStatus;
-  // }
 
   ngOnInit(): void {
     this.viewerId.set(this.userService.user_Id);
     this.userIdForProfileData.set(this.route.snapshot.paramMap.get('_id') || '');
     this.loadUserData();
+    this.route.params
+      .pipe(takeUntil(this.ngDestroyer))
+      .subscribe({
+        next: val => {
+          this.userIdForProfileData.set(val['_id']),
+          this.loadUserData();
+        },
+        error: err => console.error('observe params error', err),
+        complete: () => {},
+      });
   }
 
+  ngOnDestroy(): void {
+    this.ngDestroyer.next(true);
+    this.ngDestroyer.complete();
+  }
 }
