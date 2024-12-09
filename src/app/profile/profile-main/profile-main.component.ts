@@ -1,5 +1,5 @@
 import { Component, computed, OnInit, Signal, signal, WritableSignal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../types/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -19,6 +19,7 @@ export class ProfileMainComponent implements OnInit {
   constructor(
     private userService: UserService,
     private snackBar: MatSnackBar,
+    private route: ActivatedRoute
   ) { }
 
   private loadUserData() {
@@ -57,7 +58,7 @@ export class ProfileMainComponent implements OnInit {
 
   ngOnInit(): void {
     this.viewerId.set(this.userService.user_Id);
-    this.userIdForProfileData.set(this.userService.user_Id);
+    this.userIdForProfileData.set(this.route.snapshot.paramMap.get('_id') || '');
     this.loadUserData();
   }
 
