@@ -21,6 +21,17 @@ export class SubjectDetailsComponent implements OnInit, OnDestroy{
   curUserStatus: WritableSignal<string> = signal('');
   curUserId: WritableSignal<string> = signal('');
 
+  showFullNav: Signal<boolean> = computed(() => {
+    //show full for teachers and participating students
+    if (this.curUserStatus() === 'teacher') {
+      return true;
+    } else if (this.curUserStatus() === 'student') {
+      const isParticipant = this.subject()?.participants.find(p => p._id === this.curUserId());
+      return isParticipant ? true : false;
+    }
+    return false;
+  });
+
   //for teacher
   teacherPicSrc: Signal<string> = computed(() => {
     if (!this.subject()) {

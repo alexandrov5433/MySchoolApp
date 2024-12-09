@@ -21,8 +21,10 @@
                 <div class="mininav">
                     <button routerLink="/subject-details/{{subjectId}}/participants" routerLinkActive="colorize">Participating Students</button>
                     <button routerLink="/subject-details/{{subjectId}}/announcements" routerLinkActive="colorize">Announcements</button>
-                    <button routerLink="/subject-details/{{subjectId}}/assignments" routerLinkActive="colorize">Assignments</button>
-                    <button routerLink="/subject-details/{{subjectId}}/materials" routerLinkActive="colorize">Download Material</button>
+                    @if (showFullNav()) {
+                        <button routerLink="/subject-details/{{subjectId}}/assignments" routerLinkActive="colorize">Assignments</button>
+                        <button routerLink="/subject-details/{{subjectId}}/materials" routerLinkActive="colorize">Download Material</button>
+                    }
                 </div>
             </div>
             <div class="controls-container">
