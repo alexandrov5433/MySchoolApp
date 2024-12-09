@@ -104,7 +104,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password<i>*</i></label>
-                    <input [class]="validationLib.password.validationClass" type="text" name="password" id="password"
+                    <input [class]="validationLib.password.validationClass" type="password" name="password" id="password"
                         placeholder="Password" formControlName="password">
                     @if (validationLib.password.showErrMsg) {
                     <div class="error-msg-container">
@@ -116,7 +116,7 @@
                 </div>
                 <div class="form-group">
                     <label for="applyNowRePassword">Repeat Password<i>*</i></label>
-                    <input [class]="validationLib.applyNowRePassword?.validationClass" type="text"
+                    <input [class]="validationLib.applyNowRePassword?.validationClass" type="password"
                         name="applyNowRePassword" id="applyNowRePassword" placeholder="Repeat Password"
                         formControlName="applyNowRePassword">
                     @if (validationLib.applyNowRePassword?.showErrMsg) {
@@ -129,19 +129,19 @@
             <div class="description-elements">
                 <div>
                     <span>Please fill out all mandatory<i>*</i> fields. With this form you are applying and creating an
-                        account at the same time. The needed documents are listed under <a href="#">FORMS
+                        account at the same time. The needed documents are listed under <a routerLink="/forms-and-documents">FORMS
                             & DOCUMENTS</a>.</span>
                 </div>
                 <div>
-                    <span>After submitting the application, we will review it and send you an answer per Email as soon
-                        as possible. In this email, if accepted,
-                        you will find a link for email confirmation and the authentication code, with which your parents
-                        can also
-                        create accounts.</span>
+                    <span>After submitting the application, we will review it as soon
+                        as possible. If accepted,
+                        you will be aible to <a routerLink="/log-in">LOG IN</a>. In the details page of your user profile you will then find the authentication code, with which your parents can also create accounts.</span>
                 </div>
                 <div>
-                    <span>Having trouble or questions? Please check the <a href="#">FAQ</a> or <a href="#">CONTACT</a>
-                        us.</span>
+                    <span>If you are a parent or a teacher please <a routerLink="/register">REGISTER</a>.</span>
+                </div>
+                <div>
+                    <span>Having trouble or questions? Please check the <a routerLink="/faq">FAQ</a> or <a routerLink="/contact">CONTACT</a> us.</span>
                 </div>
             </div>
         </div>

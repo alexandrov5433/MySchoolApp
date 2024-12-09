@@ -131,7 +131,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password<i>*</i></label>
-                    <input type="text" name="password" id="password"
+                    <input type="password" name="password" id="password"
                         placeholder="Password" formControlName="password"
                         [class]="validationLib['password'].validationClass">
                     @if (validationLib['password'].showErrMsg) {
@@ -142,7 +142,7 @@
                 </div>
                 <div class="form-group">
                     <label for="rePassword">Repeat Password<i>*</i></label>
-                    <input type="text" name="rePassword" id="rePassword"
+                    <input type="password" name="rePassword" id="rePassword"
                         placeholder="Repeat Password" formControlName="rePassword"
                         [class]="validationLib['rePassword']?.validationClass">
                     @if (validationLib['rePassword']?.showErrMsg) {
@@ -157,20 +157,15 @@
                     <span>Please fill out all mandatory<i>*</i> fields.</span>
                 </div>
                 <div>
-                    <span>If you are a parent please use the authentication code, which you can find in the acceptance
-                        email we sent to your child.</span>
+                    <span>If you are a parent please use the authentication code, which you can find in the details section of the profile of your child.</span>
                     <span>If you are a teacher please use the authentication code, provided to you by the school.</span>
 
                 </div>
                 <div>
-                    <span>After registering, please check your email. You should recieve a link for email confirmation
-                        after a few moments. Click the link to activate your account. After that you can <a
-                            href="javascript:void(0)" routerLink="/log-in">LOG IN</a>.</span>
+                    <span>After registering you can <a routerLink="/log-in">LOG IN</a> right away.</span>
                 </div>
                 <div>
-                    <span>Having trouble or questions? Please check the <a href="javascript:void(0)"
-                            routerLink="/faq">FAQ</a> or <a href="javascript:void(0)" routerLink="/contact">CONTACT</a>
-                        us.</span>
+                    <span>Having trouble or questions? Please check the <a routerLink="/faq">FAQ</a> or <a routerLink="/contact">CONTACT</a> us.</span>
                 </div>
             </div>
         </div>

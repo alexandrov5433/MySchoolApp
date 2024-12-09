@@ -15,14 +15,14 @@ import { applyNowRePasswordValidator } from '../../util/validators/apply-now-re-
 import { documentsValidator } from '../../util/validators/documents.validator';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import parseServerMsg from '../../util/parseServerMsg';
 
 
 @Component({
   selector: 'app-apply-now',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './apply-now.component.html',
   styleUrl: './apply-now.component.css',
   standalone: true
