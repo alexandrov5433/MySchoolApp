@@ -1,9 +1,11 @@
-import { Component, computed, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { Component, computed, OnDestroy, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import parseServerMsg from '../../util/parseServerMsg';
 import { User } from '../../types/user';
+import { InnerCommunicationService } from '../../services/inner-communication.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +14,9 @@ import { User } from '../../types/user';
   styleUrl: './header.component.css',
   standalone: true
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit, OnDestroy {
+  private ngDestroyer = new Subject();
+
   userId: Signal<string> = computed(() => {
     return this.userSevice.user_Id;
   });
@@ -25,7 +29,8 @@ export class HeaderComponent implements OnInit{
   constructor(
     private userSevice: UserService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private innerComService: InnerCommunicationService
   ) { }
 
   get isUserLoggedIn(): boolean {
@@ -34,7 +39,7 @@ export class HeaderComponent implements OnInit{
 
   get userAuthorizationStatus(): string {
     return this.userSevice.userAuthStatus;
- 
+
   }
 
   logout(): void {
@@ -60,19 +65,34 @@ export class HeaderComponent implements OnInit{
     });
   }
 
+  private loadParentsChildren() {
+    this.userSevice.getChildrenForParent(this.userId())
+      .subscribe({
+        next: val => this.parentChildren.set(val as Array<User>),
+        error: err => {
+          console.error(err);
+          this.showSnackBar(err);
+        },
+        complete: () => { }
+      });
+  }
+
   ngOnInit(): void {
-    console.log('header userId', this.userId()); 
+    console.log('header userId', this.userId());
     if (this.userAuthStatus() === 'parent') {
-      this.userSevice.getChildrenForParent(this.userId())
+      this.loadParentsChildren();
+
+      this.innerComService.parentAddedChild
+        .pipe(takeUntil(this.ngDestroyer))
         .subscribe({
-          next: val => this.parentChildren.set(val as Array<User>),
-          error: err => {
-            console.error(err);
-            this.showSnackBar(err);
-          },
-          complete: () => {}
+          next: val => this.loadParentsChildren()
         });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.ngDestroyer.next(true);
+    this.ngDestroyer.complete();
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, computed, Signal, signal, WritableSignal } from '@angular/co
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { InnerCommunicationService } from '../../services/inner-communication.service';
 
 @Component({
   selector: 'app-add-child',
@@ -20,7 +21,8 @@ export class AddChildComponent {
   constructor(
     private router: Router,
     private userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private innerComService: InnerCommunicationService
   ) { }
 
   showSnackBar(msg: string) {
@@ -44,6 +46,7 @@ export class AddChildComponent {
           this.showSnackBar(err);
         },
         complete: () => {
+          this.innerComService.triggerParentAddedChild();
           this.router.navigate(['/home']);
         }
       });
