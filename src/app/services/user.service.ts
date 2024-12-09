@@ -214,4 +214,28 @@ export class UserService {
       }
     });
   }
+
+  getActiveStudents(firstName: string, lastName: string, displayId: string):Observable<Object> {
+    return new Observable((subscriber) => {
+      try {
+        this.http.get(`${env.restUrlBase}/students`, {
+          params: {
+            firstName,
+            lastName,
+            displayId
+          },
+          responseType: 'json',
+          withCredentials: true
+        }).subscribe({
+          next: val => {
+            subscriber.next(parseServerMsg(val as string).results);
+          },
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
 }

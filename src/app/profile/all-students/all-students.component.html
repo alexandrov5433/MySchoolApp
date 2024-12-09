@@ -1,32 +1,32 @@
-<div class="pending-applications-view">
+<div class="all-students-view">
     <div class="location">
         <span>Pending Applications</span>
     </div>
     <div class="search-container">
         <label for="serach-text">Search:</label>
-        <input type="text" id="serach-text" placeholder="Applicant First Name" #firstName>
-        <input type="text" id="serach-text" placeholder="Applicant Last Name" #lastName>
-        <input type="text" id="serach-text" placeholder="Applicant ID" #displayId>
+        <input type="text" id="serach-text" placeholder="Student First Name" #firstName>
+        <input type="text" id="serach-text" placeholder="Student Last Name" #lastName>
+        <input type="text" id="serach-text" placeholder="Student ID" #displayId>
         <button class="yellow-btn" (click)="search(firstName.value, lastName.value, displayId.value)">Search</button>
     </div>
 
-    @if(pendingApplications()?.results?.length) {
-        <div class="applications-container">
-            <div class="all-applications-container">
+    @if(studentsData()?.length) {
+        <div class="students-container">
+            <div class="all-students-container">
 
-                @for (app of pendingApplications()?.results; track $index) {
-                    <div class="single-application">
+                @for (student of studentsData(); track $index) {
+                    <div class="single-student">
                         <div class="student-photo">
-                            <img src="{{baseUrlForPicture()}}{{app.profilePictureId}}" alt="photo if student">
+                            <img src="{{baseUrlForPicture()}}{{student.profilePicture}}" alt="photo if student">
                         </div>
-                        <div class="application-name">
-                            <p>{{app.applicantName}}</p>
+                        <div class="student-name">
+                            <p>{{student.firstName}} {{student.lastName}}</p>
                         </div>
-                        <div class="application-id">
-                            <p>Applicant ID {{app.displayId}}</p>
+                        <div class="student-id">
+                            <p>Applicant ID {{student.displayId}}</p>
                         </div>
                         <div class="control">
-                            <button class="yellow-btn" (click)="viewApp(app._id)">View Application</button>
+                            <button class="yellow-btn" routerLink="/profile/{{student._id}}/details">View Profile</button>
                         </div>
                     </div>
                 }
