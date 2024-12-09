@@ -5,7 +5,7 @@
                 <p>Grade to add:</p>
             </div>
             <div class="grade-input-container">
-                <input type="number" [class]="validationClass()" #grade>
+                <input type="number" [class]="validationClass()" [value]="gradeToEdit" #grade>
             </div>
             @if (showError()) {
                 <div>
@@ -14,7 +14,7 @@
             }
         </div>
         <div class="controls">
-            <button class="green-btn" (click)="addGrade(grade.value)">Add Grade</button>
+            <button class="green-btn" (click)="editGrade(grade.value)">Add Grade</button>
             <button class="red-btn" (click)="cancel()">Cancel</button>
         </div>
     </div>
