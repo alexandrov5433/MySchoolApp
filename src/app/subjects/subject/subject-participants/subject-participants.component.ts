@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user.service';
 import { Subject } from '../../../types/subject';
 import { environment as env } from '../../../../environments/environment.development';
 import { Subject as rxjsSubject, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-subject-participants',
@@ -23,7 +24,8 @@ export class SubjectParticipantsComponent implements OnInit, OnDestroy {
   constructor(
     private subjectsService: SubjectsService,
     private snackBar: MatSnackBar,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   isTeacherCreator: Signal<boolean> = computed(() => {
@@ -44,6 +46,10 @@ export class SubjectParticipantsComponent implements OnInit, OnDestroy {
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     });
+  }
+
+  viewParticipantProfile(studentId: string) {
+    this.router.navigate([`/profile/${studentId}/details`]);
   }
 
   private loadData() {

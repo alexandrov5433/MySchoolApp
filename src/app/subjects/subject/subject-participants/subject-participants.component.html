@@ -21,7 +21,7 @@
                 </div>
                 @if (isTeacherCreator()) {
                     <div class="teacher-participant-controls">
-                        <button class="green-btn">View Profile</button>
+                        <button class="green-btn" (click)="viewParticipantProfile(part._id)">View Profile</button>
                         <button class="red-btn">Remove</button>
                     </div>
                 }
