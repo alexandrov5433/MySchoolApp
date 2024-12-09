@@ -10,8 +10,8 @@ import { User } from '../types/user';
 })
 export class UserService {
   private isLoggedIn: WritableSignal<boolean> = signal(true); //TODO change to default 'false', just testing
-  private userAuthStat: WritableSignal<string> = signal('student'); //student, parent, teacher  //TODO change to default '', just testing
-  private userId: WritableSignal<string> = signal('6751dd938a4ccb0c14d08fe5'); //TODO change to default '', just testing '674f4745eec4c2605c986bdf' teacher;
+  private userAuthStat: WritableSignal<string> = signal('teacher'); //student, parent, teacher  //TODO change to default '', just testing
+  private userId: WritableSignal<string> = signal('674f4745eec4c2605c986bdf'); //TODO change to default '', just testing '674f4745eec4c2605c986bdf' teacher;
   //6751dd938a4ccb0c14d08fe5 student ivan ivanov
   private userData: WritableSignal<User | null> = signal(null);
 
@@ -44,9 +44,7 @@ export class UserService {
           withCredentials: true
         }).subscribe({
           next: (val) => {
-            const user_id = parseServerMsg(val as string).user_id || '';
-            console.log('login user_id:', user_id);
-            
+            const user_id = parseServerMsg(val as string).user_id || '';    
             this.userId.set(user_id);
             subscriber.next(val);
           },
@@ -57,6 +55,8 @@ export class UserService {
             this.isLoggedIn.set(true);
             this.userAuthStat.set(status);
             subscriber.complete();
+            console.log('login', this.userId());
+            
           },
         });
       } catch (e) {
