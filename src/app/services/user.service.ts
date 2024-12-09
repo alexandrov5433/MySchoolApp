@@ -10,9 +10,10 @@ import { User } from '../types/user';
 })
 export class UserService {
   private isLoggedIn: WritableSignal<boolean> = signal(true); //TODO change to default 'false', just testing
-  private userAuthStat: WritableSignal<string> = signal('teacher'); //student, parent, teacher  //TODO change to default '', just testing
-  private userId: WritableSignal<string> = signal('674f4745eec4c2605c986bdf'); //TODO change to default '', just testing '674f4745eec4c2605c986bdf' teacher;
-  //6751dd938a4ccb0c14d08fe5 student ivan ivanov
+  private userAuthStat: WritableSignal<string> = signal('parent'); //student, parent, teacher  //TODO change to default '', just testing
+  private userId: WritableSignal<string> = signal('6756d4fd94484018a2bba02b'); //TODO change to default '', just testing '674f4745eec4c2605c986bdf' teacher;
+  //6751dd938a4ccb0c14d08fe5 student Ivan ivanov
+  //6756d4fd94484018a2bba02b parent Peter ivanov
   private userData: WritableSignal<User | null> = signal(null);
 
   constructor(private http: HttpClient) { }
@@ -160,6 +161,28 @@ export class UserService {
           next: val => {
             this.userData.set(parseServerMsg(val as string));
             // subscriber.next(parseServerMsg(val as string))
+          },
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+
+  getChildrenForParent(parentId: string):Observable<Object> {
+    return new Observable((subscriber) => {
+      try {
+        this.http.get(`${env.restUrlBase}/parent/${parentId}/children`, {
+          responseType: 'json',
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).subscribe({
+          next: val => {
+            subscriber.next(parseServerMsg(val as string).results);
           },
           error: err => subscriber.error(parseServerMsg(err.error).msg),
           complete: () => subscriber.complete()
