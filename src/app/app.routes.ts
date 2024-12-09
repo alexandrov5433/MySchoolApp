@@ -21,10 +21,11 @@ import { ProfileDocumentsComponent } from './profile/profile-documents/profile-d
 import { ProfileGradesComponent } from './profile/profile-grades/profile-grades.component';
 import { AddChildComponent } from './account/add-child/add-child.component';
 import { AllStudentsComponent } from './profile/all-students/all-students.component';
+import { HomeComponent } from './basic/home/home.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', redirectTo: '/todo-page' },
+    { path: 'home', component: HomeComponent },
     { path: 'about', redirectTo: '/todo-page' },
     { path: 'contact', redirectTo: '/todo-page' },
     { path: 'faq', redirectTo: '/todo-page' },
