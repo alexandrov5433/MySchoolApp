@@ -10,10 +10,11 @@ import { User } from '../types/user';
 })
 export class UserService {
   private isLoggedIn: WritableSignal<boolean> = signal(true); //TODO change to default 'false', just testing
-  private userAuthStat: WritableSignal<string> = signal('parent'); //student, parent, teacher  //TODO change to default '', just testing
-  private userId: WritableSignal<string> = signal('6756d4fd94484018a2bba02b'); //TODO change to default '', just testing '674f4745eec4c2605c986bdf' teacher;
+  private userAuthStat: WritableSignal<string> = signal('teacher'); //student, parent, teacher  //TODO change to default '', just testing
+  private userId: WritableSignal<string> = signal('67572362d2d346ab451e215b'); //TODO change to default '', just testing '674f4745eec4c2605c986bdf' teacher;
   //6751dd938a4ccb0c14d08fe5 student Ivan ivanov
   //6756d4fd94484018a2bba02b parent Peter ivanov
+  //67572362d2d346ab451e215b parent Kameliq Hristova
   private userData: WritableSignal<User | null> = signal(null);
 
   constructor(private http: HttpClient) { }
@@ -183,6 +184,27 @@ export class UserService {
         }).subscribe({
           next: val => {
             subscriber.next(parseServerMsg(val as string).results);
+          },
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+
+  addChildForParent(parentId: string, authCode: string):Observable<Object> {
+    return new Observable((subscriber) => {
+      try {
+        this.http.post(`${env.restUrlBase}/parent/${parentId}/children`, {
+          authCode
+        },{
+          responseType: 'json',
+          withCredentials: true
+        }).subscribe({
+          next: val => {
+            subscriber.next(parseServerMsg(val as string).msg);
           },
           error: err => subscriber.error(parseServerMsg(err.error).msg),
           complete: () => subscriber.complete()
