@@ -34,6 +34,74 @@ export class GradeService {
       }
     });
   }
+
+  /**
+   * @param userId _id of the student (User) for who the grade is.
+   * @param gradingId _id of the grading.
+   * @param grade The grade to be added.
+   * @returns 
+   */
+  addGradeInGrading(userId: string, gradingId: string, grade: string): Observable<Object> {
+    return new Observable((subscriber) => {
+      try {
+        this.http.post(`${env.restUrlBase}/profile/user/${userId}/grading`, {
+          gradingId,
+          grade
+        }, {
+          responseType: 'json',
+          withCredentials: true
+        }).subscribe({
+          next: val => {
+            subscriber.next(parseServerMsg(val as string).msg);
+          },
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+
+  editGrade(userId: string, gradeId: string, newGrade: string): Observable<Object> {
+    return new Observable((subscriber) => {
+      try {
+        this.http.put(`${env.restUrlBase}/profile/user/${userId}/grading`, {
+          gradeId,
+          newGrade
+        }, {
+          responseType: 'json',
+          withCredentials: true
+        }).subscribe({
+          next: val => {
+            subscriber.next(parseServerMsg(val as string).msg);
+          },
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
+  deleteGrade(userId: string, gradeId: string, gradingId: string): Observable<Object> {
+    return new Observable((subscriber) => {
+      try {
+        this.http.delete(`${env.restUrlBase}/profile/user/${userId}/grading/${gradingId}/${gradeId}`, {
+          responseType: 'json',
+          withCredentials: true
+        }).subscribe({
+          next: val => {
+            subscriber.next(parseServerMsg(val as string).msg);
+          },
+          error: err => subscriber.error(parseServerMsg(err.error).msg),
+          complete: () => subscriber.complete()
+        });
+      } catch (e) {
+        subscriber.error(e);
+      }
+    });
+  }
   // getUserDocuments(userId: string):Observable<Object> {
   //   return new Observable((subscriber) => {
   //     try {
