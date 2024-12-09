@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,7 +12,9 @@ import parseServerMsg from '../../util/parseServerMsg';
   standalone: true
 })
 export class HeaderComponent implements OnInit{
-  userId: WritableSignal<string> = signal('');
+  userId: Signal<string> = computed(() => {
+    return this.userSevice.user_Id
+  });
 
   constructor(
     private userSevice: UserService,
@@ -53,7 +55,7 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.userId.set(this.userSevice.user_Id);
+    console.log('header userId', this.userId()); 
   }
 
 }
