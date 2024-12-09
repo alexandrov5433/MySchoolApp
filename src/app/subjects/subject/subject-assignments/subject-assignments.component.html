@@ -76,7 +76,7 @@
                         <button class="green-btn" (click)="downloadFile(assignment.resource._id)">Download Resources</button>
                     }
                     @if (isTeacherCreator()) {
-                        <button class="red-btn">Delete Assignment</button>
+                        <button class="red-btn" (click)="deleteAssignment(assignment._id)">Delete Assignment</button>
                     }
                 </div>
                 @if (isParticipantViewing()) {
