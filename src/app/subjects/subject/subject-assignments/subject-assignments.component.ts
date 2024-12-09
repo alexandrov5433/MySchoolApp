@@ -216,6 +216,39 @@ export class SubjectAssignmentsComponent {
     return formatDateTime(ms);
   }
 
+  downloadFile(fileId: string | undefined) {
+    if (fileId == undefined) {
+      const msg = `Can not download a solution with an undefined id. ID: "${fileId}".`;
+      console.error(msg);
+      this.showSnackBar(msg);
+      return;
+    }
+    this.fileService.getFileStreamById(fileId)
+      .subscribe({
+        next: (data: any) => {
+          console.log(data);
+          let extention = null;
+          for (let [k,v] of Object.entries(mimeTypeLib)) {
+            if (v == data.type) {
+              extention = k;
+              break;
+            }
+          }
+          this.blob = new Blob([data], { type: data.type });
+          const downloadURL = window.URL.createObjectURL(data);
+          const link = document.createElement('a');
+          link.href = downloadURL;
+          link.download = `resource.${extention ? extention : 'unknown'}`;
+          link.click();
+        },
+        error: err => {
+          console.error(err);
+          this.showSnackBar(err as string);
+        },
+        complete: () => { }
+      });
+  }
+
   @Input()
   set _id(_id: string) {
     this.subjectId = _id;
@@ -264,7 +297,6 @@ export class SubjectAssignmentsComponent {
           this.subject.set(this.subjectsService.subjectData());
           this.curUserStatus.set(this.userService.userAuthStatus);
           this.curUserId.set(this.userService.user_Id);
-          console.log(this.subject());
         }
       });
   }

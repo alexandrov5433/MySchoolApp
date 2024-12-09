@@ -73,7 +73,7 @@
         
                 <div class="assignment-controls">
                     @if (assignment.resource) {
-                        <button class="green-btn">Download Resources</button>
+                        <button class="green-btn" (click)="downloadFile(assignment.resource._id)">Download Resources</button>
                     }
                     @if (isTeacherCreator()) {
                         <button class="red-btn">Delete Assignment</button>
