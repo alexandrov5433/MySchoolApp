@@ -20,6 +20,7 @@ import { ProfileDetailsComponent } from './profile/profile-details/profile-detai
 import { ProfileDocumentsComponent } from './profile/profile-documents/profile-documents.component';
 import { ProfileGradesComponent } from './profile/profile-grades/profile-grades.component';
 import { AddChildComponent } from './account/add-child/add-child.component';
+import { AllStudentsComponent } from './profile/all-students/all-students.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -60,6 +61,7 @@ export const routes: Routes = [
             { path: 'grades', component: ProfileGradesComponent, title: 'Profile - Grades', }
         ]
     },
+    { path: 'all-students', component: AllStudentsComponent, title: 'All Students' },
 
 
     { path: 'todo-page', component: TodoPageComponent },
