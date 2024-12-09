@@ -8,6 +8,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Subject } from '../../../types/subject';
 import { FileService } from '../../../services/file.service';
 import { mimeTypeLib } from '../../../util/mimeTypeLib';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-subject-assignments',
@@ -49,7 +50,8 @@ export class SubjectAssignmentsComponent {
     private subjectsService: SubjectsService,
     private snackBar: MatSnackBar,
     private userService: UserService,
-    private fileService: FileService
+    private fileService: FileService,
+    private router: Router
   ) { }
 
   createAssignment() {
@@ -151,7 +153,7 @@ export class SubjectAssignmentsComponent {
   }
 
   openStudentProfile(studentId: string) {
-    console.log('Open studetn Profile: ', studentId);
+    this.router.navigate([`/profile/${studentId}/details`]);
 
   }
 
@@ -283,6 +285,18 @@ export class SubjectAssignmentsComponent {
     const time = new Date().getTime();
     const assignment = this.subject()?.assignments?.find( a => a._id == assignmentId);
     return Number(assignment?.deadline) <= time;
+  }
+
+  deleteAssignment(assignmentId: string) {
+    this.subjectsService.deleteAssignment(assignmentId)
+      .subscribe({
+        next: val => this.showSnackBar(val as string),
+        error: err => {
+          this.showSnackBar(err);
+          console.error(err);
+        },
+        complete: () => this.loadData()
+      });
   }
 
   private loadData() {
