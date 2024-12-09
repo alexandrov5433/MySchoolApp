@@ -16,12 +16,14 @@
             <div class="infos-and-mininav">
                 <div class="infos">
                     <div class="name">{{userProfileData()?.firstName}} {{userProfileData()?.lastName}}</div>
-                    <div class="application-id">StudentID: {{userProfileData()?.displayId}}</div>
+                    <div class="application-id">{{userOwnerOfProfileIdTitle()}} ID: {{userProfileData()?.displayId}}</div>
                 </div>
                 <div class="mininav">
                     <button routerLink="/profile/{{userIdForProfileData()}}/details" routerLinkActive="colorize">Details</button>
                     <button routerLink="/profile/{{userIdForProfileData()}}/documents" routerLinkActive="colorize">Documents</button>
-                    <button routerLink="/profile/{{userIdForProfileData()}}/grades" routerLinkActive="colorize">Grades</button>
+                    @if (userOwnerOfProfileStatus() === 'student') {
+                        <button routerLink="/profile/{{userIdForProfileData()}}/grades" routerLinkActive="colorize">Grades</button>
+                    }
                 </div>
             </div>
         </div>
