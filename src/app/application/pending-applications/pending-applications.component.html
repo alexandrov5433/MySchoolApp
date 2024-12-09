@@ -4,8 +4,8 @@
     </div>
     <div class="search-container">
         <label for="serach-text">Search:</label>
-        <input type="text" id="serach-text" placeholder="Students First Name" #firstName>
-        <input type="text" id="serach-text" placeholder="Students Last Name" #lastName>
+        <input type="text" id="serach-text" placeholder="Applicant First Name" #firstName>
+        <input type="text" id="serach-text" placeholder="Applicant Last Name" #lastName>
         <input type="text" id="serach-text" placeholder="Applicant ID" #displayId>
         <button class="yellow-btn" (click)="search(firstName.value, lastName.value, displayId.value)">Search</button>
     </div>
@@ -23,7 +23,7 @@
                             <p>{{app.applicantName}}</p>
                         </div>
                         <div class="application-id">
-                            <p>StudentID {{app.displayId}}</p>
+                            <p>Applicant ID {{app.displayId}}</p>
                         </div>
                         <div class="control">
                             <button class="yellow-btn" (click)="viewApp(app._id)">View Application</button>
