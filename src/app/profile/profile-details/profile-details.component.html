@@ -9,12 +9,8 @@
                     <span>First Name</span>
                 </div>
                 <div class="content">
-                    <!-- <input type="text" value="{{userData()?.firstName}}" disabled> -->
                     <input type="text" [value]="userProfileData()?.firstName">
                 </div>
-                <!-- <div class="error-container">
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quisquam!</span>
-                </div> -->
             </div>
             <div class="group">
                 <div class="undertitle">
@@ -23,9 +19,6 @@
                 <div class="content">
                     <input type="text" value="{{userProfileData()?.lastName}}"  disabled>
                 </div>
-                <!-- <div class="error-container">
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quisquam!</span>
-                </div> -->
             </div>
             <div class="group">
                 <div class="undertitle">
@@ -34,18 +27,7 @@
                 <div class="content">
                     <input type="date" value="{{userProfileData()?.dateOfBirth}}" disabled>
                 </div>
-                <!-- <div class="error-container">
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quisquam!</span>
-                </div> -->
             </div>
-            <!-- <div class="control-group">
-                @if (!nameFormEditingActive()) {
-                    <button class="green-btn" type="button" (click)="editAndCancelNameForm('edit')">Edit</button>
-                } @else {
-                    <button class="green-btn">Save</button>
-                    <button class="red-btn" type="button" (click)="editAndCancelNameForm('cancel')">Cancel</button>
-                }
-            </div> -->
         </form>
     </div>
     <div class="grid-teil">
@@ -68,9 +50,6 @@
                 <div class="content">
                     <input type="text" value="{{userProfileData()?.homeNumber}}" disabled>
                 </div>
-                <!-- <div class="error-container">
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quisquam!</span>
-                </div> -->
             </div>
             <div class="group">
                 <div class="undertitle">
@@ -80,14 +59,6 @@
                     <input type="text" value="{{userProfileData()?.email}}" disabled>
                 </div>
             </div>
-            <!-- <div class="control-group">
-                @if (!contactFormEditingActive()) {
-                    <button class="green-btn" type="button" (click)="editAndCancelContactForm('edit')">Edit</button>
-                } @else {
-                    <button class="green-btn">Save</button>
-                    <button class="red-btn" type="button" (click)="editAndCancelContactForm('cancel')">Cancel</button>
-                }
-            </div> -->
         </form>
     </div>
     <div class="grid-teil">
@@ -118,20 +89,27 @@
                 <div class="content">
                     <input type="text" value="{{userProfileData()?.city}}" disabled>
                 </div>
-                <!-- <div class="error-container">
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quisquam!</span>
-                </div> -->
             </div>
-            <!-- <div class="control-group">
-                @if (!addressFormEditingActive()) {
-                    <button class="green-btn" type="button" (click)="editAndCancelAddressForm('edit')">Edit</button>
-                } @else {
-                    <button class="green-btn">Save</button>
-                    <button class="red-btn" type="button" (click)="editAndCancelAddressForm('cancel')">Cancel</button>
-                }
-            </div> -->
 
         </form>
 
     </div>
+    @if (displayAuthCode()) {
+        <div class="grid-teil">
+            <div class="title">
+                <span>Authentication</span>
+            </div>
+            <form class="info">
+                <div class="group">
+                    <div class="undertitle">
+                        <span>Parental Authentication Code</span>
+                    </div>
+                    <div class="content">
+                        <input type="text" value="{{userProfileData()?.parentalAuthenticationCode}}" disabled>
+                    </div>
+                </div>
+            </form>
+    
+        </div>
+    }
 </div>

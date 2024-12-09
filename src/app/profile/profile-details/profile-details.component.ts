@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, OnDestroy, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../types/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,6 +16,13 @@ export class ProfileDetailsComponent implements OnInit, OnDestroy{
   private ngDestroyer = new Subject();
   userIdForProfileData: WritableSignal<string> = signal('');
   userProfileData: WritableSignal<User | null> = signal(null);
+  displayAuthCode: Signal<boolean> = computed(() => {
+    const status = this.userProfileData()?.status;
+    if (status) {
+      return status === 'student' ? true : false;
+    }
+    return false;
+  });
 
   constructor(
     private userService: UserService,
