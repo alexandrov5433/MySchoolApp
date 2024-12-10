@@ -78,17 +78,6 @@
 }
 
 @keyframes colorIt {
-    /* from {
-        background-color: violet;
-    }
-
-    to 20%,
-    40%,
-    60%,
-    80%,
-    90%,
-    99% {} */
-
     20% {
         -webkit-box-shadow: 1px 0 10px var(--claret);
         -moz-box-shadow: 1px 0 10px var(--claret);
@@ -104,16 +93,9 @@
         -moz-box-shadow: 1px 0 25px var(--active-red);
         box-shadow: 1px 0 25px var(--active-red);
     }
-
-    /* 99% {
-        -webkit-box-shadow: 0 0 20px var(--claret);
-        -moz-box-shadow: 0 0 20px var(--claret);
-        box-shadow: 0 0 20px var(--claret);
-    } */
 }
 
 .other-btn {
     color: var(--white);
     background-color: rgba(213, 41, 65, 0.5);;
-    /* background-color: #d52941ff;; */
 }
