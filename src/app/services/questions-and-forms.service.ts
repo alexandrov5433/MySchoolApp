@@ -68,4 +68,61 @@ export class QuestionsAndFormsService {
         });
     }
 
+
+
+
+    publishForm(formData: FormData): Observable<Object> {
+        return new Observable((subscriber) => {
+            try {
+                this.http.post(`${env.restUrlBase}/form`, formData, {
+                    responseType: 'json',
+                    withCredentials: true
+                }).subscribe({
+                    next: val => {
+                        subscriber.next(parseServerMsg(val as string).msg);
+                    },
+                    error: err => subscriber.error(parseServerMsg(err.error).msg),
+                    complete: () => subscriber.complete()
+                });
+            } catch (e) {
+                subscriber.error(e);
+            }
+        });
+    }
+    getFormsData(): Observable<Object> {
+        return new Observable((subscriber) => {
+            try {
+                this.http.get(`${env.restUrlBase}/form`, {
+                    responseType: 'json',
+                    withCredentials: true
+                }).subscribe({
+                    next: val => {
+                        subscriber.next(parseServerMsg(val as string).results);
+                    },
+                    error: err => subscriber.error(parseServerMsg(err.error).msg),
+                    complete: () => subscriber.complete()
+                });
+            } catch (e) {
+                subscriber.error(e);
+            }
+        });
+    }
+    deleteForm(formId: string): Observable<Object> {
+        return new Observable((subscriber) => {
+            try {
+                this.http.delete(`${env.restUrlBase}/form/${formId}`, {
+                    responseType: 'json',
+                    withCredentials: true
+                }).subscribe({
+                    next: val => {
+                        subscriber.next(parseServerMsg(val as string).msg);
+                    },
+                    error: err => subscriber.error(parseServerMsg(err.error).msg),
+                    complete: () => subscriber.complete()
+                });
+            } catch (e) {
+                subscriber.error(e);
+            }
+        });
+    }
 }

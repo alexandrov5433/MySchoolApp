@@ -1,0 +1,59 @@
+<div class="forms-container">
+    <div class="page-title-container">
+        <span class="page-title">Forms & Documents</span>
+    </div>
+    @if (isUserTeacher()) {
+        <div class="teacher-form-creator">
+            <form class="forms-creator-form">
+                <div class="group add-margin-top">
+                    <div class="label-container">
+                        <label>File to upload</label>
+                    </div>
+                    <label for="materialFileUpload" class="single-custom-file-upload-btn">Select File
+                        <input type="file" id="materialFileUpload" (change)="getFile($event)">
+                    </label>
+                    <div class="add-margin-top single-selected-file-name-container">
+                        <span>{{formFileName()}}</span>
+                    </div>
+                </div>
+                @if (showFileSelectError()) {
+                    <div class="error-msg-container">
+                        <span class="error">Please select a file.</span>
+                    </div>
+                }
+                <div class="button-group">
+                    <button class="green-btn" type="button" (click)="createForm()">Publish File</button>
+                    <button class="red-btn" type="button" (click)="removeFile()">Remove File</button>
+                </div>
+            </form>
+        </div>
+    }
+    @if (formsData()?.length) {
+        @for (form of formsData(); track $index) {
+            <div class="form">
+        
+                <div class="file-icon-container">
+                    <img alt="file icon" src="{{getFileIconPath(form.file.mimeType)}}">
+                </div>
+        
+                <div class="info">
+                    <div class="name-container">
+                        <p>{{form.file.originalName}}</p>
+                    </div>
+                </div>
+        
+                <div class="teacher-form-controls">
+                    <button class="green-btn" (click)="downloadFile(form.file._id)">Download</button>
+                    @if (isUserTeacher()) {
+                        <button class="red-btn" (click)="deleteForm(form._id)">Delete</button>
+                    }
+                </div>
+        
+            </div>
+        }
+    } @else {
+        <div class="no-results">
+            <span>No forms available.</span>
+        </div>
+    }
+</div>

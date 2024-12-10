@@ -27,6 +27,7 @@ import { ContactComponent } from './basic/contact/contact.component';
 import { routeGuards } from './util/routeGuards';
 import { PageNotFoundComponent } from './basic/page-not-found/page-not-found.component';
 import { FrequentQuestionsComponent } from './basic/frequent-questions/frequent-questions.component';
+import { FormsComponent } from './basic/forms/forms.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -34,7 +35,7 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'faq', component: FrequentQuestionsComponent },
-    { path: 'forms-and-documents', redirectTo: '/todo-page' },
+    { path: 'forms-and-documents', component: FormsComponent },
 
     { path: 'log-in', component: LoginComponent, title: 'Log In', canActivate: [routeGuards.guestOnly] },
     { path: 'register', component: RegisterComponent, title: 'Register', canActivate: [routeGuards.guestOnly] },
