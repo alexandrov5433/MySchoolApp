@@ -16,14 +16,23 @@
     background-color: rgba(0, 0, 0, 0.35);
     display: grid;
     color: var(--white);
+
+    label {
+        font-size: 2vw;
+        color: var(--rusty-red);
+    }
 }
 
 .teil {
     padding: 0 1vw;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
 }
 
 .text {
-    display: flex;
+ 
     align-items: baseline;
     font-size: 1.5vw;
 }
@@ -31,14 +40,9 @@
 .title {
     text-transform: capitalize;
     font-size: 5vw;
-    align-items: center;
+    justify-content: center;
 }
 
 .description {
     align-items: baseline;
-
-}
-
-.additional {
-    max-width: 50vw;
 }
