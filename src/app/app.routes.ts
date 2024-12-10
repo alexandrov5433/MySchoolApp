@@ -69,6 +69,6 @@ export const routes: Routes = [
     },
     { path: 'all-students', component: AllStudentsComponent, title: 'All Students', canActivate: [routeGuards.teacherOnly] },
 
-    { path: '**', component: PageNotFoundComponent, title: 'Page Not Found'},
     { path: 'todo-page', component: TodoPageComponent },
+    { path: '**', component: PageNotFoundComponent, title: 'Page Not Found'},
 ];
