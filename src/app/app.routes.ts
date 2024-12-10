@@ -24,6 +24,7 @@ import { AllStudentsComponent } from './profile/all-students/all-students.compon
 import { HomeComponent } from './basic/home/home.component';
 import { AboutComponent } from './basic/about/about.component';
 import { ContactComponent } from './basic/contact/contact.component';
+import { routeGuards } from './util/routeGuards';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -33,38 +34,39 @@ export const routes: Routes = [
     { path: 'faq', redirectTo: '/todo-page' },
     { path: 'forms-and-documents', redirectTo: '/todo-page' },
 
-    { path: 'log-in', component: LoginComponent, title: 'Log In' },
-    { path: 'register', component: RegisterComponent, title: 'Register' },
-    { path: 'apply-now', component: ApplyNowComponent, title: 'Apply Now' },
-    { path: 'add-student', component: AddChildComponent, title: 'Add Student'},
+    { path: 'log-in', component: LoginComponent, title: 'Log In', canActivate: [routeGuards.guestOnly] },
+    { path: 'register', component: RegisterComponent, title: 'Register', canActivate: [routeGuards.guestOnly] },
+    { path: 'apply-now', component: ApplyNowComponent, title: 'Apply Now', canActivate: [routeGuards.guestOnly] },
 
-    { path: 'create-subject', component: CreateSubjectComponent, title: 'Create New Subject' },
+    { path: 'add-student', component: AddChildComponent, title: 'Add Student', canActivate: [routeGuards.parentOnly] },
+
+    { path: 'create-subject', component: CreateSubjectComponent, title: 'Create New Subject', canActivate: [routeGuards.teacherOnly] },
     { path: 'all-subjects', component: AllSubjectsComponent, title: 'All Subjects' },
-    { path: 'my-subjects', component: MySubjectsComponent, title: 'My Subjects' },
+    { path: 'my-subjects', component: MySubjectsComponent, title: 'My Subjects', canActivate: [routeGuards.studentAndTeacherOnly] },
     {
         path: 'subject-details/:_id', component: SubjectDetailsComponent, title: 'Subject', children: [
             { path: 'participants', component: SubjectParticipantsComponent, title: 'Subject Participants' },
             { path: 'announcements', component: SubjectAnnouncementsComponent, title: 'Subject Announcements' },
-            { path: 'assignments', component: SubjectAssignmentsComponent, title: 'Subject Assignments' },
-            { path: 'materials', component: SubjectMaterialsComponent, title: 'Subject Materials' }
+            { path: 'assignments', component: SubjectAssignmentsComponent, title: 'Subject Assignments', canActivate: [routeGuards.studentAndTeacherOnly] },
+            { path: 'materials', component: SubjectMaterialsComponent, title: 'Subject Materials', canActivate: [routeGuards.studentAndTeacherOnly] }
         ]
     },
 
-    { path: 'pending-applications', component: PendingApplicationsComponent, title: 'Pending Applications' },
+    { path: 'pending-applications', component: PendingApplicationsComponent, title: 'Pending Applications', canActivate: [routeGuards.teacherOnly] },
     {
         path: 'application/:_id', component: ApplicationMainComponent, title: 'Application', children: [
-            { path: 'details', component: ApplicationDetailsComponent, title: 'Application - Details' },
-            { path: 'documents', component: ApplicationDocumentsComponent, title: 'Application - Documents', }
-        ]
+            { path: 'details', component: ApplicationDetailsComponent, title: 'Application - Details', canActivate: [routeGuards.teacherOnly] },
+            { path: 'documents', component: ApplicationDocumentsComponent, title: 'Application - Documents', canActivate: [routeGuards.teacherOnly] }
+        ], canActivate: [routeGuards.teacherOnly]
     },
     {
         path: 'profile/:_id', component: ProfileMainComponent, title: 'Profile', children: [
-            { path: 'details', component: ProfileDetailsComponent, title: 'Profile - Details' },
-            { path: 'documents', component: ProfileDocumentsComponent, title: 'Profile - Documents', },
-            { path: 'grades', component: ProfileGradesComponent, title: 'Profile - Grades', }
-        ]
+            { path: 'details', component: ProfileDetailsComponent, title: 'Profile - Details', canActivate: [routeGuards.allUsers] },
+            { path: 'documents', component: ProfileDocumentsComponent, title: 'Profile - Documents', canActivate: [routeGuards.allUsers] },
+            { path: 'grades', component: ProfileGradesComponent, title: 'Profile - Grades', canActivate: [routeGuards.allUsers] }
+        ], canActivate: [routeGuards.allUsers]
     },
-    { path: 'all-students', component: AllStudentsComponent, title: 'All Students' },
+    { path: 'all-students', component: AllStudentsComponent, title: 'All Students', canActivate: [routeGuards.teacherOnly] },
 
 
     { path: 'todo-page', component: TodoPageComponent },
