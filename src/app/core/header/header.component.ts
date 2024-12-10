@@ -78,7 +78,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('header userId', this.userId());
     if (this.userAuthStatus() === 'parent') {
       this.loadParentsChildren();
 
