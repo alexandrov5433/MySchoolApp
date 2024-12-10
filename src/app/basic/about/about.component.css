@@ -1,0 +1,44 @@
+:host {
+    width: 100%;
+    height: 100%;
+}
+
+.about-view {
+    display: grid;
+    width: 100%;
+    height: 90vh;
+    background-image: url(/pictures/about-new.png);
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+    background-color: rgba(0, 0, 0, 0.35);
+    display: grid;
+    color: var(--white);
+}
+
+.teil {
+    padding: 0 1vw;
+}
+
+.text {
+    display: flex;
+    align-items: baseline;
+    font-size: 1.5vw;
+}
+
+.title {
+    text-transform: capitalize;
+    font-size: 5vw;
+    align-items: center;
+}
+
+.description {
+    align-items: baseline;
+
+}
+
+.additional {
+    max-width: 50vw;
+}
