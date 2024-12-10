@@ -10,3 +10,11 @@ main {
     overflow-y: auto;
     display: flex;
 }
+
+main::-webkit-scrollbar {
+    width: 7px;
+}
+
+main::-webkit-scrollbar-thumb {
+    background-color: var(--rusty-red);
+}
