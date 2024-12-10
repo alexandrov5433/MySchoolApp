@@ -121,12 +121,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
       const val:any = ent[1];
       formData.set(key, val.trim());
     }
-    console.log(Object.fromEntries(formData.entries()));
     if (this.profilePictureFile) {
       formData.set('profilePicture', this.profilePictureFile);
     }
-    console.log(Object.fromEntries(formData.entries()));
-
     this.userService.register(formData, status)
       .subscribe({
         next: (val) => {
