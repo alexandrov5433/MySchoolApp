@@ -11,7 +11,11 @@
         </div>
         <div class="teil"></div>
         <div class="teil controls">
+            @if (isUserLoggedIn()) {
+                <button class="other-btn btn unselectable" routerLink="/profile/{{userId()}}/details">My Profile</button>
+            } @else {
                 <button class="apply-btn btn unselectable" routerLink="/apply-now">Apply Now!</button>
+            }
                 <button class="other-btn btn unselectable" routerLink="/all-subjects">Subjects</button>
         </div>
         <div class="teil"></div>
