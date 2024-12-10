@@ -23,12 +23,13 @@ import { AddChildComponent } from './account/add-child/add-child.component';
 import { AllStudentsComponent } from './profile/all-students/all-students.component';
 import { HomeComponent } from './basic/home/home.component';
 import { AboutComponent } from './basic/about/about.component';
+import { ContactComponent } from './basic/contact/contact.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'about', component: AboutComponent },
-    { path: 'contact', redirectTo: '/todo-page' },
+    { path: 'contact', component: ContactComponent },
     { path: 'faq', redirectTo: '/todo-page' },
     { path: 'forms-and-documents', redirectTo: '/todo-page' },
 

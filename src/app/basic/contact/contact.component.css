@@ -1,0 +1,67 @@
+:host {
+    width: 100%;
+    height: 100%;
+}
+
+.contact-view {
+    display: grid;
+    width: 100%;
+    height: 90vh;
+    background-image: url(/pictures/office.jpg);
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+    background-color: rgba(0, 0, 0, 0.75);
+    display: grid;
+    color: var(--white);
+    grid-template-columns: auto auto auto auto auto;
+
+    label {
+        font-size: 2vw;
+        color: var(--rusty-red);
+    }
+
+    a {
+        text-decoration: none;
+        text-transform: uppercase;
+        color: var(--rusty-red);
+    }
+}
+
+.teil {
+    padding: 0 1vw;
+    gap: 10px;
+}
+
+.text {
+    
+    display: flex;
+    align-items: baseline;
+    font-size: 1.5vw;
+}
+
+.title {
+    text-transform: capitalize;
+    font-size: 5vw;
+    align-items: center;
+    grid-column: 1 / 6;
+}
+
+.addition {
+    grid-column: 1 / 6;
+}
+
+.hours {
+    grid-column: 3 / 6;
+    grid-row: 3 / 6;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.infos {
+    flex-direction: column;
+    grid-column: 1 / 3;
+}
