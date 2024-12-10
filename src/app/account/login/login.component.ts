@@ -18,9 +18,6 @@ import parseServerMsg from '../../util/parseServerMsg';
 export class LoginComponent implements OnInit, OnDestroy {
   private ngUnsub = new Subject();
   isLoading: WritableSignal<boolean> = signal(false);
-  
-  // showServerErrorMsg: WritableSignal<boolean> = signal(false);
-  // errorMsgFromServer: WritableSignal<string> = signal('');
 
   form = new FormGroup({
     loginAs: new FormControl('', [Validators.required]),
@@ -78,7 +75,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
         complete: () => {
           this.isLoading.set(false);
-          console.log('Login successfull!');
           this.router.navigate(['/home']);
           this.showSnackBar('Login successfull!');
         },
