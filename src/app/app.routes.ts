@@ -25,6 +25,7 @@ import { HomeComponent } from './basic/home/home.component';
 import { AboutComponent } from './basic/about/about.component';
 import { ContactComponent } from './basic/contact/contact.component';
 import { routeGuards } from './util/routeGuards';
+import { PageNotFoundComponent } from './basic/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -68,6 +69,6 @@ export const routes: Routes = [
     },
     { path: 'all-students', component: AllStudentsComponent, title: 'All Students', canActivate: [routeGuards.teacherOnly] },
 
-
+    { path: '**', component: PageNotFoundComponent, title: 'Page Not Found'},
     { path: 'todo-page', component: TodoPageComponent },
 ];
