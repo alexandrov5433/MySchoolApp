@@ -51,7 +51,7 @@
                         </li>
                         <li>
                             <div class="dropdown">
-                                <a href="#" class="dropdown-btn underline">Students</a>
+                                <a routerLink="/all-students" class="dropdown-btn underline">Students</a>
                                 <div class="dropdown-content">
                                     <a href="javascript:void(0)" routerLink="/pending-applications">Pending Applications</a>
                                     <a routerLink="/all-students">All Students</a>
@@ -78,7 +78,7 @@
                         </li>
                         <li><a routerLink="/profile/{{userId()}}/grades">My Grades</a></li>
                         <li><a routerLink="/profile/{{userId()}}/details">My Profile</a></li>
-                        <li class="logout-active"><a href="javascript:void(0)" (click)="logout()">Logout</a></li>
+                        <li class="logout-active"><a (click)="logout()">Logout</a></li>
                     </ul>
                 </nav>
             </div>
