@@ -5,6 +5,9 @@ export function rePasswordValidator(registerComponent: RegisterComponent): Valid
     return (control) => {
         const password = registerComponent.registerForm?.get('password')?.value;
         const rePassword = control?.value;
+        if (!password) {
+            return { rePasswordValidator : true };
+        }
         const isInvalid = rePassword === password;
         return isInvalid ? null : { rePasswordValidator : true };
     };
