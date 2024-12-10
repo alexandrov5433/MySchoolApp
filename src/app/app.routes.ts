@@ -26,13 +26,14 @@ import { AboutComponent } from './basic/about/about.component';
 import { ContactComponent } from './basic/contact/contact.component';
 import { routeGuards } from './util/routeGuards';
 import { PageNotFoundComponent } from './basic/page-not-found/page-not-found.component';
+import { FrequentQuestionsComponent } from './basic/frequent-questions/frequent-questions.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent },
-    { path: 'faq', redirectTo: '/todo-page' },
+    { path: 'faq', component: FrequentQuestionsComponent },
     { path: 'forms-and-documents', redirectTo: '/todo-page' },
 
     { path: 'log-in', component: LoginComponent, title: 'Log In', canActivate: [routeGuards.guestOnly] },

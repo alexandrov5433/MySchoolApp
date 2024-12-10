@@ -1,0 +1,106 @@
+:host {
+    width: 100%;
+}
+
+.faq-container {
+    padding: 1vh 1vw;
+
+    button:active {
+        transform: var(--translate-y-btn);
+    }
+}
+
+.faq-container .answer {
+    margin-top: 15px;
+    padding: 2px;
+    background-color: var(--white);
+    box-shadow: var(--component-box-shadow);
+}
+
+.faq-container .answer:hover {
+    box-shadow: var(--component-box-shadow-strong);
+}
+
+.faq-container .answer .upper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    color: var(--gray);
+    
+
+    .title-container {
+        font-size: var(--size-mid-title);
+        font-weight: bold;
+    }
+}
+
+.faq-container .answer .lower {
+    padding: 10px;
+    font-size: var(--size-text);
+    /* background-color: var(--white); */
+}
+
+.faq-container .teacher-answer-creator {
+    border: 1px solid var(--black);
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--background-gray);
+
+    .group {
+        label {
+            font-size: var(--size-description);
+            font-weight: bold;
+        }
+
+        input {
+            /* border: transparent; */
+            width: 600px;
+            font-size: var(--size-description);
+            padding: 5px 5px;
+            font-family: var(--font-family);
+        }
+
+        textarea {
+            /* border: transparent; */
+            padding: 5px 5px;
+            width: 900px;
+            height: 250px;
+            font-size: var(--size-description);
+            font-family: var(--font-family);
+        }
+    }
+
+    .add-margin-top {
+        margin-top: 2vh;
+    }
+
+    .buttons-container {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+    }
+}
+
+.page-title-container {
+    font-size: 2vw;
+    display: flex;
+    flex-direction: column;
+    .page-title {
+        text-transform: capitalize;
+        font-size: 5vw;
+    }
+
+    a {
+        text-decoration: none;
+        text-transform: uppercase;
+        color: var(--rusty-red);
+    }
+}
+
+.faq-container .teacher-answer-controls {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 15vw;
+}

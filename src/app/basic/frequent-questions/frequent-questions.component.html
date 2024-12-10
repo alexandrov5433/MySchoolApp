@@ -1,0 +1,65 @@
+<div class="faq-container">
+    <div class="page-title-container">
+        <span class="page-title">frequently asked questions</span>
+        <span>If you do not find your answer on this page feel free to <a routerLink="/contact">Contact</a> us.</span>
+    </div>
+    @if (isTeacherViewing()) {
+        <div class="teacher-answer-creator">
+            <form [formGroup]="form" (ngSubmit)="publish()">
+                <div class="group">
+                    <div class="label-container">
+                        <label for="_question">Question</label>
+                    </div>
+                    <input type="text" id="_question" [class]="validationLib.question.validationClass" formControlName="question">
+                    @if (validationLib.question.showErrMsg) {
+                        <div class="error-msg-container">
+                            <span class="error">Please enter a question.</span>
+                        </div>
+                    }
+                </div>
+                <div class="group add-margin-top">
+                    <div class="label-container">
+                        <label for="_answer">Answer</label>
+                    </div>
+                    <textarea id="_answer" formControlName="answer"></textarea>
+                    @if (validationLib.answer.showErrMsg) {
+                        <div class="error-msg-container">
+                            <span class="error">Please enter an answer.</span>
+                        </div>
+                    }
+                </div>
+                <div class="buttons-container">
+                    <button class="green-btn add-margin-top">Publish Answer</button>
+                    <button class="red-btn add-margin-top" type="button" (click)="clearFields()">Clear Fields</button>
+                </div>
+            </form>
+        </div>
+    }
+    @if (faqData()?.length) {
+        @for (entry of faqData(); track $index) {
+            <div class="answer">
+                <div class="upper">
+                    <div class="info">
+                        <div class="title-container">
+                            <p>{{entry.question}}</p>
+                        </div>
+                    </div>
+                    @if (isTeacherViewing()) {
+                        <div class="teacher-announcement-controls">
+                            <button class="red-btn" (click)="deleteFaqEntry(entry._id)">Delete</button>
+                        </div>
+                    }
+                </div>
+                <div class="lower">
+                    <div>
+                        <p>{{entry.answer}}</p>
+                    </div>
+                </div>
+            </div>
+        }
+    } @else {
+        <div class="no-results">
+            <span>No Announcements</span>
+        </div>
+    }
+</div>
