@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         complete: () => {
           this.isLoading.set(false);
           this.router.navigate(['/home']);
-          this.showSnackBar('Login successfull!');
+          this.showSnackBar('Login successful!');
         },
       });
   }
