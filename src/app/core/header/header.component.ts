@@ -18,9 +18,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private ngDestroyer = new Subject();
 
   userId: WritableSignal<string> = signal('');
-  // userId: Signal<string> = computed(() => {
-  //   return this.userSevice.user_Id;
-  // });
   userAuthStatus: Signal<string> = computed(() => {
     return this.userSevice.userAuthStatus;
   });
