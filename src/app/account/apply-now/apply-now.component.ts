@@ -115,7 +115,6 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
 
   apply() {
     this.isLoading.set(true);
-    console.log('Apply!');
     const formData = new FormData();
     for (let ent of Object.entries(this.form.value)) {
       const key: string = ent[0];
@@ -127,7 +126,6 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
     this.documentsFiles.forEach(file => {
       formData.append(file.name, file);
     });
-    // console.log([...formData.entries()]);
     this.userService.apply(formData).subscribe({
       next: val => console.log(val),
       error: err => {
@@ -160,9 +158,8 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
   }
 
   get isFormInvalid(): boolean {
-
     if (this.form.touched) {
-      if (!this.form.get('applyNowRePassword')?.touched || !this.filesSelected()) {
+      if (!this.filesSelected()) {
         return true;
       }
       return this.form.invalid;
@@ -198,6 +195,12 @@ export class ApplyNowComponent implements OnInit, OnDestroy {
           }
         });
     });
+    //triggers a validation check for the value of applyNowRePassword when the value of password changes
+    this.form.get('password')?.valueChanges
+      .pipe(takeUntil(this.ngUnsub))
+      .subscribe(() => {
+        this.form.get('applyNowRePassword')?.updateValueAndValidity({ onlySelf: true });
+      });
   }
 
   onProfilePictureFileSelect(event: any) {
