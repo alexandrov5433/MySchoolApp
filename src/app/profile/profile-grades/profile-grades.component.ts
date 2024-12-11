@@ -96,8 +96,8 @@ export class ProfileGradesComponent implements OnInit {
           console.error(err);
           this.showSnackBar(err);
         },
-        complete: () => { console.log(this.gradingData());
-        }
+        complete: () => { }
+        
       });
   }
 

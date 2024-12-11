@@ -151,8 +151,7 @@ export class ProfileDocumentsComponent implements OnInit {
           console.error(err);
           this.showSnackBar(err);
         },
-        complete: () => { console.log(this.userDocuments());
-        }
+        complete: () => { }
       });
   }
 
