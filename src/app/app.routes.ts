@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { TodoPageComponent } from './basic/todo-page/todo-page.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { ApplyNowComponent } from './account/apply-now/apply-now.component';
@@ -71,6 +70,5 @@ export const routes: Routes = [
     },
     { path: 'all-students', component: AllStudentsComponent, title: 'All Students', canActivate: [routeGuards.teacherOnly] },
 
-    { path: 'todo-page', component: TodoPageComponent },
     { path: '**', component: PageNotFoundComponent, title: 'Page Not Found'},
 ];
