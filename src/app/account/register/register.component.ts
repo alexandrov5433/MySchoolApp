@@ -157,11 +157,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   get isRegisterFormInvalid(): boolean {
-    
     if (this.registerForm.touched) {
-      if (!this.registerForm.get('rePassword')?.touched) {
-        return true;
-      }
       return this.registerForm.invalid;
     }
     return true;
@@ -194,6 +190,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
               (this.validationLib as any)[control].showErrMsg = false;
             }
           });
+      });
+      //triggers a validation check for the value of rePassword when the value of password changes
+      this.registerForm.get('password')?.valueChanges
+      .pipe(takeUntil(this.ngUnsub))
+      .subscribe(x => {
+        this.registerForm.get('rePassword')?.updateValueAndValidity({onlySelf: true});
       });
   }
 
