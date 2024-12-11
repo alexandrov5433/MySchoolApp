@@ -105,7 +105,6 @@ export class ProfileDocumentsComponent implements OnInit {
     this.fileService.getFileStreamById(fileId)
       .subscribe({
         next: (data: any) => {
-          console.log(data);
           let extention = null;
           for (let [k, v] of Object.entries(mimeTypeLib)) {
             if (v == data.type) {
