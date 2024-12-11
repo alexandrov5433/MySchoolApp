@@ -17,9 +17,10 @@ import { Subject, takeUntil } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   private ngDestroyer = new Subject();
 
-  userId: Signal<string> = computed(() => {
-    return this.userSevice.user_Id;
-  });
+  userId: WritableSignal<string> = signal('');
+  // userId: Signal<string> = computed(() => {
+  //   return this.userSevice.user_Id;
+  // });
   userAuthStatus: Signal<string> = computed(() => {
     return this.userSevice.userAuthStatus;
   });
@@ -78,6 +79,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.userSevice.userIdChangeEmitter
+      .pipe(takeUntil(this.ngDestroyer))
+      .subscribe({
+        next: val => {
+          this.userId.set(val as string)
+          if (this.userAuthStatus() === 'parent') {
+            this.loadParentsChildren();
+          }
+        }
+      });
+
     if (this.userAuthStatus() === 'parent') {
       this.loadParentsChildren();
 

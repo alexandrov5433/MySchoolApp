@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import { EventEmitter, Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment as env } from '../../environments/environment.development';
 import parseServerMsg from '../util/parseServerMsg';
@@ -16,6 +16,8 @@ export class UserService {
   //6756d4fd94484018a2bba02b parent Peter ivanov
   //67572362d2d346ab451e215b parent Kameliq Hristova
   private userData: WritableSignal<User | null> = signal(null);
+
+  userIdChangeEmitter = new EventEmitter<string>();
 
   constructor(private http: HttpClient) { }
 
@@ -57,8 +59,8 @@ export class UserService {
             this.isLoggedIn.set(true);
             this.userAuthStat.set(status);
             subscriber.complete();
-            console.log('login', this.userId());
-            
+            this.userIdChangeEmitter.emit(this.user_Id);
+  
           },
         });
       } catch (e) {
@@ -85,6 +87,7 @@ export class UserService {
             this.userAuthStat.set('');
             this.userId.set('');
             subscriber.complete();
+            this.userIdChangeEmitter.emit(this.user_Id);
           },
         });
       } catch (e) {
@@ -118,6 +121,7 @@ export class UserService {
             this.isLoggedIn.set(true);
             this.userAuthStat.set(status);
             subscriber.complete();
+            this.userIdChangeEmitter.emit(this.user_Id);
           },
         });
       } catch (e) {
