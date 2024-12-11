@@ -165,7 +165,6 @@ export class UserService {
         }).subscribe({
           next: val => {
             this.userData.set(parseServerMsg(val as string));
-            // subscriber.next(parseServerMsg(val as string))
           },
           error: err => subscriber.error(parseServerMsg(err.error).msg),
           complete: () => subscriber.complete()
