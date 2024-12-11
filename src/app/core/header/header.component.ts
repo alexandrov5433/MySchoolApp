@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout(): void {
     this.userSevice.logout()
       .subscribe({
-        next: val => console.log(val),
+        next: () => {},
         error: (err) => {
           console.error(err);
           this.showSnackBar(parseServerMsg(err.error).msg);

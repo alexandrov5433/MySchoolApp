@@ -65,9 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const stutus = this.form.get('loginAs')?.value || '';
     this.userService.login(formData, stutus)
       .subscribe({
-        next: (val) => {
-          console.log(val)
-        },
+        next: () => {},
         error: (err) => {
           this.isLoading.set(false);
           this.showSnackBar(parseServerMsg(err.error).msg);
