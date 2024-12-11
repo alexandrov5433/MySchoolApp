@@ -54,7 +54,6 @@ export class ProfileDetailsComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.userIdForProfileData.set(this.route.snapshot.paramMap.get('_id') || '');
-    console.log('userIdForProfileData: ', this.userIdForProfileData());
     this.route.params
     .pipe(takeUntil(this.ngDestroyer))
     .subscribe({
