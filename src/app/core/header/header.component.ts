@@ -79,26 +79,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    //initial userId set, if any
+    this.userId.set(this.userSevice.user_Id);
+    //listening for userId changes and updating it on change. Mainly for the case of parents registering, to update the dropdown menu with the child.
     this.userSevice.userIdChangeEmitter
       .pipe(takeUntil(this.ngDestroyer))
       .subscribe({
         next: val => {
-          this.userId.set(val as string)
+          this.userId.set(val as string);
           if (this.userAuthStatus() === 'parent') {
             this.loadParentsChildren();
           }
         }
       });
-
-    if (this.userAuthStatus() === 'parent') {
-      this.loadParentsChildren();
-
-      this.innerComService.parentAddedChild
-        .pipe(takeUntil(this.ngDestroyer))
-        .subscribe({
-          next: val => this.loadParentsChildren()
-        });
-    }
+    // user parent - listening for the event that he added a new child. In that case - children update in dropdown.
+    this.innerComService.parentAddedChild
+      .pipe(takeUntil(this.ngDestroyer))
+      .subscribe({
+        next: val => this.loadParentsChildren()
+      });
   }
 
   ngOnDestroy(): void {
