@@ -7,6 +7,8 @@ The MySchoolApp is the client application for the MySchool project. This project
 - run `npm install`.
 - run `ng serve`.
 
+Before running the application you should check the `restUrlBase` property located in (root)/src/environments/environment.development.ts. This variable determines the base of the URL for the requests to the MySchoolServer. The default is: `restUrlBase: 'http://localhost:3000'`. If you change the port on the server, for example, you must change this value accordingly.
+
 In order to use this application you must also install the [MySchoolServer](https://github.com/alexandrov5433/MySchoolServer). More on the server in the given repository.
 
 ## About
