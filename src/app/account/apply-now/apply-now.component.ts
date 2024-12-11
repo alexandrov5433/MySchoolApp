@@ -18,11 +18,12 @@ import { UserService } from '../../services/user.service';
 import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import parseServerMsg from '../../util/parseServerMsg';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 
 @Component({
   selector: 'app-apply-now',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, LoaderComponent],
   templateUrl: './apply-now.component.html',
   styleUrl: './apply-now.component.css',
   standalone: true
