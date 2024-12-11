@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { Router, RouterLink } from '@angular/router';
@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     rePassword: new FormControl('', [rePasswordValidator(this)]),
     profilePicture: new FormControl(''),
   });
-  isLoading = false;
+  isLoading: WritableSignal<boolean> = signal(false);
   profilePictureFileName: string | null = null;
   profilePictureFile: File | null = null;
   private ngUnsub = new Subject();
@@ -114,6 +114,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ) { }
 
   register(): void {
+    this.isLoading.set(true);
     const status = this.registerForm.get('registerAs')?.value || '';
     const formData = new FormData();
     for (let ent of Object.entries(this.registerForm.value)) {
@@ -134,7 +135,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
           console.error(parseServerMsg(err.error));
         },
         complete: () => {
-          this.showSnackBar('Registration successfull!');
+          this.isLoading.set(false);
+          this.showSnackBar('Registration successful!');
           this.router.navigate(['/home']);
         }
       });
