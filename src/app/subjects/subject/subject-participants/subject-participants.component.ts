@@ -68,6 +68,17 @@ export class SubjectParticipantsComponent implements OnInit, OnDestroy {
     });
   }
 
+  removeparticipant(participantId: string) {
+    this.subjectsService.participationControl(this.subjectId, participantId, 'leave')
+      .subscribe({
+        next: val => this.showSnackBar(val as string),
+        error: err => this.showSnackBar(err as string),
+        complete: () => {
+          this.loadData();
+        }
+      });
+  }
+
   ngOnInit(): void {
     this.subjectsService.realoadDataTriggerForChildren
     .pipe(takeUntil(this.ngDestroyer))
