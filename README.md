@@ -16,4 +16,11 @@ This is an application built in Angular v19. The extra packages used are:
 - Angular Materials (provided in Angular) - The `MatSnackBar` was used for displaying informative and error messages to the user. E.g. when trying to log in with a wrong password or when successfully adding a grade.
 
 The folder structure follows the layout of the website.
-There are the core compnents - `header` and `main`. The `header` holds the navigation bar and the rest is renderd in the `main` component. 
+There are the core compnents - `header` and `main`. The `header` holds the navigation bar and the rest is renderd in the `main` component.
+In the `basic` folder you can find all components for the home, about, contact, FAQ and forms and documents pages.
+All profile-related components are located in the `profile` folder
+In the `application` folder are placed the components user for reviewing applications.
+In the `account` folder are the login, register, apply (for submitting applications, as it is a form of registration) and add-children (for parents to add students as children; the connection is made between the `User` documents, which are also the main documents for the account, that is why this component is here).
+In the `subjects` folder are subject-related components, for example the subjects overview `all-subjects` component.
+All services are placed together in the `services` folder. The same goes for the TypeScript types - they are in the `types` folder.
+Utilities can be found in the `util` folder: authorization guards, input validator functions, Date time parsing functions, server message parser and a mimetype library for finding the appropriate file extention when the user is downloading a file.
