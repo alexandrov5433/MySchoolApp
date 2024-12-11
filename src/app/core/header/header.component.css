@@ -69,6 +69,7 @@ div.navigation li:hover {
 .apply:hover {
     border-radius: 0px !important;
     background-color: var(--active-red);
+
     a {
         color: var(--white) !important;
     }
@@ -98,9 +99,9 @@ div.navigation li:hover {
 }
 
 .dropdown-content a:hover {
-    background-color: var(--cosmic-latte);
+    background-color: rgba(0, 0, 0, 0.1);
     color: var(--rusty-red) !important;
-} 
+}
 
 .dropdown:hover .dropdown-content {
     display: block;
