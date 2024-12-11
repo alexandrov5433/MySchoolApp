@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.showSnackBar(parseServerMsg(err.error).msg);
         },
         complete: () => {
-          this.showSnackBar('Log out successfull!');
+          this.showSnackBar('Log out successful!');
           this.router.navigate(['/home']);
         }
       });;
