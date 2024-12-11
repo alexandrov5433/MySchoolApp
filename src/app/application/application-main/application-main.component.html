@@ -21,8 +21,6 @@
                 <div class="mininav">
                     <button routerLink="/application/{{appId}}/details" routerLinkActive="colorize">Details</button>
                     <button routerLink="/application/{{appId}}/documents" routerLinkActive="colorize">Uploaded Documents</button>
-                    <!-- <button [class]="colorizeNavBtn() === 'details' ? 'colorize' : ''" (click)="navigateTo('details')">Details</button>
-                    <button [class]="colorizeNavBtn() === 'documents' ? 'colorize' : ''" (click)="navigateTo('documents')">Uploaded Documents</button> -->
                 </div>
             </div>
             @if (isTeacherViewing) {
