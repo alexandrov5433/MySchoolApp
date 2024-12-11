@@ -37,6 +37,36 @@ export class UserService {
     return this.userData();
   }
 
+  setPropsFromLocalStorageIfCookieExists(userCookieExists: boolean) {
+    if (userCookieExists && !this.isLoggedIn()) {
+      const userData = this.getUserDataFromLocalStorage();
+      if (userData) {
+        this.isLoggedIn.set(true);
+        this.userAuthStat.set(userData.userStatus);
+        this.userId.set(userData.userId);
+        this.userIdChangeEmitter.emit(userData.userId);
+      }
+    }
+  }
+
+  private setUserDataInLocalStorage() {
+    const userId = this.userId();
+    const userStatus = this.userAuthStat();
+    window.localStorage.setItem('user', JSON.stringify({userId, userStatus}));
+  }
+
+  private clearLocalStorage() {
+    window.localStorage.clear();
+  }
+
+  private getUserDataFromLocalStorage() {
+    const userData = window.localStorage.getItem('user');
+    if (userData) {
+      return JSON.parse(userData);
+    }
+    return false;
+  }
+
   login(formData: FormData, status: string): Observable<Object> {
     return new Observable((subscriber) => {
       try {
@@ -60,7 +90,7 @@ export class UserService {
             this.userAuthStat.set(status);
             subscriber.complete();
             this.userIdChangeEmitter.emit(this.user_Id);
-  
+            this.setUserDataInLocalStorage();
           },
         });
       } catch (e) {
@@ -88,6 +118,7 @@ export class UserService {
             this.userId.set('');
             subscriber.complete();
             this.userIdChangeEmitter.emit(this.user_Id);
+            this.clearLocalStorage();
           },
         });
       } catch (e) {
@@ -122,6 +153,7 @@ export class UserService {
             this.userAuthStat.set(status);
             subscriber.complete();
             this.userIdChangeEmitter.emit(this.user_Id);
+            this.setUserDataInLocalStorage();
           },
         });
       } catch (e) {

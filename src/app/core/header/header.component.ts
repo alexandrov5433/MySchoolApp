@@ -17,7 +17,9 @@ import { Subject, takeUntil } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   private ngDestroyer = new Subject();
 
-  userId: WritableSignal<string> = signal('');
+  userId: Signal<string> = computed(() => {
+    return this.userSevice.user_Id;
+  });
   userAuthStatus: Signal<string> = computed(() => {
     return this.userSevice.userAuthStatus;
   });
@@ -76,14 +78,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    //initial userId set, if any
-    this.userId.set(this.userSevice.user_Id);
+    if (this.userAuthStatus() === 'parent') {
+      this.loadParentsChildren();
+    }
     //listening for userId changes and updating it on change. Mainly for the case of parents registering, to update the dropdown menu with the child.
     this.userSevice.userIdChangeEmitter
       .pipe(takeUntil(this.ngDestroyer))
       .subscribe({
         next: val => {
-          this.userId.set(val as string);
           if (this.userAuthStatus() === 'parent') {
             this.loadParentsChildren();
           }
