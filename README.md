@@ -1,59 +1,19 @@
 # MySchoolApp
+The MySchoolApp is the client application for the MySchool project. This project is a platform (website) designed for a school on which applicants can submit applications, parents can view the grades of their children, teachers can submit assignments and many mire.
+ project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+## How to run
+- Download the MySchoolApp from this repositoty.
+- Open the terminal and navigate to the directory in which you just downloaded the MySchoolApp.
+- run `npm install`.
+- run `ng serve`.
+In order to use this application you must also install the [MySchoolServer](https://github.com/alexandrov5433/MySchoolServer). More on the server in the given repository.
 
-## Development server
+## About
+### Code and libraries
+This is an application built in Angular v19. The extra packages used are:
+- [ngx-cookie-service](https://www.npmjs.com/package/ngx-cookie-service) - Used for monitoring the presence of the cookie 'user', the value of which is the JWT used for authentication on the MySchoolServer, sent with every request. It is also used to keep the user logged in after the page is refrashed. On log in the user id and authorization status are saved in the local storage under the key `userData`. They are cleared on log out. If in the meen time the user refreshes the page, the  life cycle hook ngOnInit (OnInit) in the `main` component checks if there is a cookie `user` and sends `true` or `false` to the `UserService`. Based on the boolean value the `UserService` gets the user data from the local storage and resets the needed private properties. This way the user stays logged in after the page refrash and the next request to the server is authorized.
+- Angular Materials (provided in Angular) - The `MatSnackBar` was used for displaying informative and error messages to the user. E.g. when trying to log in with a wrong password or when successfully adding a grade.
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The folder structure follows the layout of the website.
+There are the core compnents - `header` and `main`. The `header` holds the navigation bar and the rest is renderd in the `main` component. 
