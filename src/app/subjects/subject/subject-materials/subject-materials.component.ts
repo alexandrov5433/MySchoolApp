@@ -174,7 +174,6 @@ export class SubjectMaterialsComponent implements OnInit, OnDestroy {
           this.subject.set(this.subjectsService.subjectData());
           this.curUserStatus.set(this.userService.userAuthStatus);
           this.curUserId.set(this.userService.user_Id);
-          console.log(this.subject());
         }
       });
   }

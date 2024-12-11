@@ -130,7 +130,6 @@ export class SubjectDetailsComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    console.log(this.subjectId);
     if (
       !this.router.url.endsWith('participants') &&
       !this.router.url.endsWith('announcements') &&

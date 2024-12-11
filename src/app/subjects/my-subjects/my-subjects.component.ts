@@ -42,8 +42,6 @@ export class MySubjectsComponent {
       .subscribe({
         next: val => {
           const subjectCardsResult: subjectCardsSearchResult = parseServerMsg(val as string);
-          console.log(subjectCardsResult);
-          
           this.subjectCards.set(subjectCardsResult);
         },
         error: err => {
