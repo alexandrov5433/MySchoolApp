@@ -1,12 +1,12 @@
 # MySchoolApp
-The MySchoolApp is the client application for the MySchool project. This project is a platform (website) designed for a school on which applicants can submit applications, parents can view the grades of their children, teachers can submit assignments and many mire.
- project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+The MySchoolApp is the client application for the MySchool project. This project is a platform (website) designed for a school on which applicants can submit applications, parents can view the grades of their children, teachers can submit assignments and many more.
 
 ## How to run
 - Download the MySchoolApp from this repositoty.
 - Open the terminal and navigate to the directory in which you just downloaded the MySchoolApp.
 - run `npm install`.
 - run `ng serve`.
+
 In order to use this application you must also install the [MySchoolServer](https://github.com/alexandrov5433/MySchoolServer). More on the server in the given repository.
 
 ## About
