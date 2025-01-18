@@ -131,6 +131,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           console.log(val);
         },
         error: (err) => {
+          this.isLoading.set(false);
           this.showSnackBar(parseServerMsg(err.error).msg);
           console.error(parseServerMsg(err.error));
         },
